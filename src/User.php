@@ -90,6 +90,13 @@
         {
             $this->id = (int) $new_id;
         }
+
+        function save()
+        {
+            $statement = GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, activity_level) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getActivityLevel()}) RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId(result['id']);
+        }
     }
 
 ?>

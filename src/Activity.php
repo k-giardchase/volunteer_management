@@ -30,6 +30,13 @@
         {
             $this->id = (int) $new_id;
         }
+
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO users (activity_name) VALUES ('{$this->getActivityName()}') RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
     }
 
 ?>

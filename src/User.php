@@ -95,7 +95,7 @@
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, activity_level) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getActivityLevel()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $this->setId(result['id']);
+            $this->setId($result['id']);
         }
 
         static function getAll()
@@ -113,7 +113,7 @@
                 $password = $user['password'];
                 $activity_level = $user['activity_level'];
                 $id = $user['id'];
-                $new_user = new User($first_name, $last_name, $email, $username, $passwod, $activity_level, $id);
+                $new_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
                 array_push($users, $new_user);
             }
 

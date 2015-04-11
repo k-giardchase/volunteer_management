@@ -11,6 +11,11 @@
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            User::deleteAll();
+        }
+
         function test_getFirstName()
         {
             //Arrange
@@ -324,7 +329,7 @@
             $password = '123456';
             $activity_level = 3;
             $id = 2;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
             $test_user2->save();
 
             //Act
@@ -354,7 +359,7 @@
             $password = '123456';
             $activity_level = 3;
             $id = 2;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
             $test_user2->save();
 
             //Act

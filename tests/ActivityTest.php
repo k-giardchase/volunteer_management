@@ -69,6 +69,21 @@
             $this->assertEquals(2, $result);
         }
 
+        function test_save()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            //Act
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals([$test_activity], $result);
+        }
+
     }
 
 ?>

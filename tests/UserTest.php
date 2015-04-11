@@ -428,6 +428,37 @@
             $this->assertEquals(['Margaret', 'Down', 'mag@me.com', 'Margaret123', '4321', 4], [$test_user->getFirstName(), $test_user->getLastName(), $test_user->getEmail(), $test_user->getUsername(), $test_user->getPassword(), $test_user->getActivityLevel()]);
         }
 
+        function test_delete()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $first_name = 'Johnny';
+            $last_name = 'Doe';
+            $email = 'johnny@me.com';
+            $username = 'John123';
+            $password = '123456';
+            $activity_level = 3;
+            $id = 2;
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2->save();
+
+            //Act
+            $test_user->delete();
+            $result = User::getAll();
+
+            //Assert
+            $this->assertEquals([$test_user2], $result);
+        }
+
     }
 
 ?>

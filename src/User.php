@@ -119,6 +119,11 @@
             $this->setActivityLevel($new_activity_level);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM users;");

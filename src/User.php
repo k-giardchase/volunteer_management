@@ -80,6 +80,11 @@
         {
             $this->activity_level = (int) $new_activity_level;
         }
+
+        function getId()
+        {
+            return $this->id;
+        }
     }
 
 ?>

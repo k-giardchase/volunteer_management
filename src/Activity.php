@@ -57,6 +57,19 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM activities *;");
         }
+
+        static function find($search_id)
+        {
+            $found_activity = null;
+            $activities = Activity::getAll();
+            foreach($activities as $activity) {
+                $activity_id = $activity->getId();
+                if($activity_id === $search_id) {
+                    $found_activity = $activity;
+                }
+            }
+            return $found_activity;
+        }
     }
 
 ?>

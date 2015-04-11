@@ -13,7 +13,16 @@
     {
         function test_getActivityName()
         {
-            
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+
+            //Act
+            $result = $test_activity->getActivityName();
+
+            //Assert
+            $this->assertEquals('Sleeping', $result);
         }
 
     }

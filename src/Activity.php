@@ -38,6 +38,12 @@
             $this->setId($result['id']);
         }
 
+        function update($new_activity_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE activities SET activity_name = '{$new_activity_name}' WHERE id = {$this->getId()};");
+            $this->setActivityName($new_activity_name);
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM activities;");

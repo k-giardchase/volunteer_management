@@ -89,6 +89,25 @@
             $this->assertEquals('Does', $result);
         }
 
+        function test_getEmail()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+
+            //Act
+            $result = $test_user->getEmail();
+
+            //Assert
+            $this->assertEquals('maggie@me.com', $result);
+        }
+
 
 
     }

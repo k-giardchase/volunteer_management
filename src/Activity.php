@@ -38,7 +38,7 @@
             $this->setId($result['id']);
         }
 
-        function getAll()
+        static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM activities;");
             $returned_activities = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -51,6 +51,11 @@
                 array_push($activities, $new_activity);
             }
             return $activities;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM activities *;");
         }
     }
 

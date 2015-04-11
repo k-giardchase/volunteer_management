@@ -104,6 +104,26 @@
             $this->assertEquals([$test_activity, $test_activity2], $result);
         }
 
+        function test_deleteAll()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $activity_name2 = 'Running';
+            $id2 = 2;
+            $test_activity2 = new Activity($activity_name, $id);
+            $test_activity2->save();
+
+            //Act
+            Activity::deleteAll();
+            $result = Activity::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
     }
 
 ?>

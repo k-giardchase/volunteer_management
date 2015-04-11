@@ -25,6 +25,21 @@
             $this->assertEquals('Sleeping', $result);
         }
 
+        function test_setActivityName()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+
+            //Act
+            $test_activity->setActivityName('Running');
+            $result = $test_activity->getActivityName();
+
+            //Assert
+            $this->assertEquals('Running', $result);
+        }
+
     }
 
 ?>

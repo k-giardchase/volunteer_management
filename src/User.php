@@ -55,6 +55,11 @@
         {
             return $this->username;
         }
+
+        function setUsername($new_username)
+        {
+            $this->username = (string) $new_username;
+        }
     }
 
 ?>

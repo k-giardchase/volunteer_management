@@ -149,6 +149,23 @@
             //Assert
             $this->assertEquals($test_activity2, $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $new_activity_name = 'Running';
+
+            //Act
+            $test_activity->update($new_activity_name);
+
+            //Assert
+            $this->assertEquals('Running', $test_activity->getActivityName());
+        }
     }
 
 ?>

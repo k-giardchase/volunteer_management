@@ -60,6 +60,11 @@
         {
             $this->username = (string) $new_username;
         }
+
+        function getPassword()
+        {
+            return $this->password;
+        }
     }
 
 ?>

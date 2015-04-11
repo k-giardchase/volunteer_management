@@ -75,6 +75,11 @@
         {
             return $this->activity_level;
         }
+
+        function setActivityLevel($new_activity_level)
+        {
+            $this->activity_level = (int) $new_activity_level;
+        }
     }
 
 ?>

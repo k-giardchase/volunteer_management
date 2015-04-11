@@ -5,7 +5,7 @@
     * @backupStaticAttributes disabled
     */
 
-    $DB = new PDO('pgsql: host=localhost;dbname=day_test');
+    // $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/User.php';
 

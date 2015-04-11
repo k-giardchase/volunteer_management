@@ -20,6 +20,11 @@
             $this->activity_level = $activity_level;
             $this->id = $id;
         }
+
+        function getFirstName()
+        {
+            return $this->first_name;
+        }
     }
 
 ?>

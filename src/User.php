@@ -30,6 +30,11 @@
         {
             $this->first_name = (string) $new_first_name;
         }
+
+        function getLastName()
+        {
+            return $this->last_name;
+        }
     }
 
 ?>

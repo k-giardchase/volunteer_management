@@ -25,6 +25,11 @@
         {
             return $this->first_name;
         }
+
+        function setFirstName($new_first_name)
+        {
+            $this->first_name = (string) $new_first_name;
+        }
     }
 
 ?>

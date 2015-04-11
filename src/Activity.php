@@ -20,7 +20,11 @@
         {
             $this->activity_name = (string) $new_activity_name;
         }
-    
+
+        function getId()
+        {
+            return $this->id;
+        }
     }
 
 ?>

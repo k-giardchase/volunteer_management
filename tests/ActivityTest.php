@@ -8,12 +8,14 @@
     $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/Activity.php';
+    require_once __DIR__.'/../src/User.php';
 
     class ActivityTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
             Activity::deleteAll();
+            User::deleteAll();
         }
 
         function test_getActivityName()

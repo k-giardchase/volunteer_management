@@ -8,12 +8,14 @@
     $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/User.php';
+    require_once __DIR__.'/../src/Activity.php';
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
             User::deleteAll();
+            Activity::deleteAll();
         }
 
         function test_getFirstName()
@@ -457,6 +459,36 @@
 
             //Assert
             $this->assertEquals([$test_user2], $result);
+        }
+
+        function test_getActivities()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $activity_name2 = 'Running';
+            $id2 = 2;
+            $test_activity2 = new Activity($activity_name, $id);
+            $test_activity2->save();
+
+            //Act
+            $result = $test_user->getActivities();
+
+            //Assert
+            $this->assertEquals(['Sleeping', 'Running'], $result);
         }
 
     }

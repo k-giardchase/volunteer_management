@@ -98,6 +98,27 @@
             $this->setId($result['id']);
         }
 
+        function update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_activity_level)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
+            $this->setFirstName($new_first_name);
+
+            $GLOBALS['DB']->exec("UPDATE users SET last_name = '{$new_last_name}' WHERE id={$this->getId()};");
+            $this->setLastName($new_last_name);
+
+            $GLOBALS['DB']->exec("UPDATE users SET email = '{$new_email}' WHERE id={$this->getId()};");
+            $this->setEmail($new_email);
+
+            $GLOBALS['DB']->exec("UPDATE users SET username = '{$new_username}' WHERE id={$this->getId()};");
+            $this->setUsername($new_username);
+
+            $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id={$this->getId()};");
+            $this->setPassword($new_password);
+
+            $GLOBALS['DB']->exec("UPDATE users SET activity_level = '{$new_activity_level}' WHERE id={$this->getId()};");
+            $this->setActivityLevel($new_activity_level);
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM users;");

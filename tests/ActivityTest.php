@@ -220,7 +220,7 @@
 
             //Act
             $test_activity->addUser($test_user);
-            $result = $test_activity->getActivities();
+            $result = $test_activity->getUsers();
 
             //Assert
             $this->assertEquals([$test_user], $result);
@@ -257,7 +257,7 @@
             //Act
             $test_activity->addUser($test_user);
             $test_activity->addUser($test_user2);
-            $result = $test_activity->getActivities();
+            $result = $test_activity->getUsers();
 
             //Assert
             $this->assertEquals([$test_user, $test_user2], $result);

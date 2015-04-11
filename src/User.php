@@ -164,6 +164,11 @@
             }
             return $found_user;
         }
+
+        function getActivities()
+        {
+            $query = $GLOBALS['DB']->query("SELECT activities.* FROM users JOIN activities_users ON (users.id = activities_users.user_id) JOIN activities ON (activities_users.activity_id = activities.id) WHERE users.id = {$this->getId()};");
+        }
     }
 
 ?>

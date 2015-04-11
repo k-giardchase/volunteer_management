@@ -461,6 +461,37 @@
             $this->assertEquals([$test_user2], $result);
         }
 
+        function test_addActivity()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $activity_name2 = 'Running';
+            $id2 = 2;
+            $test_activity2 = new Activity($activity_name, $id);
+            $test_activity2->save();
+
+            //Act
+            $test_user->addActivity($test_activity);
+            $test_user->getActivities();
+
+            //Assert
+            $this->assertEquals(['Running'], $result);
+        }
+
         function test_getActivities()
         {
             //Arrange
@@ -485,6 +516,8 @@
             $test_activity2->save();
 
             //Act
+            $test_user->addActivity($test_activity);
+            $test_user->addActivity($test_activity2);
             $result = $test_user->getActivities();
 
             //Assert

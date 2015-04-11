@@ -44,6 +44,11 @@
             $this->setActivityName($new_activity_name);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM activities WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM activities;");

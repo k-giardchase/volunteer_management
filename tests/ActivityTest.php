@@ -189,6 +189,79 @@
             //Assert
             $this->assertEquals([$test_activity], $result);
         }
+
+        function test_addUser()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $first_name = 'Johnny';
+            $last_name = 'Doe';
+            $email = 'johnny@me.com';
+            $username = 'John123';
+            $password = '123456';
+            $activity_level = 3;
+            $id = 2;
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2->save();
+
+            //Act
+            $test_activity->addUser($test_user);
+            $result = $test_activity->getActivities();
+
+            //Assert
+            $this->assertEquals([$test_user], $result);
+        }
+
+        function test_getUsers()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $first_name = 'Johnny';
+            $last_name = 'Doe';
+            $email = 'johnny@me.com';
+            $username = 'John123';
+            $password = '123456';
+            $activity_level = 3;
+            $id = 2;
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2->save();
+
+            //Act
+            $test_activity->addUser($test_user);
+            $test_activity->addUser($test_user2);
+            $result = $test_activity->getActivities();
+
+            //Assert
+            $this->assertEquals([$test_user, $test_user2], $result);
+        }
     }
 
 ?>

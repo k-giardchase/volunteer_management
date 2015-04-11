@@ -93,14 +93,14 @@
 
         function save()
         {
-            $statement = GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, activity_level) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getActivityLevel()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, activity_level) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getActivityLevel()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId(result['id']);
         }
 
         static function getAll()
         {
-            $query = GLOBALS['DB']->query("SELECT * FROM users;");
+            $query = $GLOBALS['DB']->query("SELECT * FROM users;");
             $returned_users = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $users = [];
@@ -118,6 +118,11 @@
             }
 
             return $users;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM users *;");
         }
     }
 

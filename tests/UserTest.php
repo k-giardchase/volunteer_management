@@ -186,6 +186,26 @@
             $this->assertEquals('1234', $result);
         }
 
+        function test_setPassword()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+
+            //Act
+            $test_user->setPassword('123');
+            $result = $test_user->getPassword();
+
+            //Assert
+            $this->assertEquals('123', $result);
+        }
+
 
 
     }

@@ -40,6 +40,11 @@
         {
             $this->last_name = (string) $new_last_name;
         }
+
+        function getEmail()
+        {
+            return $this->email;
+        }
     }
 
 ?>

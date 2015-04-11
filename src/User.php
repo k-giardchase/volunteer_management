@@ -165,9 +165,23 @@
             return $found_user;
         }
 
+        function addActivity($new_activity)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO activities_users (activity_id, user_id) VALUES ({$new_activity->getId()}, {$this->getId()});");
+        }
         function getActivities()
         {
             $query = $GLOBALS['DB']->query("SELECT activities.* FROM users JOIN activities_users ON (users.id = activities_users.user_id) JOIN activities ON (activities_users.activity_id = activities.id) WHERE users.id = {$this->getId()};");
+            $returned_activities = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $activities = [];
+            foreach($returned_activities as $activity) {
+                $activity_name = $activity['activity_name'];
+                $id = $activity['id'];
+                $new_activity = new Activity($activity_name, $id);
+                array_push($activities, $new_activity);
+            }
+            return $activities;
         }
     }
 

@@ -486,10 +486,10 @@
 
             //Act
             $test_user->addActivity($test_activity);
-            $test_user->getActivities();
+            $result = $test_user->getActivities();
 
             //Assert
-            $this->assertEquals(['Running'], $result);
+            $this->assertEquals([$test_activity], $result);
         }
 
         function test_getActivities()
@@ -521,7 +521,7 @@
             $result = $test_user->getActivities();
 
             //Assert
-            $this->assertEquals(['Sleeping', 'Running'], $result);
+            $this->assertEquals([$test_activity, $test_activity2], $result);
         }
 
     }

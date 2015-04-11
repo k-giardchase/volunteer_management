@@ -62,11 +62,11 @@
             $test_activity = new Activity($activity_name, $id);
 
             //Act
-            $test_activity->setId('Running');
+            $test_activity->setId(2);
             $result = $test_activity->getId();
 
             //Assert
-            $this->assertEquals('Running', $result);
+            $this->assertEquals(2, $result);
         }
 
     }

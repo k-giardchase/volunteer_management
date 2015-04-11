@@ -50,6 +50,11 @@
         {
             $this->email = (string) $new_email;
         }
+
+        function getUsername()
+        {
+            return $this->username;
+        }
     }
 
 ?>

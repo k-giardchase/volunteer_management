@@ -141,7 +141,7 @@
             $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
 
             //Act
-            $result = $test_user->getEmail();
+            $result = $test_user->getUsername();
 
             //Assert
             $this->assertEquals('Mags123', $result);

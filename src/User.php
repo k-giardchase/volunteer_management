@@ -35,6 +35,11 @@
         {
             return $this->last_name;
         }
+
+        function setLastName($new_last_name)
+        {
+            $this->last_name = (string) $new_last_name;
+        }
     }
 
 ?>

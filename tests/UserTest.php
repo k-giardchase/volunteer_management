@@ -69,7 +69,7 @@
             $this->assertEquals('Doe', $result);
         }
 
-        function test_setFirstName()
+        function test_setLastName()
         {
             //Arrange
             $first_name = 'Maggie';

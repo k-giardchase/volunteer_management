@@ -10,6 +10,11 @@
             $this->activity_name = $activity_name;
             $this->id = $id;
         }
+
+        function getActivityName()
+        {
+            return $this->activity_name;
+        }
     }
 
 ?>

@@ -33,7 +33,7 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (activity_name) VALUES ('{$this->getActivityName()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO activities (activity_name) VALUES ('{$this->getActivityName()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }

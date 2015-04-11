@@ -40,6 +40,20 @@
             $this->assertEquals('Running', $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+
+            //Act
+            $result = $test_activity->getId();
+
+            //Assert
+            $this->assertEquals(1, $result);
+        }
+
     }
 
 ?>

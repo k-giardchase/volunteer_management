@@ -20,6 +20,7 @@
         {
             $this->activity_name = (string) $new_activity_name;
         }
+    
     }
 
 ?>

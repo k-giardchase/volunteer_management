@@ -54,6 +54,21 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_setId()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+
+            //Act
+            $test_activity->setId('Running');
+            $result = $test_activity->getId();
+
+            //Assert
+            $this->assertEquals('Running', $result);
+        }
+
     }
 
 ?>

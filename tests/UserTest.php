@@ -121,7 +121,7 @@
             $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
 
             //Act
-            $test_user->setEmail('mag@me.com')
+            $test_user->setEmail('mag@me.com');
             $result = $test_user->getEmail();
 
             //Assert

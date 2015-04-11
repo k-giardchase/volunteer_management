@@ -37,6 +37,21 @@
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
+
+        function getAll()
+        {
+            $query = $GLOBALS['DB']->query("SELECT * FROM activities;");
+            $returned_activities = $query->fetchAll(PDO::FETCH_ASSOC);
+            $activities = [];
+
+            foreach($returned_activities as $activity) {
+                $activity_name = $activity['activity_name'];
+                $id = $activity['id'];
+                $new_activity = new Activity($activity_name, $id);
+                array_push($activities, $new_activity);
+            }
+            return $activities;
+        }
     }
 
 ?>

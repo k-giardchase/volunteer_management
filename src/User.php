@@ -70,6 +70,11 @@
         {
             $this->password = (string) $new_password;
         }
+
+        function getActivityLevel()
+        {
+            return $this->activity_level;
+        }
     }
 
 ?>

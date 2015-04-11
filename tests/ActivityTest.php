@@ -129,6 +129,26 @@
             //Assert
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $activity_name = 'Sleeping';
+            $id = 1;
+            $test_activity = new Activity($activity_name, $id);
+            $test_activity->save();
+
+            $activity_name2 = 'Running';
+            $id2 = 2;
+            $test_activity2 = new Activity($activity_name, $id);
+            $test_activity2->save();
+
+            //Act
+            $result = Activity::find($test_activity2->getId());
+
+            //Assert
+            $this->assertEquals($test_activity2, $result);
+        }
     }
 
 ?>

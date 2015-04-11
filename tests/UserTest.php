@@ -400,6 +400,34 @@
             $this->assertEquals($test_user, $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $username = 'Mags123';
+            $password = '1234';
+            $activity_level = 2;
+            $id = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user->save();
+
+            $new_first_name = 'Margaret';
+            $new_last_name = 'Down';
+            $new_email = 'mag@me.com';
+            $new_username = 'Margaret123';
+            $new_password = '4321';
+            $new_activity_level = 4;
+
+            //Act
+            $test_user->update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_activity_level);
+
+
+            //Assert
+            $this->assertEquals(['Margaret', 'Down', 'mag@me.com', 'Margaret123', '4321', 4], [$test_user->getFirstName(), $test_user->getLastName(), $test_user->getEmail(), $test_user->getUsername(), $test_user->getPassword(), $test_user->getActivityLevel()]);
+        }
+
     }
 
 ?>

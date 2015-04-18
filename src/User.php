@@ -7,17 +7,17 @@
         private $email;
         private $username;
         private $password;
-        private $activity_level;
+        private $admin_stat;
         private $id;
 
-        function __construct($first_name, $last_name, $email, $username, $password, $activity_level, $id = null)
+        function __construct($first_name, $last_name, $email, $username, $password, $admin_stat, $id = null)
         {
             $this->first_name = $first_name;
             $this->last_name = $last_name;
             $this->email = $email;
             $this->username = $username;
             $this->password = $password;
-            $this->activity_level = $activity_level;
+            $this->admin_stat = $admin_stat;
             $this->id = $id;
         }
 
@@ -71,14 +71,14 @@
             $this->password = (string) $new_password;
         }
 
-        function getActivityLevel()
+        function getAdminStat()
         {
-            return $this->activity_level;
+            return $this->admin_stat;
         }
 
-        function setActivityLevel($new_activity_level)
+        function setAdminStat($new_admin_stat)
         {
-            $this->activity_level = (int) $new_activity_level;
+            $this->admin_stat = (int) $new_admin_stat;
         }
 
         function getId()
@@ -93,12 +93,12 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, activity_level) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getActivityLevel()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
-        function update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_activity_level)
+        function update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat)
         {
             $GLOBALS['DB']->exec("UPDATE users SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
             $this->setFirstName($new_first_name);
@@ -115,8 +115,8 @@
             $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id={$this->getId()};");
             $this->setPassword($new_password);
 
-            $GLOBALS['DB']->exec("UPDATE users SET activity_level = '{$new_activity_level}' WHERE id={$this->getId()};");
-            $this->setActivityLevel($new_activity_level);
+            $GLOBALS['DB']->exec("UPDATE users SET admin_stat = {$new_admin_stat} WHERE id={$this->getId()};");
+            $this->setAdminStat($new_admin_stat);
         }
 
         function delete()
@@ -137,9 +137,9 @@
                 $email = $user['email'];
                 $username = $user['username'];
                 $password = $user['password'];
-                $activity_level = $user['activity_level'];
+                $admin_stat = $user['admin_stat'];
                 $id = $user['id'];
-                $new_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+                $new_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
                 array_push($users, $new_user);
             }
 

@@ -3,11 +3,15 @@
     class Event
     {
         private $event_name;
+        private $date;
+        private $location;
         private $id;
 
-        function __construct($event_name, $id = null)
+        function __construct($event_name, $date, $location, $id = null)
         {
             $this->event_name = $event_name;
+            $this->date = $date;
+            $this->location = $location;
             $this->id = $id;
         }
 

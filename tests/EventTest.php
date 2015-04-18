@@ -21,9 +21,11 @@
         function test_getEventName()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
+            $test_event = new Event($event_name, $date, $location, $id);
 
             //Act
             $result = $test_event->getEventName();
@@ -35,9 +37,11 @@
         function test_setEventName()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
+            $test_event = new Event($event_name, $date, $location, $id);
 
             //Act
             $test_event->setEventName('Running');
@@ -50,9 +54,11 @@
         function test_getId()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
+            $test_event = new Event($event_name, $date, $location, $id);
 
             //Act
             $result = $test_event->getId();
@@ -64,9 +70,11 @@
         function test_setId()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
+            $test_event = new Event($event_name, $date, $location, $id);
 
             //Act
             $test_event->setId(2);
@@ -79,11 +87,11 @@
         function test_save()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
-
+            $test_event = new Event($event_name, $date, $location, $id);
             //Act
             $result = Event::getAll();
 
@@ -94,15 +102,17 @@
         function test_getAll()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
-            $event_name2 = 'Running';
+            $event_name2 = 'Raffle';
+            $date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
             $id2 = 2;
-            $test_event2 = new Event($event_name, $id);
-            $test_event2->save();
+            $test_event2 = new Event($event_name2, $date2, $location2, $id2);
 
             //Act
             $result = Event::getAll();
@@ -114,15 +124,17 @@
         function test_deleteAll()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
-            $event_name2 = 'Running';
+            $event_name2 = 'Raffle';
+            $date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
             $id2 = 2;
-            $test_event2 = new Event($event_name, $id);
-            $test_event2->save();
+            $test_event2 = new Event($event_name2, $date2, $location2, $id2);
 
             //Act
             Event::deleteAll();
@@ -135,15 +147,17 @@
         function test_find()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
-            $event_name2 = 'Running';
+            $event_name2 = 'Raffle';
+            $date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
             $id2 = 2;
-            $test_event2 = new Event($event_name, $id);
-            $test_event2->save();
+            $test_event2 = new Event($event_name2, $date2, $location2, $id2);
 
             //Act
             $result = Event::find($test_event2->getId());
@@ -155,32 +169,35 @@
         function test_update()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
-            $new_event_name = 'Running';
+            $new_event_name = 'Raffle';
 
             //Act
             $test_event->update($new_event_name);
 
             //Assert
-            $this->assertEquals('Running', $test_event->getEventName());
+            $this->assertEquals('Raffle', $test_event->getEventName());
         }
 
         function test_delete()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
-            $event_name2 = 'Running';
+            $event_name2 = 'Raffle';
+            $date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
             $id2 = 2;
-            $test_event2 = new Event($event_name, $id);
-            $test_event2->save();
+            $test_event2 = new Event($event_name2, $date2, $location2, $id2);
 
             //Act
             $test_event2->delete();
@@ -193,17 +210,18 @@
         function test_addUser()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 0E;
+            $admin_stat = 0;
             $id = 1;
             $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user->save();
@@ -229,10 +247,11 @@
         function test_getUsers()
         {
             //Arrange
-            $event_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_event = new Event($event_name, $id);
-            $test_event->save();
+            $test_event = new Event($event_name, $date, $location, $id);
 
             $first_name = 'Maggie';
             $last_name = 'Doe';

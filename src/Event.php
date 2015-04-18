@@ -3,14 +3,14 @@
     class Event
     {
         private $event_name;
-        private $date;
+        private $event_date;
         private $location;
         private $id;
 
-        function __construct($event_name, $date, $location, $id = null)
+        function __construct($event_name, $event_date, $location, $id = null)
         {
             $this->event_name = $event_name;
-            $this->date = $date;
+            $this->event_date = $event_date;
             $this->location = $location;
             $this->id = $id;
         }
@@ -25,6 +25,26 @@
             $this->event_name = (string) $new_event_name;
         }
 
+        function getEventDate()
+        {
+            return $this->event_date;
+        }
+
+        function setEventDate($new_event_date)
+        {
+            $this->event_date = (string) $new_event_date;
+        }
+
+        function getLocation()
+        {
+            return $this->location;
+        }
+
+        function setLocation($new_location)
+        {
+            $this->location = (string) $new_location;
+        }
+
         function getId()
         {
             return $this->id;
@@ -37,15 +57,19 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO events (event_name) VALUES ('{$this->getEventName()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO events (event_name, event_date, location) VALUES ('{$this->getEventName()}', '{$this->getEventDate()}', '{$this->getLocation()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
-        function update($new_event_name)
+        function update($new_event_name, $new_event_date, $new_location)
         {
             $GLOBALS['DB']->exec("UPDATE events SET event_name = '{$new_event_name}' WHERE id = {$this->getId()};");
             $this->setEventName($new_event_name);
+            $GLOBALS['DB']->exec("UPDATE events SET event_date = '{$new_event_date}' WHERE id = {$this->getId()};");
+            $this->setEventDate($new_event_date);
+            $GLOBALS['DB']->exec("UPDATE events SET location = '{$new_location}' WHERE id = {$this->getId()};");
+            $this->setLocation($new_location);
         }
 
         function delete()
@@ -61,8 +85,10 @@
 
             foreach($returned_events as $event) {
                 $event_name = $event['event_name'];
+                $event_date = $event['event_date'];
+                $location = $event['location'];
                 $id = $event['id'];
-                $new_event = new Event($event_name, $id);
+                $new_event = new Event($event_name, $event_date, $location, $id);
                 array_push($events, $new_event);
             }
             return $events;

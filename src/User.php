@@ -165,23 +165,25 @@
             return $found_user;
         }
 
-        function addActivity($new_activity)
+        function addEvent($new_event)
         {
-            $GLOBALS['DB']->exec("INSERT INTO activities_users (activity_id, user_id) VALUES ({$new_activity->getId()}, {$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO events_users (event_id, user_id) VALUES ({$new_event->getId()}, {$this->getId()});");
         }
-        function getActivities()
+        function getEvents()
         {
-            $query = $GLOBALS['DB']->query("SELECT activities.* FROM users JOIN activities_users ON (users.id = activities_users.user_id) JOIN activities ON (activities_users.activity_id = activities.id) WHERE users.id = {$this->getId()};");
-            $returned_activities = $query->fetchAll(PDO::FETCH_ASSOC);
+            $query = $GLOBALS['DB']->query("SELECT events.* FROM users JOIN events_users ON (users.id = events_users.user_id) JOIN events ON (events_users.event_id = events.id) WHERE users.id = {$this->getId()};");
+            $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            $activities = [];
-            foreach($returned_activities as $activity) {
-                $activity_name = $activity['activity_name'];
-                $id = $activity['id'];
-                $new_activity = new Activity($activity_name, $id);
-                array_push($activities, $new_activity);
+            $events = [];
+            foreach($returned_events as $event) {
+                $event_name = $event['event_name'];
+                $event_date = $event['event_date'];
+                $location = $event['location'];
+                $id = $event['id'];
+                $new_event = new Event($event_name, $event_date, $location, $id);
+                array_push($events, $new_event);
             }
-            return $activities;
+            return $events;
         }
     }
 

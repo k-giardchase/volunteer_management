@@ -8,14 +8,14 @@
     $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/User.php';
-    require_once __DIR__.'/../src/Activity.php';
+    require_once __DIR__.'/../src/Event.php';
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
             User::deleteAll();
-            Activity::deleteAll();
+            Event::deleteAll();
         }
 
         function test_getFirstName()
@@ -213,7 +213,7 @@
             $this->assertEquals('123', $result);
         }
 
-        function test_getActivityLevel()
+        function test_getAdminStat()
         {
             //Arrange
             $first_name = 'Maggie';
@@ -226,13 +226,13 @@
             $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getActivityLevel();
+            $result = $test_user->getAdminStat();
 
             //Assert
-            $this->assertEquals(2, $result);
+            $this->assertEquals(0, $result);
         }
 
-        function test_setActivityLevel()
+        function test_setAdminStat()
         {
             //Arrange
             $first_name = 'Maggie';
@@ -245,11 +245,11 @@
             $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setActivityLevel(4);
-            $result = $test_user->getActivityLevel();
+            $test_user->setAdminStat(0);
+            $result = $test_user->getAdminStat();
 
             //Assert
-            $this->assertEquals(4, $result);
+            $this->assertEquals(0, $result);
         }
 
         function test_getId()
@@ -359,7 +359,7 @@
             $email = 'johnny@me.com';
             $username = 'John123';
             $password = '123456';
-            $admin_stat = 3;
+            $admin_stat = 0;
             $id = 2;
             $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user2->save();
@@ -461,7 +461,7 @@
             $this->assertEquals([$test_user2], $result);
         }
 
-        function test_addActivity()
+        function test_addEvent()
         {
             //Arrange
             $first_name = 'Maggie';
@@ -470,29 +470,33 @@
             $username = 'Mags123';
             $password = '1234';
             $admin_stat = 0;
-            $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $id1 = 1;
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id1);
             $test_user->save();
 
-            $activity_name = 'Sleeping';
-            $id = 1;
-            $test_activity = new Activity($activity_name, $id);
-            $test_activity->save();
+            $event_name = 'Silent Auction';
+            $event_date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
+            $id2 = 1;
+            $test_event = new Event($event_name, $event_date, $location, $id2);
+            $test_event->save();
 
-            $activity_name2 = 'Running';
-            $id2 = 2;
-            $test_activity2 = new Activity($activity_name, $id);
-            $test_activity2->save();
+            $event_name2 = 'Raffle';
+            $event_date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
+            $id3 = 2;
+            $test_event2 = new Event($event_name2, $event_date2, $location2, $id3);
+            $test_event2->save();
 
             //Act
-            $test_user->addActivity($test_activity);
-            $result = $test_user->getActivities();
+            $test_user->addEvent($test_event);
+            $result = $test_user->getEvents();
 
             //Assert
-            $this->assertEquals([$test_activity], $result);
+            $this->assertEquals([$test_event], $result);
         }
 
-        function test_getActivities()
+        function test_getEvents()
         {
             //Arrange
             $first_name = 'Maggie';
@@ -505,23 +509,27 @@
             $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user->save();
 
-            $activity_name = 'Sleeping';
+            $event_name = 'Silent Auction';
+            $date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
             $id = 1;
-            $test_activity = new Activity($activity_name, $id);
-            $test_activity->save();
+            $test_event = new Event($event_name, $date, $location, $id);
+            $test_event->save();
 
-            $activity_name2 = 'Running';
+            $event_name2 = 'Raffle';
+            $date2 = '2015-01-01 12:00:00';
+            $location2 = "500 Some Street";
             $id2 = 2;
-            $test_activity2 = new Activity($activity_name, $id);
-            $test_activity2->save();
+            $test_event2 = new Event($event_name2, $date2, $location2, $id2);
+            $test_event2->save();
 
             //Act
-            $test_user->addActivity($test_activity);
-            $test_user->addActivity($test_activity2);
-            $result = $test_user->getActivities();
+            $test_user->addEvent($test_event);
+            $test_user->addEvent($test_event2);
+            $result = $test_user->getEvents();
 
             //Assert
-            $this->assertEquals([$test_activity, $test_activity2], $result);
+            $this->assertEquals([$test_event, $test_event2], $result);
         }
 
     }

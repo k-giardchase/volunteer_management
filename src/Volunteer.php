@@ -1,6 +1,6 @@
 <?php
 
-    class User
+    class Volunteer
     {
         private $first_name;
         private $last_name;
@@ -93,85 +93,85 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (first_name, last_name, email, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO volunteers (first_name, last_name, email, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
         function update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat)
         {
-            $GLOBALS['DB']->exec("UPDATE users SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
             $this->setFirstName($new_first_name);
 
-            $GLOBALS['DB']->exec("UPDATE users SET last_name = '{$new_last_name}' WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET last_name = '{$new_last_name}' WHERE id={$this->getId()};");
             $this->setLastName($new_last_name);
 
-            $GLOBALS['DB']->exec("UPDATE users SET email = '{$new_email}' WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET email = '{$new_email}' WHERE id={$this->getId()};");
             $this->setEmail($new_email);
 
-            $GLOBALS['DB']->exec("UPDATE users SET username = '{$new_username}' WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET username = '{$new_username}' WHERE id={$this->getId()};");
             $this->setUsername($new_username);
 
-            $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET password = '{$new_password}' WHERE id={$this->getId()};");
             $this->setPassword($new_password);
 
-            $GLOBALS['DB']->exec("UPDATE users SET admin_stat = {$new_admin_stat} WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE volunteers SET admin_stat = {$new_admin_stat} WHERE id={$this->getId()};");
             $this->setAdminStat($new_admin_stat);
         }
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM volunteers WHERE id = {$this->getId()};");
         }
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->query("SELECT * FROM users;");
-            $returned_users = $query->fetchAll(PDO::FETCH_ASSOC);
+            $query = $GLOBALS['DB']->query("SELECT * FROM volunteers;");
+            $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            $users = [];
+            $volunteers = [];
 
-            foreach($returned_users as $user) {
-                $first_name = $user['first_name'];
-                $last_name = $user['last_name'];
-                $email = $user['email'];
-                $username = $user['username'];
-                $password = $user['password'];
-                $admin_stat = $user['admin_stat'];
-                $id = $user['id'];
-                $new_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-                array_push($users, $new_user);
+            foreach($returned_volunteers as $volunteer) {
+                $first_name = $volunteer['first_name'];
+                $last_name = $volunteer['last_name'];
+                $email = $volunteer['email'];
+                $username = $volunteer['username'];
+                $password = $volunteer['password'];
+                $admin_stat = $volunteer['admin_stat'];
+                $id = $volunteer['id'];
+                $new_user = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+                array_push($volunteers, $new_user);
             }
 
-            return $users;
+            return $volunteers;
         }
 
         static function deleteAll()
         {
-            $GLOBALS['DB']->exec("DELETE FROM users *;");
+            $GLOBALS['DB']->exec("DELETE FROM volunteers *;");
         }
 
         static function find($search_id)
         {
-            $found_user = null;
-            $users = User::getAll();
+            $found_volunteer = null;
+            $volunteers = Volunteer::getAll();
 
-            foreach($users as $user) {
-                $user_id = $user->getId();
-                if($user_id === $search_id) {
-                    $found_user = $user;
+            foreach($volunteers as $volunteer) {
+                $volunteer_id = $volunteer->getId();
+                if($volunteer_id === $search_id) {
+                    $found_volunteer = $volunteer;
                 }
             }
-            return $found_user;
+            return $found_volunteer;
         }
 
         function addEvent($new_event)
         {
-            $GLOBALS['DB']->exec("INSERT INTO events_users (event_id, user_id) VALUES ({$new_event->getId()}, {$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$new_event->getId()}, {$this->getId()});");
         }
         function getEvents()
         {
-            $query = $GLOBALS['DB']->query("SELECT events.* FROM users JOIN events_users ON (users.id = events_users.user_id) JOIN events ON (events_users.event_id = events.id) WHERE users.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT events.* FROM volunteers JOIN events_volunteers ON (volunteers.id = events_volunteers.volunteer_id) JOIN events ON (events_volunteers.event_id = events.id) WHERE volunteers.id = {$this->getId()};");
             $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $events = [];

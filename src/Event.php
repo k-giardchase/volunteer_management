@@ -112,28 +112,28 @@
             return $found_event;
         }
 
-        function addUser($new_user)
+        function addVolunteer($new_volunteer)
         {
-            $GLOBALS['DB']->exec("INSERT INTO events_users (event_id, user_id) VALUES ({$this->getId()}, {$new_user->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$this->getId()}, {$new_volunteer->getId()});");
         }
 
-        function getUsers()
+        function getVolunteers()
         {
-            $query = $GLOBALS['DB']->query("SELECT users.* FROM events JOIN events_users ON (events.id = events_users.event_id) JOIN users ON (events_users.user_id = users.id) WHERE events.id = {$this->getId()};");
-            $returned_users = $query->fetchAll(PDO::FETCH_ASSOC);
-            $users = [];
-            foreach($returned_users as $user) {
-                $first_name = $user['first_name'];
-                $last_name = $user['last_name'];
-                $email = $user['email'];
-                $username = $user['username'];
-                $password = $user['password'];
-                $admin_stat = $user['admin_stat'];
-                $id = $user['id'];
-                $new_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-                array_push($users, $new_user);
+            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM events JOIN events_volunteers ON (events.id = events_volunteers.event_id) JOIN volunteers ON (events_volunteers.volunteer_id = volunteers.id) WHERE events.id = {$this->getId()};");
+            $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
+            $volunteers = [];
+            foreach($returned_volunteers as $volunteer) {
+                $first_name = $volunteer['first_name'];
+                $last_name = $volunteer['last_name'];
+                $email = $volunteer['email'];
+                $username = $volunteer['username'];
+                $password = $volunteer['password'];
+                $admin_stat = $volunteer['admin_stat'];
+                $id = $volunteer['id'];
+                $new_volunteer= new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+                array_push($volunteers, $new_volunteer);
             }
-            return $users;
+            return $volunteers;
         }
     }
 

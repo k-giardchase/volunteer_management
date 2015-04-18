@@ -8,14 +8,14 @@
     $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/Event.php';
-    require_once __DIR__.'/../src/User.php';
+    require_once __DIR__.'/../src/Volunteer.php';
 
     class EventTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
             Event::deleteAll();
-            User::deleteAll();
+            Volunteer::deleteAll();
         }
 
         function test_getEventName()
@@ -286,7 +286,7 @@
             $this->assertEquals([$test_event], $result);
         }
 
-        function test_addUser()
+        function test_addVolunteer()
         {
             //Arrange
             $event_name = 'Silent Auction';
@@ -303,8 +303,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -313,18 +313,18 @@
             $password = '123456';
             $admin_stat = 1;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            $test_event->addUser($test_user);
-            $result = $test_event->getUsers();
+            $test_event->addVolunteer($test_volunteer);
+            $result = $test_event->getVolunteers();
 
             //Assert
-            $this->assertEquals([$test_user], $result);
+            $this->assertEquals([$test_volunteer], $result);
         }
 
-        function test_getUsers()
+        function test_getVolunteers()
         {
             //Arrange
             $event_name = 'Silent Auction';
@@ -341,8 +341,8 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -351,16 +351,16 @@
             $password = '123456';
             $admin_stat = 0;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            $test_event->addUser($test_user);
-            $test_event->addUser($test_user2);
-            $result = $test_event->getUsers();
+            $test_event->addVolunteer($test_volunteer);
+            $test_event->addVolunteer($test_volunteer2);
+            $result = $test_event->getVolunteers();
 
             //Assert
-            $this->assertEquals([$test_user, $test_user2], $result);
+            $this->assertEquals([$test_volunteer, $test_volunteer2], $result);
         }
     }
 

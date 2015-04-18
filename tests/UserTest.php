@@ -7,14 +7,14 @@
 
     $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
-    require_once __DIR__.'/../src/User.php';
+    require_once __DIR__.'/../src/Volunteer.php';
     require_once __DIR__.'/../src/Event.php';
 
-    class UserTest extends PHPUnit_Framework_TestCase
+    class VolunteerTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
-            User::deleteAll();
+            Volunteer::deleteAll();
             Event::deleteAll();
         }
 
@@ -28,10 +28,10 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getFirstName();
+            $result = $test_volunteer->getFirstName();
 
             //Assert
             $this->assertEquals('Maggie', $result);
@@ -47,11 +47,11 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setFirstName('Margaret');
-            $result = $test_user->getFirstName();
+            $test_volunteer->setFirstName('Margaret');
+            $result = $test_volunteer->getFirstName();
 
             //Assert
             $this->assertEquals('Margaret', $result);
@@ -67,10 +67,10 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getLastName();
+            $result = $test_volunteer->getLastName();
 
             //Assert
             $this->assertEquals('Doe', $result);
@@ -86,11 +86,11 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setLastName('Does');
-            $result = $test_user->getLastName();
+            $test_volunteer->setLastName('Does');
+            $result = $test_volunteer->getLastName();
 
             //Assert
             $this->assertEquals('Does', $result);
@@ -106,10 +106,10 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getEmail();
+            $result = $test_volunteer->getEmail();
 
             //Assert
             $this->assertEquals('maggie@me.com', $result);
@@ -125,11 +125,11 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setEmail('mag@me.com');
-            $result = $test_user->getEmail();
+            $test_volunteer->setEmail('mag@me.com');
+            $result = $test_volunteer->getEmail();
 
             //Assert
             $this->assertEquals('mag@me.com', $result);
@@ -145,10 +145,10 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getUsername();
+            $result = $test_volunteer->getUsername();
 
             //Assert
             $this->assertEquals('Mags123', $result);
@@ -164,11 +164,11 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setUsername('Maggie123');
-            $result = $test_user->getUsername();
+            $test_volunteer->setUsername('Maggie123');
+            $result = $test_volunteer->getUsername();
 
             //Assert
             $this->assertEquals('Maggie123', $result);
@@ -184,10 +184,10 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getPassword();
+            $result = $test_volunteer->getPassword();
 
             //Assert
             $this->assertEquals('1234', $result);
@@ -203,11 +203,11 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setPassword('123');
-            $result = $test_user->getPassword();
+            $test_volunteer->setPassword('123');
+            $result = $test_volunteer->getPassword();
 
             //Assert
             $this->assertEquals('123', $result);
@@ -223,10 +223,10 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getAdminStat();
+            $result = $test_volunteer->getAdminStat();
 
             //Assert
             $this->assertEquals(0, $result);
@@ -242,11 +242,11 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setAdminStat(0);
-            $result = $test_user->getAdminStat();
+            $test_volunteer->setAdminStat(0);
+            $result = $test_volunteer->getAdminStat();
 
             //Assert
             $this->assertEquals(0, $result);
@@ -262,10 +262,10 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $result = $test_user->getId();
+            $result = $test_volunteer->getId();
 
             //Assert
             $this->assertEquals(1, $result);
@@ -281,11 +281,11 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_user->setId(4);
-            $result = $test_user->getId();
+            $test_volunteer->setId(4);
+            $result = $test_volunteer->getId();
 
             //Assert
             $this->assertEquals(4, $result);
@@ -301,14 +301,14 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             //Act
-            $result = User::getAll();
+            $result = Volunteer::getAll();
 
             //Assert
-            $this->assertEquals([$test_user], $result);
+            $this->assertEquals([$test_volunteer], $result);
         }
 
         function test_getAll()
@@ -321,8 +321,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -331,14 +331,14 @@
             $password = '123456';
             $admin_stat = 0;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            $result = User::getAll();
+            $result = Volunteer::getAll();
 
             //Assert
-            $this->assertEquals([$test_user, $test_user2], $result);
+            $this->assertEquals([$test_volunteer, $test_volunteer2], $result);
         }
 
         function test_deleteAll()
@@ -351,8 +351,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -361,12 +361,12 @@
             $password = '123456';
             $admin_stat = 0;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            User::deleteAll();
-            $result = User::getAll();
+            Volunteer::deleteAll();
+            $result = Volunteer::getAll();
 
             //Assert
             $this->assertEquals([], $result);
@@ -382,8 +382,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -392,14 +392,14 @@
             $password = '123456';
             $admin_stat = 0;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            $result = User::find($test_user->getId());
+            $result = Volunteer::find($test_volunteer->getId());
 
             //Assert
-            $this->assertEquals($test_user, $result);
+            $this->assertEquals($test_volunteer, $result);
         }
 
         function test_update()
@@ -412,8 +412,8 @@
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $new_first_name = 'Margaret';
             $new_last_name = 'Down';
@@ -423,11 +423,11 @@
             $new_admin_stat = 0;
 
             //Act
-            $test_user->update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat);
+            $test_volunteer->update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat);
 
 
             //Assert
-            $this->assertEquals(['Margaret', 'Down', 'mag@me.com', 'Margaret123', '4321', 0], [$test_user->getFirstName(), $test_user->getLastName(), $test_user->getEmail(), $test_user->getUsername(), $test_user->getPassword(), $test_user->getAdminStat()]);
+            $this->assertEquals(['Margaret', 'Down', 'mag@me.com', 'Margaret123', '4321', 0], [$test_volunteer->getFirstName(), $test_volunteer->getLastName(), $test_volunteer->getEmail(), $test_volunteer->getUsername(), $test_volunteer->getPassword(), $test_volunteer->getAdminStat()]);
         }
 
         function test_delete()
@@ -440,8 +440,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
@@ -450,15 +450,15 @@
             $password = '123456';
             $admin_stat = 1;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user2->save();
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2->save();
 
             //Act
-            $test_user->delete();
-            $result = User::getAll();
+            $test_volunteer->delete();
+            $result = Volunteer::getAll();
 
             //Assert
-            $this->assertEquals([$test_user2], $result);
+            $this->assertEquals([$test_volunteer2], $result);
         }
 
         function test_addEvent()
@@ -471,8 +471,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id1 = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id1);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id1);
+            $test_volunteer->save();
 
             $event_name = 'Silent Auction';
             $event_date = '2015-01-01 12:00:00';
@@ -489,8 +489,8 @@
             $test_event2->save();
 
             //Act
-            $test_user->addEvent($test_event);
-            $result = $test_user->getEvents();
+            $test_volunteer->addEvent($test_event);
+            $result = $test_volunteer->getEvents();
 
             //Assert
             $this->assertEquals([$test_event], $result);
@@ -506,8 +506,8 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-            $test_user->save();
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
 
             $event_name = 'Silent Auction';
             $date = '2015-01-01 12:00:00';
@@ -524,9 +524,9 @@
             $test_event2->save();
 
             //Act
-            $test_user->addEvent($test_event);
-            $test_user->addEvent($test_event2);
-            $result = $test_user->getEvents();
+            $test_volunteer->addEvent($test_event);
+            $test_volunteer->addEvent($test_event2);
+            $result = $test_volunteer->getEvents();
 
             //Assert
             $this->assertEquals([$test_event, $test_event2], $result);

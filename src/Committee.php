@@ -20,6 +20,11 @@
             return $this->committee_name;
         }
 
+        function setCommitteeName($new_committee_name)
+        {
+            $this->committee_name = (string) $new_committee_name;
+        }
+
     }
 
 ?>

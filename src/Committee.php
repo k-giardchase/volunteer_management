@@ -15,6 +15,10 @@
             $this->id = $id;
         }
 
+        function getCommitteeName()
+        {
+            return $this->committee_name;
+        }
 
     }
 

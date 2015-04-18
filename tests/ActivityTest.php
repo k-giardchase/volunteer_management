@@ -203,9 +203,9 @@
             $email = 'maggie@me.com';
             $username = 'Mags123';
             $password = '1234';
-            $activity_level = 2;
+            $admin_stat = 0;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user->save();
 
             $first_name = 'Johnny';
@@ -213,9 +213,9 @@
             $email = 'johnny@me.com';
             $username = 'John123';
             $password = '123456';
-            $activity_level = 3;
+            $admin_stat = 1;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user2->save();
 
             //Act
@@ -239,9 +239,9 @@
             $email = 'maggie@me.com';
             $username = 'Mags123';
             $password = '1234';
-            $activity_level = 2;
+            $admin_stat = 1;
             $id = 1;
-            $test_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user->save();
 
             $first_name = 'Johnny';
@@ -249,9 +249,9 @@
             $email = 'johnny@me.com';
             $username = 'John123';
             $password = '123456';
-            $activity_level = 3;
+            $admin_stat = 0;
             $id = 2;
-            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+            $test_user2 = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
             $test_user2->save();
 
             //Act

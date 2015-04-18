@@ -98,9 +98,9 @@
                 $email = $user['email'];
                 $username = $user['username'];
                 $password = $user['password'];
-                $activity_level = $user['activity_level'];
+                $admin_stat = $user['admin_stat'];
                 $id = $user['id'];
-                $new_user = new User($first_name, $last_name, $email, $username, $password, $activity_level, $id);
+                $new_user = new User($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
                 array_push($users, $new_user);
             }
             return $users;

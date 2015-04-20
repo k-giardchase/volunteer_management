@@ -118,5 +118,22 @@
             //Assert
             $this->assertEquals('Jane Smith', $result);
         }
+
+        function test_save()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $supervisor = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
+
+            //Act
+            $test_committee->save();
+            Committee::getAll();
+
+            //Assert
+            $this->assertEquals([$test_committee], $result);
+        }
     }
 ?>

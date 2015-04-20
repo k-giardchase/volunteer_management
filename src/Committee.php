@@ -25,6 +25,11 @@
             $this->committee_name = (string) $new_committee_name;
         }
 
+        function getDepartment()
+        {
+            return $this->department;
+        }
+
     }
 
 ?>

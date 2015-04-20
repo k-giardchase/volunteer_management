@@ -62,7 +62,7 @@
           $this->setId($result['id']);
         }
 
-        function getAll()
+        static function getAll()
         {
           $query = $GLOBALS['DB']->query("SELECT * FROM committees;");
           $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -76,6 +76,11 @@
             array_push($committees, $new_committee);
           }
           return $committees;
+        }
+
+        static function deleteAll()
+        {
+          $GLOBALS['DB']->("DELETE FROM committees *;");
         }
 
     }

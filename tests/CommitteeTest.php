@@ -193,5 +193,30 @@
             //Assert
             $this->assertEquals([$test_committee, $test_committee2], $result);
         }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $supervisor = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
+            $test_committee->save();
+
+            $committee_name2 = 'FLASH';
+            $department2 = 'Events';
+            $supervisor2 = 'Bryant C';
+            $id2 = 2;
+            $test_committee2 = new Committee($committee_name2, $department2, $supervisor2, $id2);
+            $test_committee2->save();
+
+            //Act
+            Committee::deleteAll();
+            $result = Committee::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
     }
 ?>

@@ -25,9 +25,9 @@
             //Arrange
             $committee_name = 'Art';
             $department = 'Event Management';
-            $staff_member = 'Maggie Smith';
+            $supervisor = 'Maggie Smith';
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
 
             //Act
             $result = $test_committee->getCommitteeName();
@@ -41,9 +41,9 @@
             //Arrange
             $committee_name = 'Art';
             $department = 'Event Management';
-            $staff_member = 'Maggie Smith';
+            $supervisor = 'Maggie Smith';
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
 
             //Act
             $test_committee->setCommitteeName('Theory & Practice');
@@ -58,9 +58,9 @@
             //Arrange
             $committee_name = 'Art';
             $department = 'Event Management';
-            $staff_member = 'Maggie Smith';
+            $supervisor = 'Maggie Smith';
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
 
             //Act
             $result = $test_committee->getDepartment();
@@ -74,9 +74,9 @@
             //Arrange
             $committee_name = 'Art';
             $department = 'Event Management';
-            $staff_member = 'Maggie Smith';
+            $supervisor = 'Maggie Smith';
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
 
             //Act
             $test_committee->setDepartment('Prevention');
@@ -86,17 +86,17 @@
             $this->assertEquals('Prevention', $result);
         }
 
-        function test_getStaffMember()
+        function test_getSupervisor()
         {
             //Arrange
             $committee_name = 'Art';
             $department = 'Event Management';
-            $staff_member = 'Maggie Smith';
+            $supervisor = 'Maggie Smith';
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
 
             //Act
-            $result = $test_committee->getStaffMember();
+            $result = $test_committee->getSupervisor();
 
             //Assert
             $this->assertEquals('Maggie Smith', $result);

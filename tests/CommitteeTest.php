@@ -85,5 +85,21 @@
             //Assert
             $this->assertEquals('Prevention', $result);
         }
+
+        function test_getStaffMember()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $staff_member = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+
+            //Act
+            $result = $test_committee->getStaffMember();
+
+            //Assert
+            $this->assertEquals('Maggie Smith', $result);
+        }
     }
 ?>

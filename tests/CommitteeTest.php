@@ -119,6 +119,40 @@
             $this->assertEquals('Jane Smith', $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $supervisor = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
+
+            //Act
+            $result = $test_committee->getId();
+
+            //Assert
+            $this->assertEquals(1, $result);
+        }
+
+        function test_setId()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $supervisor = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
+
+            //Act
+            $test_committee->setId(3);
+            $result = $test_committee->getId();
+
+            //Assert
+            $this->assertEquals(3, $result);
+        }
+
+
         function test_save()
         {
             //Arrange

@@ -45,6 +45,13 @@
             $this->supervisor = (string) $new_supervisor;
         }
 
+        function save()
+        {
+          $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, supervisor) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getSupervisor()}') RETURNING id;");
+          $result = $statement->fetch(PDO::FETCH_ASSOC);
+          $this->setId($result['id']);
+        }
+
     }
 
 ?>

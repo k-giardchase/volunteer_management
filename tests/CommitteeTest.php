@@ -83,7 +83,7 @@
             $result = $test_committee->getDepartment();
 
             //Assert
-            $this->assertEquals('Department', $result);
+            $this->assertEquals('Prevention', $result);
         }
     }
 ?>

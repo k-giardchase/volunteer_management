@@ -30,6 +30,11 @@
             return $this->department;
         }
 
+        function setDepartment($new_department)
+        {
+            $this->department = (string) $new_department;
+        }
+
     }
 
 ?>

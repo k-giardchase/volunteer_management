@@ -5,7 +5,7 @@
     * @backupStaticAttributes disabled
     */
 
-    $DB = new PDO('pgsql: host=localhost;dbname=day_test');
+    // $DB = new PDO('pgsql: host=localhost;dbname=day_test');
 
     require_once __DIR__.'/../src/Event.php';
     require_once __DIR__.'/../src/Volunteer.php';
@@ -51,6 +51,22 @@
 
             //Assert
             $this->assertEquals('Theory & Practice', $result);
+        }
+
+        function test_getDepartment()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $staff_member = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+
+            //Act
+            $result = $test_committee->getDepartment();
+
+            //Assert
+            $this->assertEquals('Event Management', $result);
         }
     }
 ?>

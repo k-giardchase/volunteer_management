@@ -83,6 +83,19 @@
           $GLOBALS['DB']->exec("DELETE FROM committees *;");
         }
 
+        static function find($search_id)
+        {
+          $found_committee = null;
+          $all_committees = Committee::getAll();
+          foreach($all_committees as $committee) {
+            $committee_id = $committee->getId();
+            if($committee_id === $search_id) {
+              $found_committee = $committee;
+            }
+          }
+          return $found_committee;
+        }
+
     }
 
 ?>

@@ -62,6 +62,22 @@
           $this->setId($result['id']);
         }
 
+        function getAll()
+        {
+          $query = $GLOBALS['DB']->query("SELECT * FROM committees;");
+          $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
+          $committees = [];
+          foreach($returned_committees as $committee) {
+            $committee_name = $committee['committee_name'];
+            $department = $committee['department'];
+            $supervisor = $committee['supervisor'];
+            $id = $committee['id'];
+            $new_committee = new Committee($committee_name, $department, $supervisor, $id);
+            array_push($committees, $new_committee);
+          }
+          return $committees;
+        }
+
     }
 
 ?>

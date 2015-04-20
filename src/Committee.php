@@ -45,6 +45,16 @@
             $this->supervisor = (string) $new_supervisor;
         }
 
+        function getId()
+        {
+          return $this->id;
+        }
+
+        function setId($new_id)
+        {
+          $this->id = (int) $new_id;
+        }
+
         function save()
         {
           $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, supervisor) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getSupervisor()}') RETURNING id;");

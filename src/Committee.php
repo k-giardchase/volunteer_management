@@ -40,6 +40,11 @@
             return $this->supervisor;
         }
 
+        function setSupervisor($new_supervisor)
+        {
+            $this->supervisor = (string) $new_supervisor;
+        }
+
     }
 
 ?>

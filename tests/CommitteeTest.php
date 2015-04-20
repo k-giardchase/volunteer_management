@@ -101,5 +101,22 @@
             //Assert
             $this->assertEquals('Maggie Smith', $result);
         }
+
+        function test_setSupervisor()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $supervisor = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $supervisor, $id);
+
+            //Act
+            $test_committee->setSupervisor('Jane Smith');
+            $result = $test_committee->getSupervisor();
+
+            //Assert
+            $this->assertEquals('Jane Smith', $result);
+        }
     }
 ?>

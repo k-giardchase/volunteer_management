@@ -68,5 +68,22 @@
             //Assert
             $this->assertEquals('Event Management', $result);
         }
+
+        function test_setDepartment()
+        {
+            //Arrange
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $staff_member = 'Maggie Smith';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $staff_member, $id);
+
+            //Act
+            $test_committee->setDepartment('Prevention');
+            $result = $test_committee->getDepartment();
+
+            //Assert
+            $this->assertEquals('Department', $result);
+        }
     }
 ?>

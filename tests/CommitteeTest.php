@@ -17,7 +17,7 @@
         {
             Event::deleteAll();
             Volunteer::deleteAll();
-            // Committee::deleteAll();
+            Committee::deleteAll();
         }
 
         function test_getCommitteeName()
@@ -164,7 +164,7 @@
 
             //Act
             $test_committee->save();
-            Committee::getAll();
+            $result = Committee::getAll();
 
             //Assert
             $this->assertEquals([$test_committee], $result);

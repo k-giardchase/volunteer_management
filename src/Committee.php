@@ -80,7 +80,7 @@
 
         static function deleteAll()
         {
-          $GLOBALS['DB']->("DELETE FROM committees *;");
+          $GLOBALS['DB']->exec("DELETE FROM committees *;");
         }
 
     }

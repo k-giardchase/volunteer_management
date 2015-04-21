@@ -68,6 +68,11 @@
         {
             $this->phone = (string) $new_phone;
         }
+
+        function getId()
+        {
+            return $this->id;
+        }
     }
 
 ?>

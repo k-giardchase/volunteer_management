@@ -48,6 +48,11 @@
         {
             $this->position_title = (string) $new_position_title;
         }
+
+        function getEmail()
+        {
+            return $this->email;
+        }
     }
 
 ?>

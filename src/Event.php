@@ -66,8 +66,10 @@
         {
             $GLOBALS['DB']->exec("UPDATE events SET event_name = '{$new_event_name}' WHERE id = {$this->getId()};");
             $this->setEventName($new_event_name);
+
             $GLOBALS['DB']->exec("UPDATE events SET event_date = '{$new_event_date}' WHERE id = {$this->getId()};");
             $this->setEventDate($new_event_date);
+            
             $GLOBALS['DB']->exec("UPDATE events SET location = '{$new_location}' WHERE id = {$this->getId()};");
             $this->setLocation($new_location);
         }

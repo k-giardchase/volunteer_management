@@ -149,6 +149,26 @@
             //Assert
             $this->assertEquals('Micah@nonprofit.org', $result);
         }
+
+        function test_setEmail()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $phone = '800-600-5000';
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+
+            //Act
+            $test_supervisor->setEmail('Micah@nonprofit.org');
+            $result = $test_supervisor->getEmail();
+
+            //Assert
+            $this->assertEquals('Micah@nonprofit.org', $result);
+        }
+
     }
 
 ?>

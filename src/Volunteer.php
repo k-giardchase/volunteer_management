@@ -11,11 +11,12 @@
         private $admin_stat;
         private $id;
 
-        function __construct($first_name, $last_name, $email, $username, $password, $admin_stat, $id = null)
+        function __construct($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id = null)
         {
             $this->first_name = $first_name;
             $this->last_name = $last_name;
             $this->email = $email;
+            $this->phone = $phone;
             $this->username = $username;
             $this->password = $password;
             $this->admin_stat = $admin_stat;
@@ -50,6 +51,16 @@
         function setEmail($new_email)
         {
             $this->email = (string) $new_email;
+        }
+
+        function getPhone()
+        {
+            return $this->phone;
+        }
+
+        function setPhone($new_phone)
+        {
+            $this->phone = (string) $new_phone;
         }
 
         function getUsername()

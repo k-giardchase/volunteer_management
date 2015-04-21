@@ -38,6 +38,11 @@
         {
             $this->last_name = (string) $new_last_name;
         }
+
+        function getPositionTitle()
+        {
+            return $this->position_title;
+        }
     }
 
 ?>

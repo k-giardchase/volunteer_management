@@ -221,26 +221,47 @@
 
         function test_find()
         {
-        //Arrange
-        $committee_name = 'Art';
-        $department = 'Event Management';
-        $description = 'The art committee is responsible for making pretty things for events.';
-        $id = 1;
-        $test_committee = new Committee($committee_name, $department, $description, $id);
-        $test_committee->save();
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
 
-        $committee_name2 = 'FLASH';
-        $department2 = 'Events';
-        $supervisor2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
-        $id2 = 2;
-        $test_committee2 = new Committee($committee_name2, $department2, $supervisor2, $id2);
-        $test_committee2->save();
+          $committee_name2 = 'FLASH';
+          $department2 = 'Events';
+          $supervisor2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
+          $id2 = 2;
+          $test_committee2 = new Committee($committee_name2, $department2, $supervisor2, $id2);
+          $test_committee2->save();
 
-        //Act
-        $result = Committee::find($test_committee2->getId());
+          //Act
+          $result = Committee::find($test_committee2->getId());
 
-        //Assert
-        $this->assertEquals($test_committee2, $result);
+          //Assert
+          $this->assertEquals($test_committee2, $result);
+      }
+
+      function test_update()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $new_committee_name = 'Theory';
+          $new_department = 'Organizing';
+          $new_description = 'Study group for theory & practice.';
+
+          //Act
+          $test_committee->update($new_committee_name, $new_department, $new_description);
+
+          //Assert
+          $this->assertEquals(['Theory', 'Organizing', 'Study group for theory & practice.'], [$test_committee->getCommitteeName(), $test_committee->getDepartment(), $test_committee->getDescription()]);
       }
     }
 ?>

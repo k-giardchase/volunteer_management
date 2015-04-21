@@ -63,6 +63,11 @@
         {
             return $this->phone;
         }
+
+        function setPhone($new_phone)
+        {
+            $this->phone = (string) $new_phone;
+        }
     }
 
 ?>

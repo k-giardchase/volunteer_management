@@ -112,6 +112,25 @@
             //Assert
             $this->assertEquals('Director of Development', $result);
         }
+
+        function test_setPositionTitle()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $phone = '800-600-5000';
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+
+            //Act
+            $test_supervisor->setPositionTitle('Assistant Director of Development');
+            $result = $test_supervisor->getPositionTitle();
+
+            //Assert
+            $this->assertEquals('Assistant Director of Development', $result);
+        }
     }
 
 ?>

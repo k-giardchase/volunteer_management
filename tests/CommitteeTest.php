@@ -263,5 +263,30 @@
           //Assert
           $this->assertEquals(['Theory', 'Organizing', 'Study group for theory & practice.'], [$test_committee->getCommitteeName(), $test_committee->getDepartment(), $test_committee->getDescription()]);
       }
+
+      function test_delete()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $committee_name2 = 'FLASH';
+          $department2 = 'Events';
+          $supervisor2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
+          $id2 = 2;
+          $test_committee2 = new Committee($committee_name2, $department2, $supervisor2, $id2);
+          $test_committee2->save();
+
+          //Act
+          $test_committee->delete();
+          $result = Committee::getAll();
+
+          //Assert
+          $this->assertEquals([$test_committee2], $result);
+      }
     }
 ?>

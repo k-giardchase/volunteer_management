@@ -9,6 +9,7 @@
 
     require_once __DIR__.'/../src/Event.php';
     require_once __DIR__.'/../src/Volunteer.php';
+    require_once __DIR__.'/../src/Committee.php';
 
     class EventTest extends PHPUnit_Framework_TestCase
     {
@@ -16,6 +17,7 @@
         {
             Event::deleteAll();
             Volunteer::deleteAll();
+            Committee::deleteAll();
         }
 
         function test_getEventName()

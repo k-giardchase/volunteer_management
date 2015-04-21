@@ -5,6 +5,7 @@
         private $first_name;
         private $last_name;
         private $email;
+        private $phone;
         private $username;
         private $password;
         private $admin_stat;

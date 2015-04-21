@@ -224,6 +224,25 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_setId()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $phone = '800-600-5000';
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+
+            //Act
+            $test_supervisor->setId(2);
+            $result = $test_supervisor->getId();
+
+            //Assert
+            $this->assertEquals(2, $result);
+        }
+
 
     }
 

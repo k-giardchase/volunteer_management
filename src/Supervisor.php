@@ -53,6 +53,11 @@
         {
             return $this->email;
         }
+
+        function setEmail($new_email)
+        {
+            $this->email = (string) $new_email;
+        }
     }
 
 ?>

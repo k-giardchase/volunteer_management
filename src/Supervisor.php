@@ -58,6 +58,11 @@
         {
             $this->email = (string) $new_email;
         }
+
+        function getPhone()
+        {
+            return $this->phone;
+        }
     }
 
 ?>

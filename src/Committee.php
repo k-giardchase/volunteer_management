@@ -74,6 +74,11 @@
             $this->setDescription($new_description);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM committees WHERE id={$this->getId()};");
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM committees;");

@@ -105,12 +105,12 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO volunteers (first_name, last_name, email, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO volunteers (first_name, last_name, email, phone, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getPhone()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
-        function update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat)
+        function update($new_first_name, $new_last_name, $new_email, $new_phone, $new_username, $new_password, $new_admin_stat)
         {
             $GLOBALS['DB']->exec("UPDATE volunteers SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
             $this->setFirstName($new_first_name);
@@ -120,6 +120,9 @@
 
             $GLOBALS['DB']->exec("UPDATE volunteers SET email = '{$new_email}' WHERE id={$this->getId()};");
             $this->setEmail($new_email);
+
+            $GLOBALS['DB']->exec("UPDATE volunteers SET phone = '{$new_phone}' WHERE id={$this->getId()};");
+            $this->setPhone($new_phone);
 
             $GLOBALS['DB']->exec("UPDATE volunteers SET username = '{$new_username}' WHERE id={$this->getId()};");
             $this->setUsername($new_username);
@@ -147,12 +150,13 @@
                 $first_name = $volunteer['first_name'];
                 $last_name = $volunteer['last_name'];
                 $email = $volunteer['email'];
+                $phone = $volunteer['phone'];
                 $username = $volunteer['username'];
                 $password = $volunteer['password'];
                 $admin_stat = $volunteer['admin_stat'];
                 $id = $volunteer['id'];
-                $new_user = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
-                array_push($volunteers, $new_user);
+                $new_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
+                array_push($volunteers, $new_volunteer);
             }
 
             return $volunteers;

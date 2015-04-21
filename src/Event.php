@@ -69,7 +69,7 @@
 
             $GLOBALS['DB']->exec("UPDATE events SET event_date = '{$new_event_date}' WHERE id = {$this->getId()};");
             $this->setEventDate($new_event_date);
-            
+
             $GLOBALS['DB']->exec("UPDATE events SET location = '{$new_location}' WHERE id = {$this->getId()};");
             $this->setLocation($new_location);
         }
@@ -128,11 +128,12 @@
                 $first_name = $volunteer['first_name'];
                 $last_name = $volunteer['last_name'];
                 $email = $volunteer['email'];
+                $phone = $volunteer['phone'];
                 $username = $volunteer['username'];
                 $password = $volunteer['password'];
                 $admin_stat = $volunteer['admin_stat'];
                 $id = $volunteer['id'];
-                $new_volunteer= new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+                $new_volunteer= new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
                 array_push($volunteers, $new_volunteer);
             }
             return $volunteers;

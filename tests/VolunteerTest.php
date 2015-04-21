@@ -29,7 +29,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -49,7 +49,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -70,7 +70,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -90,7 +90,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -111,7 +111,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -122,7 +122,7 @@
             $this->assertEquals('maggie@me.com', $result);
         }
 
-        function test_setPhone()
+        function test_setEmail()
         {
             //Arrange
             $first_name = 'Maggie';
@@ -131,7 +131,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -152,7 +152,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -172,7 +172,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -193,7 +193,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -213,7 +213,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -234,7 +234,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -254,7 +254,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -275,7 +275,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -295,16 +295,16 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
             //Act
-            $test_volunteer->setAdminStat(0);
+            $test_volunteer->setAdminStat(1);
             $result = $test_volunteer->getAdminStat();
 
             //Assert
-            $this->assertEquals(0, $result);
+            $this->assertEquals(1, $result);
         }
 
         function test_getId()
@@ -316,7 +316,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -336,7 +336,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
 
@@ -357,7 +357,7 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
@@ -378,17 +378,17 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
-            $first_name2 = 'Maggie';
+            $first_name2 = 'Jane';
             $last_name2 = 'Doe';
-            $email2 = 'maggie@me.com';
-            $phone2 = '999-888-1111';
-            $username2 = 'Mags123';
-            $password2 = '1234';
+            $email2 = 'jane@me.com';
+            $phone2 = '111-333-2222';
+            $username2 = 'jane123';
+            $password2 = '9876';
             $admin_stat2 = 1;
             $id2 = 2;
             $test_volunteer2 = new Volunteer($first_name2, $last_name2, $email2, $phone2, $username2, $password2, $admin_stat2, $id2);
@@ -410,17 +410,17 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
-            $first_name2 = 'Maggie';
+            $first_name2 = 'Jane';
             $last_name2 = 'Doe';
-            $email2 = 'maggie@me.com';
-            $phone2 = '999-888-1111';
-            $username2 = 'Mags123';
-            $password2 = '1234';
+            $email2 = 'jane@me.com';
+            $phone2 = '111-333-2222';
+            $username2 = 'jane123';
+            $password2 = '9876';
             $admin_stat2 = 1;
             $id2 = 2;
             $test_volunteer2 = new Volunteer($first_name2, $last_name2, $email2, $phone2, $username2, $password2, $admin_stat2, $id2);
@@ -443,17 +443,17 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
-            $first_name2 = 'Maggie';
+            $first_name2 = 'Jane';
             $last_name2 = 'Doe';
-            $email2 = 'maggie@me.com';
-            $phone2 = '999-888-1111';
-            $username2 = 'Mags123';
-            $password2 = '1234';
+            $email2 = 'jane@me.com';
+            $phone2 = '111-333-2222';
+            $username2 = 'jane123';
+            $password2 = '9876';
             $admin_stat2 = 1;
             $id2 = 2;
             $test_volunteer2 = new Volunteer($first_name2, $last_name2, $email2, $phone2, $username2, $password2, $admin_stat2, $id2);
@@ -472,26 +472,28 @@
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
+            $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $new_first_name = 'Margaret';
             $new_last_name = 'Down';
             $new_email = 'mag@me.com';
+            $new_phone = '111-222-3333';
             $new_username = 'Margaret123';
             $new_password = '4321';
-            $new_admin_stat = 0;
+            $new_admin_stat = 1;
 
             //Act
-            $test_volunteer->update($new_first_name, $new_last_name, $new_email, $new_username, $new_password, $new_admin_stat);
+            $test_volunteer->update($new_first_name, $new_last_name, $new_email, $new_phone, $new_username, $new_password, $new_admin_stat);
 
 
             //Assert
-            $this->assertEquals(['Margaret', 'Down', 'mag@me.com', 'Margaret123', '4321', 0], [$test_volunteer->getFirstName(), $test_volunteer->getLastName(), $test_volunteer->getEmail(), $test_volunteer->getUsername(), $test_volunteer->getPassword(), $test_volunteer->getAdminStat()]);
+            $this->assertEquals(['Margaret', 'Down', 'mag@me.com', '111-222-3333', 'Margaret123', '4321', 1], [$test_volunteer->getFirstName(), $test_volunteer->getLastName(), $test_volunteer->getEmail(), $test_volunteer->getPhone(), $test_volunteer->getUsername(), $test_volunteer->getPassword(), $test_volunteer->getAdminStat()]);
         }
 
         function test_delete()
@@ -503,17 +505,17 @@
             $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 1;
             $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
-            $first_name2 = 'Maggie';
+            $first_name2 = 'Jane';
             $last_name2 = 'Doe';
-            $email2 = 'maggie@me.com';
-            $phone2 = '999-888-1111';
-            $username2 = 'Mags123';
-            $password2 = '1234';
+            $email2 = 'jane@me.com';
+            $phone2 = '111-333-2222';
+            $username2 = 'jane123';
+            $password2 = '9876';
             $admin_stat2 = 1;
             $id2 = 2;
             $test_volunteer2 = new Volunteer($first_name2, $last_name2, $email2, $phone2, $username2, $password2, $admin_stat2, $id2);
@@ -533,7 +535,7 @@
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
-            $phone = '999-888-7777'
+            $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
             $admin_stat = 0;
@@ -569,7 +571,7 @@
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
-            $phone = '999-888-7777'
+            $phone = '999-888-7777';
             $username = 'Mags123';
             $password = '1234';
             $admin_stat = 0;

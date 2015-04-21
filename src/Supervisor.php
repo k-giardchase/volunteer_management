@@ -43,6 +43,11 @@
         {
             return $this->position_title;
         }
+
+        function setPositionTitle($new_position_title)
+        {
+            $this->position_title = (string) $new_position_title;
+        }
     }
 
 ?>

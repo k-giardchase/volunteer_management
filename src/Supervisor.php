@@ -18,6 +18,11 @@
             $this->phone = $phone;
             $this->id = $id;
         }
+
+        function getFirstName()
+        {
+            return $this->first_name;
+        }
     }
 
 ?>

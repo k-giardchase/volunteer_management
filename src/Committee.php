@@ -4,14 +4,14 @@
     {
         private $committee_name;
         private $department;
-        private $supervisor;
+        private $description;
         private $id;
 
-        function __construct($committee_name, $department, $supervisor, $id = null)
+        function __construct($committee_name, $department, $description, $id = null)
         {
             $this->committee_name = $committee_name;
             $this->department = $department;
-            $this->supervisor = $supervisor;
+            $this->description = $description;
             $this->id = $id;
         }
 
@@ -35,14 +35,14 @@
             $this->department = (string) $new_department;
         }
 
-        function getSupervisor()
+        function getDescription()
         {
-            return $this->supervisor;
+            return $this->description;
         }
 
-        function setSupervisor($new_supervisor)
+        function setDescription($new_description)
         {
-            $this->supervisor = (string) $new_supervisor;
+            $this->description = (string) $new_description;
         }
 
         function getId()
@@ -57,7 +57,7 @@
 
         function save()
         {
-          $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, supervisor) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getSupervisor()}') RETURNING id;");
+          $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, description) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getDescription()}') RETURNING id;");
           $result = $statement->fetch(PDO::FETCH_ASSOC);
           $this->setId($result['id']);
         }
@@ -70,9 +70,9 @@
           foreach($returned_committees as $committee) {
             $committee_name = $committee['committee_name'];
             $department = $committee['department'];
-            $supervisor = $committee['supervisor'];
+            $description = $committee['description'];
             $id = $committee['id'];
-            $new_committee = new Committee($committee_name, $department, $supervisor, $id);
+            $new_committee = new Committee($committee_name, $department, $description, $id);
             array_push($committees, $new_committee);
           }
           return $committees;

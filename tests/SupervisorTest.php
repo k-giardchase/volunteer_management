@@ -94,6 +94,24 @@
             //Assert
             $this->assertEquals('Daniels', $result);
         }
+
+        function test_getPositionTitle()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $phone = '800-600-5000';
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+
+            //Act
+            $result = $test_supervisor->getPositionTitle();
+
+            //Assert
+            $this->assertEquals('Director of Development', $result);
+        }
     }
 
 ?>

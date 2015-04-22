@@ -10,6 +10,7 @@
     require_once __DIR__.'/../src/Event.php';
     require_once __DIR__.'/../src/Volunteer.php';
     require_once __DIR__.'/../src/Committee.php';
+    require_once __DIR__.'/../src/Supervisor.php';
 
     class ComitteeTest extends PHPUnit_Framework_TestCase
     {
@@ -18,7 +19,7 @@
             Event::deleteAll();
             Volunteer::deleteAll();
             Committee::deleteAll();
-            // Supervisor::deleteAll();
+            Supervisor::deleteAll();
         }
 
         function test_getCommitteeName()

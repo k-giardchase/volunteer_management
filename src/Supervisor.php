@@ -88,8 +88,8 @@
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->("SELECT * FROM supervisors;");
-            $returned_supervisors = $query->fetchAll(PDO:FETCH_ASSOC);
+            $query = $GLOBALS['DB']->query("SELECT * FROM supervisors;");
+            $returned_supervisors = $query->fetchAll(PDO::FETCH_ASSOC);
             $supervisors = [];
             foreach($returned_supervisors as $supervisor) {
                 $first_name = $supervisor['first_name'];
@@ -102,6 +102,11 @@
                 array_push($supervisors, $new_supervisor);
             }
             return $supervisors;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM supervisors *;");
         }
     }
 

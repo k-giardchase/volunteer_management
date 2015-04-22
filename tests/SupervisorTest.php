@@ -19,6 +19,7 @@
             Volunteer::deleteAll();
             Event::deleteAll();
             Committee::deleteAll();
+            Supervisor::deleteAll();
         }
 
         function test_getFirstName()
@@ -290,7 +291,7 @@
             $this->assertEquals([$test_supervisor, $test_supervisor2], $result);
         }
 
-        function test_getAll()
+        function test_deleteAll()
         {
             //Arrange
             $first_name = 'Micah';

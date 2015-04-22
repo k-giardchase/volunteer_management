@@ -10,6 +10,8 @@
     require_once __DIR__.'/../src/Volunteer.php';
     require_once __DIR__.'/../src/Event.php';
     require_once __DIR__.'/../src/Committee.php';
+    require_once __DIR__.'/../src/Supervisor.php';
+
 
     class VolunteerTest extends PHPUnit_Framework_TestCase
     {
@@ -18,6 +20,7 @@
             Volunteer::deleteAll();
             Event::deleteAll();
             Committee::deleteAll();
+            Supervisor::deleteAll();
         }
 
         function test_getFirstName()

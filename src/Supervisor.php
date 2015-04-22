@@ -78,6 +78,13 @@
         {
             $this->id = (int) $new_id;
         }
+
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO supervisors (first_name, last_name, position_title, email, phone) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPositionTitle()}', '{$this->getEmail()}', '{$this->getEmail()}', '{$this->getPhone()}') RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
     }
 
 ?>

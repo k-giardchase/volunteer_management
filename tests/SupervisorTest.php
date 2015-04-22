@@ -261,8 +261,7 @@
             //Assert
             $this->assertEquals([$test_supervisor], $result);
         }
-
-
+        
     }
 
 ?>

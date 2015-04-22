@@ -149,6 +149,11 @@
             $this->setAdminStat($new_admin_stat);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM supervisors WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $query = $GLOBALS['DB']->query("SELECT * FROM supervisors;");

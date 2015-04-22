@@ -81,9 +81,27 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO supervisors (first_name, last_name, position_title, email, phone) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPositionTitle()}', '{$this->getEmail()}', '{$this->getEmail()}', '{$this->getPhone()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO supervisors (first_name, last_name, position_title, email, phone) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPositionTitle()}', '{$this->getEmail()}','{$this->getPhone()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
+        }
+
+        static function getAll()
+        {
+            $query = $GLOBALS['DB']->("SELECT * FROM supervisors;");
+            $returned_supervisors = $query->fetchAll(PDO:FETCH_ASSOC);
+            $supervisors = [];
+            foreach($returned_supervisors as $supervisor) {
+                $first_name = $supervisor['first_name'];
+                $last_name = $supervisor['last_name'];
+                $position_title = $supervisor['position_title'];
+                $email = $supervisor['email'];
+                $phone = $supervisor['phone'];
+                $id = $supervisor['id'];
+                $new_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+                array_push($supervisors, $new_supervisor);
+            }
+            return $supervisors;
         }
     }
 

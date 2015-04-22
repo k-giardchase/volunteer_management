@@ -605,6 +605,35 @@
             $this->assertEquals([$test_event, $test_event2], $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $phone = '999-888-7777';
+            $username = 'Mags123';
+            $password = '1234';
+            $admin_stat = 0;
+            $id = 1;
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
+
+            $new_first_name = 'John';
+            $new_last_name = 'Doe';
+            $new_email = 'john@me.com';
+            $new_phone = '000-444-666';
+            $new_username = 'John123';
+            $new_password = '9876';
+            $new_admin_stat = 1;
+
+            //Act
+            $test_volunteer->update($new_first_name, $new_last_name, $new_email, $new_phone, $new_username, $new_password, $new_admin_stat);
+
+            //Assert
+            $this->assertEquals(['John', 'Doe', 'john@me.com', '000-444-666', 'John123', '9876', 1], [$test_volunteer->getFirstName(), $test_volunteer->getLastName(), $test_volunteer->getEmail(), $test_volunteer->getPhone(), $test_volunteer->getUsername(), $test_volunteer->getPassword(), $test_volunteer->getAdminStat()]);
+        }
+
     }
 
 ?>

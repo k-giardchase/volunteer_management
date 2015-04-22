@@ -534,6 +534,37 @@
             $this->assertEquals($test_supervisor2, $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+            $test_supervisor->save();
+
+            $new_first_name = 'Morgan';
+            $new_last_name = 'Durant';
+            $new_position_title = 'Director of Operations';
+            $new_email = 'Morgan@nonprofit.org';
+            $new_username = 'morgan123';
+            $new_password = 'hithere';
+            $new_phone = '786-600-5234';
+            $new_admin_stat = 1;
+
+            //Act
+            $test_supervisor->update($new_first_name, $new_last_name, $new_position_title, $new_email, $new_username, $new_password, $new_phone, $new_admin_stat);
+
+            //Assert
+            $this->assertEquals(['Morgan', 'Durant', 'Director of Operations', 'Morgan@nonprofit.org', 'morgan123', 'hithere', '786-600-5234', 1], [$test_supervisor->getFirstName(), $test_supervisor->getLastName(), $test_supervisor->getPositionTitle(), $test_supervisor->getEmail(), $test_supervisor->getUsername(), $test_supervisor->getPassword(), $test_supervisor->getPhone(), $test_supervisor->getAdminStat()]);
+        }
+
     }
 
 ?>

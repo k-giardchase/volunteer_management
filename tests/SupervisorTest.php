@@ -600,6 +600,77 @@
             $this->assertEquals([$test_supervisor2], $result);
         }
 
+        function test_addCommittee()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+            $test_supervisor->save();
+
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $description = 'The art committee is responsible for making pretty things for events.';
+            $supervisor_id1 = $test_supervisor->getSupervisorId();
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $description, $supervisor_id1, $id);
+            $test_committee->save();
+
+            //Act
+            $test_supervisor->addCommittee($test_committee);
+            $result = $test_supervisor->getCommittees();
+
+            //Assert
+            $this->assertEquals([$test_committee], $result);
+        }
+
+        function test_getCommittees()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+            $test_supervisor->save();
+
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $description = 'The art committee is responsible for making pretty things for events.';
+            $supervisor_id1 = $test_supervisor->getSupervisorId();
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $description, $supervisor_id1, $id);
+            $test_committee->save();
+
+            $committee_name2 = 'FLASH';
+            $department2 = 'Events';
+            $description2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
+            $supervisor_id2 = $test_supervisor->getSupervisorId();
+            $id2 = 2;
+            $test_committee2 = new Committee($committee_name2, $department2, $description2, $supervisor_id2, $id2);
+            $test_committee2->save();
+
+            //Act
+            $test_supervisor->addCommittee($test_committee);
+            $test_supervisor->addCommittee($test_committee2);
+            $result = $test_supervisor->getCommittees();
+
+            //Assert
+            $this->assertEquals([$test_committee, $test_committee2)], $result);
+        }
+
     }
 
 ?>

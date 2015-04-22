@@ -192,6 +192,26 @@
             }
             return $found_supervisor;
         }
+
+        function addCommittee($new_committee)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_supervisors (committee_id, supervisor_id) VALUES ({$new_committee->getId()}, {$this->getId()});");
+        }
+        function getCommittees()
+        {
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM supervisors JOIN committees_supervisors ON (supervisors.id = committees_supervisors.supervisor_id) JOIN committees ON (committees_supervisors.committee_id = committees.id) WHERE supervisor_id = {$this->getId()};");
+            $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
+            $committees = [];
+            foreach($returned_committees as $committee) {
+                $committee_name = $committee['committee_name'];
+                $department = $committee['department'];
+                $description = $committee['description'];
+                $id = $committee['id'];
+                $new_committee = new Committee($committee_name, $department, $description, $id);
+                array_push($committees, $new_committee);
+            }
+            return $committees;
+        }
     }
 
 ?>

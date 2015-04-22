@@ -618,9 +618,8 @@
             $committee_name = 'Art';
             $department = 'Event Management';
             $description = 'The art committee is responsible for making pretty things for events.';
-            $supervisor_id1 = $test_supervisor->getSupervisorId();
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $description, $supervisor_id1, $id);
+            $test_committee = new Committee($committee_name, $department, $description, $id);
             $test_committee->save();
 
             //Act
@@ -649,17 +648,15 @@
             $committee_name = 'Art';
             $department = 'Event Management';
             $description = 'The art committee is responsible for making pretty things for events.';
-            $supervisor_id1 = $test_supervisor->getSupervisorId();
             $id = 1;
-            $test_committee = new Committee($committee_name, $department, $description, $supervisor_id1, $id);
+            $test_committee = new Committee($committee_name, $department, $description, $id);
             $test_committee->save();
 
             $committee_name2 = 'FLASH';
             $department2 = 'Events';
             $description2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
-            $supervisor_id2 = $test_supervisor->getSupervisorId();
             $id2 = 2;
-            $test_committee2 = new Committee($committee_name2, $department2, $description2, $supervisor_id2, $id2);
+            $test_committee2 = new Committee($committee_name2, $department2, $description2, $id2);
             $test_committee2->save();
 
             //Act
@@ -668,7 +665,7 @@
             $result = $test_supervisor->getCommittees();
 
             //Assert
-            $this->assertEquals([$test_committee, $test_committee2)], $result);
+            $this->assertEquals([$test_committee, $test_committee2], $result);
         }
 
     }

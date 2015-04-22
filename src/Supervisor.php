@@ -6,16 +6,22 @@
         private $last_name;
         private $position_title;
         private $email;
+        private $username;
+        private $password;
         private $phone;
+        private $admin_stat;
         private $id;
 
-        function __construct($first_name, $last_name, $position_title, $email, $phone, $id = null)
+        function __construct($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id = null)
         {
             $this->first_name = $first_name;
             $this->last_name = $last_name;
             $this->position_title = $position_title;
             $this->email = $email;
+            $this->username = $username;
+            $this->password = $password;
             $this->phone = $phone;
+            $this->admin_stat = $admin_stat;
             $this->id = $id;
         }
 
@@ -59,6 +65,26 @@
             $this->email = (string) $new_email;
         }
 
+        function getUsername()
+        {
+            return $this->username;
+        }
+
+        function setUsername($new_username)
+        {
+            $this->username = (string) $new_username;
+        }
+
+        function getPassword()
+        {
+            return $this->password;
+        }
+
+        function setPassword($new_password)
+        {
+            $this->password = (string) $new_password;
+        }
+
         function getPhone()
         {
             return $this->phone;
@@ -67,6 +93,16 @@
         function setPhone($new_phone)
         {
             $this->phone = (string) $new_phone;
+        }
+
+        function getAdminStat()
+        {
+            return $this->admin_stat;
+        }
+
+        function setAdminStat($new_admin_stat)
+        {
+            $this->admin_stat = (int) $new_admin_stat;
         }
 
         function getId()
@@ -81,9 +117,36 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO supervisors (first_name, last_name, position_title, email, phone) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPositionTitle()}', '{$this->getEmail()}','{$this->getPhone()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO supervisors (first_name, last_name, position_title, email, username, password, phone, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPositionTitle()}', '{$this->getEmail()}', '{$this->getUsername()}', '{$this->getPassword()}', '{$this->getPhone()}', {$this->getAdminStat()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
+        }
+
+        function update($new_first_name, $new_last_name, $new_position_title, $new_email, $new_username, $new_password, $new_phone, $new_admin_stat)
+        {
+            $GLOBALS['DB']->exec("UPDATE supervisors SET first_name = '{$new_first_name}' WHERE id = {$this->getId()};");
+            $this->setFirstName($new_first_name);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET last_name = '{$new_last_name}' WHERE id = {$this->getId()};");
+            $this->setLastName($new_last_name);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET position_title = '{$new_position_title}' WHERE id = {$this->getId()};");
+            $this->setPositionTitle($new_position_title);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET email = '{$new_email}' WHERE id = {$this->getId()};");
+            $this->setEmail($new_email);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET username = '{$new_username}' WHERE id = {$this->getId()};");
+            $this->setUsername($new_username);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET password = '{$new_password}' WHERE id = {$this->getId()};");
+            $this->setPassword($new_password);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET phone = '{$new_phone}' WHERE id = {$this->getId()};");
+            $this->setPhone($new_phone);
+
+            $GLOBALS['DB']->exec("UPDATE supervisors SET admin_stat = '{$new_admin_stat}' WHERE id = {$this->getId()};");
+            $this->setAdminStat($new_admin_stat);
         }
 
         static function getAll()
@@ -96,9 +159,12 @@
                 $last_name = $supervisor['last_name'];
                 $position_title = $supervisor['position_title'];
                 $email = $supervisor['email'];
+                $username = $supervisor['username'];
+                $password = $supervisor['password'];
                 $phone = $supervisor['phone'];
+                $admin_stat = $supervisor['admin_stat'];
                 $id = $supervisor['id'];
-                $new_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+                $new_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
                 array_push($supervisors, $new_supervisor);
             }
             return $supervisors;

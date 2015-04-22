@@ -105,7 +105,7 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO volunteers (first_name, last_name, email, phone, username, password, admin_stat) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getPhone()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO volunteers (first_name, last_name, email, phone, username, password, admin_stat) VALUES  ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getEmail()}', '{$this->getPhone()}', '{$this->getUsername()}', '{$this->getPassword()}', {$this->getAdminStat()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }

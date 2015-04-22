@@ -29,9 +29,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getFirstName();
@@ -47,9 +50,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setFirstName('Michael');
@@ -66,9 +72,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getLastName();
@@ -84,9 +93,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setLastName('Daniels');
@@ -103,9 +115,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getPositionTitle();
@@ -121,9 +136,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setPositionTitle('Assistant Director of Development');
@@ -140,9 +158,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getEmail();
@@ -158,9 +179,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setEmail('Micah@nonprofit.org');
@@ -170,6 +194,92 @@
             $this->assertEquals('Micah@nonprofit.org', $result);
         }
 
+        function test_getUsername()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $result = $test_supervisor->getUsername();
+
+            //Assert
+            $this->assertEquals('Micah2', $result);
+        }
+
+        function test_setUsername()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $test_supervisor->setUsername('Micah5');
+            $result = $test_supervisor->getUsername();
+
+            //Assert
+            $this->assertEquals('Micah5', $result);
+        }
+
+        function test_getPassword()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $result = $test_supervisor->getPassword();
+
+            //Assert
+            $this->assertEquals('helloworld', $result);
+        }
+
+        function test_setPassword()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $test_supervisor->setPassword('helloworld234');
+            $result = $test_supervisor->getPassword();
+
+            //Assert
+            $this->assertEquals('helloworld234', $result);
+        }
+
         function test_getPhone()
         {
             //Arrange
@@ -177,9 +287,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getPhone();
@@ -195,9 +308,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setPhone('111-111-1111');
@@ -207,6 +323,49 @@
             $this->assertEquals('111-111-1111', $result);
         }
 
+        function test_getAdminStat()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $result = $test_supervisor->getAdminStat();
+
+            //Assert
+            $this->assertEquals(0, $result);
+        }
+
+        function test_setAdminStat()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
+            $phone = '800-600-5000';
+            $admin_stat = 0;
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+            //Act
+            $test_supervisor->setAdminStat(1);
+            $result = $test_supervisor->getAdminStat();
+
+            //Assert
+            $this->assertEquals(1, $result);
+        }
+
         function test_getId()
         {
             //Arrange
@@ -214,9 +373,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $result = $test_supervisor->getId();
@@ -232,9 +394,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->setId(2);
@@ -251,9 +416,12 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
 
             //Act
             $test_supervisor->save();
@@ -270,18 +438,24 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
             $test_supervisor->save();
 
             $first_name2 = 'Morgan';
             $last_name2 = 'Durant';
             $position_title2 = 'Director of Operations';
             $email2 = 'Morgan@nonprofit.org';
+            $username2 = 'morgan123';
+            $password2 = 'hithere';
             $phone2 = '786-600-5234';
+            $admin_stat2 = 1;
             $id2 = 1;
-            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $phone2, $id2);
+            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $username2, $password2, $phone2, $admin_stat2,$id2);
             $test_supervisor2->save();
 
             //Act
@@ -298,18 +472,24 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
             $test_supervisor->save();
 
             $first_name2 = 'Morgan';
             $last_name2 = 'Durant';
             $position_title2 = 'Director of Operations';
             $email2 = 'Morgan@nonprofit.org';
+            $username2 = 'morgan123';
+            $password2 = 'hithere';
             $phone2 = '786-600-5234';
+            $admin_stat2 = 1;
             $id2 = 1;
-            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $phone2, $id2);
+            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $username2, $password2, $phone2, $admin_stat2,$id2);
             $test_supervisor2->save();
 
             //Act
@@ -327,18 +507,24 @@
             $last_name = 'Smith';
             $position_title = 'Director of Development';
             $email = 'Micah@nonprofit.org';
+            $username = 'Micah2';
+            $password = 'helloworld';
             $phone = '800-600-5000';
+            $admin_stat = 0;
             $id = 1;
-            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
             $test_supervisor->save();
 
             $first_name2 = 'Morgan';
             $last_name2 = 'Durant';
             $position_title2 = 'Director of Operations';
             $email2 = 'Morgan@nonprofit.org';
+            $username2 = 'morgan123';
+            $password2 = 'hithere';
             $phone2 = '786-600-5234';
+            $admin_stat2 = 1;
             $id2 = 1;
-            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $phone2, $id2);
+            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $username2, $password2, $phone2, $admin_stat2,$id2);
             $test_supervisor2->save();
 
             //Act

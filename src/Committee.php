@@ -5,13 +5,15 @@
         private $committee_name;
         private $department;
         private $description;
+        private $supervisor_id;
         private $id;
 
-        function __construct($committee_name, $department, $description, $id = null)
+        function __construct($committee_name, $department, $description, $supervisor_id, $id = null)
         {
             $this->committee_name = $committee_name;
             $this->department = $department;
             $this->description = $description;
+            $this->supervisor_id = $supervisor_id;
             $this->id = $id;
         }
 
@@ -45,6 +47,16 @@
             $this->description = (string) $new_description;
         }
 
+        function getSupervisorId()
+        {
+            return $this->supervisor_id;
+        }
+
+        function setSupervisorId($new_supervisor_id)
+        {
+            $this->supervisor_id = (int) $new_supervisor_id;
+        }
+
         function getId()
         {
             return $this->id;
@@ -57,12 +69,12 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, description) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getDescription()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO committees (committee_name, department, description, supervisor_id) VALUES ('{$this->getCommitteeName()}', '{$this->getDepartment()}', '{$this->getDescription()}', {$this->getSupervisorId()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
-        function update($new_committee_name, $new_department, $new_description)
+        function update($new_committee_name, $new_department, $new_description, $new_supervisor_id)
         {
             $GLOBALS['DB']->exec("UPDATE committees SET committee_name = '{$new_committee_name}' WHERE id = {$this->getId()};");
             $this->setCommitteeName($new_committee_name);
@@ -72,6 +84,9 @@
 
             $GLOBALS['DB']->exec("UPDATE committees SET description = '{$new_description}' WHERE id = {$this->getId()};");
             $this->setDescription($new_description);
+
+            $GLOBALS['DB']->exec("UPDATE committees SET supervisor_id = {$new_supervisor_id} WHERE id = {$this->getId()};");
+            $this->setSupervisorId($new_supervisor_id);
         }
 
         function delete()
@@ -89,8 +104,9 @@
                 $committee_name = $committee['committee_name'];
                 $department = $committee['department'];
                 $description = $committee['description'];
+                $supervisor_id = $committee['supervisor_id'];
                 $id = $committee['id'];
-                $new_committee = new Committee($committee_name, $department, $description, $id);
+                $new_committee = new Committee($committee_name, $department, $description, $supervisor_id, $id);
                 array_push($committees, $new_committee);
             }
             return $committees;

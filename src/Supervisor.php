@@ -108,6 +108,19 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM supervisors *;");
         }
+
+        static function find($search_id)
+        {
+            $found_supervisor = null;
+            $all_supervisors = Supervisor::getAll();
+            foreach($all_supervisors as $supervisor) {
+                $supervisor_id = $supervisor->getId();
+                if($supervisor_id === $search_id) {
+                    $found_supervisor = $supervisor;
+                }
+            }
+            return $found_supervisor;
+        }
     }
 
 ?>

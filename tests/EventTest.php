@@ -392,6 +392,39 @@
             //Assert
             $this->assertEquals([$test_committee], $result);
         }
+
+        function test_getCommittees()
+        {
+            //Arrange
+            $event_name = 'Silent Auction';
+            $event_date = '2015-01-01 12:00:00';
+            $location = "202 Some Street";
+            $id = 1;
+            $test_event = new Event($event_name, $event_date, $location, $id);
+            $test_event->save();
+
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $description = 'The art committee is responsible for making pretty things for events.';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $description, $id);
+            $test_committee->save();
+
+            $committee_name2 = 'FLASH';
+            $department2 = 'Events';
+            $description2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
+            $id2 = 2;
+            $test_committee2 = new Committee($committee_name2, $department2, $description2, $id2);
+            $test_committee2->save();
+
+            //Act
+            $test_event->addCommittee($test_committee);
+            $test_event->addCommittee($test_committee2);
+            $result = $test_event->getCommittees();
+
+            //Assert
+            $this->assertEquals([$test_committee, $test_committee2], $result);
+        }
     }
 
 ?>

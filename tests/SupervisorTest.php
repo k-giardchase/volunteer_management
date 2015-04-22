@@ -320,6 +320,34 @@
             $this->assertEquals([], $result);
         }
 
+        function test_find()
+        {
+            //Arrange
+            $first_name = 'Micah';
+            $last_name = 'Smith';
+            $position_title = 'Director of Development';
+            $email = 'Micah@nonprofit.org';
+            $phone = '800-600-5000';
+            $id = 1;
+            $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $phone, $id);
+            $test_supervisor->save();
+
+            $first_name2 = 'Morgan';
+            $last_name2 = 'Durant';
+            $position_title2 = 'Director of Operations';
+            $email2 = 'Morgan@nonprofit.org';
+            $phone2 = '786-600-5234';
+            $id2 = 1;
+            $test_supervisor2 = new Supervisor($first_name2, $last_name2, $position_title2, $email2, $phone2, $id2);
+            $test_supervisor2->save();
+
+            //Act
+            $result = Supervisor::find($test_supervisor2->getId());
+
+            //Assert
+            $this->assertEquals($test_supervisor2, $result);
+        }
+
     }
 
 ?>

@@ -185,6 +185,7 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$new_event->getId()}, {$this->getId()});");
         }
+
         function getEvents()
         {
             $query = $GLOBALS['DB']->query("SELECT events.* FROM volunteers JOIN events_volunteers ON (volunteers.id = events_volunteers.volunteer_id) JOIN events ON (events_volunteers.event_id = events.id) WHERE volunteers.id = {$this->getId()};");
@@ -200,6 +201,28 @@
                 array_push($events, $new_event);
             }
             return $events;
+        }
+
+        function addCommittee($new_committee)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_volunteers (committee_id, volunteer_id) VALUES ({$new_committee->getId()}, {$this->getId()});");
+        }
+
+        function getCommittees()
+        {
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM volunteers JOIN committees_volunteers ON (volunteers.id = committees_volunteers.volunteer_id) JOIN committees ON (committees_volunteers.committee_id = committees.id) WHERE volunteers.id = {$this->getId()};");
+            $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $committees = [];
+            foreach($returned_committees as $committee) {
+                $committee_name = $committee['committee_name'];
+                $department = $committee['department'];
+                $description = $committee['description'];
+                $id = $committee['id'];
+                $new_committee = new Committee($committee_name, $department, $description, $id);
+                array_push($committees, $new_committee);
+            }
+            return $committees;
         }
     }
 

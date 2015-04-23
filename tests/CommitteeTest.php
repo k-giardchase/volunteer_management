@@ -291,5 +291,30 @@
           $this->assertEquals([$test_committee2], $result);
       }
 
+      function test_addEvent()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $event_name = 'Silent Auction';
+          $event_date = '2015-01-01 12:00:00';
+          $location = "202 Some Street";
+          $id = 1;
+          $test_event = new Event($event_name, $event_date, $location, $id);
+          $test_event->save();
+
+          //Act
+          $test_committee->addEvent($new_event);
+          $result = $test_committee->getEvents();
+
+          //Assert
+          $this->assertEquals([$test_committee], $result);
+      }
+
     }
 ?>

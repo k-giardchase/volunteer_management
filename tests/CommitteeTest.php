@@ -309,12 +309,44 @@
           $test_event->save();
 
           //Act
-          $test_committee->addEvent($new_event);
+          $test_committee->addEvent($test_event);
           $result = $test_committee->getEvents();
 
           //Assert
-          $this->assertEquals([$test_committee], $result);
+          $this->assertEquals([$test_event], $result);
       }
 
+      function test_getEvents()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $event_name = 'Silent Auction';
+          $event_date = '2015-01-01 12:00:00';
+          $location = "202 Some Street";
+          $id = 1;
+          $test_event = new Event($event_name, $event_date, $location, $id);
+          $test_event->save();
+
+          $event_name2 = 'Raffle';
+          $event_date2 = '2015-01-01 12:00:00';
+          $location2 = "500 Some Street";
+          $id2 = 2;
+          $test_event2 = new Event($event_name2, $event_date2, $location2, $id2);
+          $test_event2->save();
+
+          //Act
+          $test_committee->addEvent($test_event);
+          $test_committee->addEvent($test_event2);
+          $result = $test_committee->getEvents();
+
+          //Assert
+          $this->assertEquals([$test_event, $test_event2], $result);
+      }
     }
 ?>

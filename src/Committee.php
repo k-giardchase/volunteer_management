@@ -115,6 +115,11 @@
             return $found_committee;
         }
 
+        function addEvent($new_event)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_events (committee_id, event_id) VALUES ({$this->getId()}, {$new_event->getId()});");
+        }
+
     }
 
 ?>

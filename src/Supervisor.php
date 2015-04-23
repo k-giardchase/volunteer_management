@@ -199,7 +199,7 @@
         }
         function getCommittees()
         {
-            $query = $GLOBALS['DB']->query("SELECT committees.* FROM supervisors JOIN committees_supervisors ON (supervisors.id = committees_supervisors.supervisor_id) JOIN committees ON (committees_supervisors.committee_id = committees.id) WHERE supervisor_id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM supervisors JOIN committees_supervisors ON (supervisors.id = committees_supervisors.supervisor_id) JOIN committees ON (committees_supervisors.committee_id = committees.id) WHERE supervisors.id = {$this->getId()};");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
             $committees = [];
             foreach($returned_committees as $committee) {

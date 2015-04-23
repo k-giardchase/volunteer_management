@@ -138,6 +138,27 @@
             }
             return $volunteers;
         }
+
+        function addCommittee($new_committee)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_events (committee_id, event_id) VALUES ({$new_committee->getId()}, {$this->getId()});");
+        }
+
+        function getCommittees()
+        {
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM events JOIN committees_events ON (events.id = committees_events.event_id) JOIN committees ON (committees_events.event_id = events.id) WHERE events.id = {$this->getId()};");
+            $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
+            $committees = [];
+            foreach($returned_committees as $committee) {
+                $committee_name = $committee['committee_name'];
+                $department = $committee['department'];
+                $description = $committee['description'];
+                $id = $committee['id'];
+                $new_committee = new Committee($committee_name, $department, $description, $id);
+                array_push($committees, $new_committee);
+            }
+            return $committees;
+        }
     }
 
 ?>

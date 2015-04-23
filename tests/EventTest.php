@@ -20,7 +20,6 @@
             Volunteer::deleteAll();
             Committee::deleteAll();
             Supervisor::deleteAll();
-
         }
 
         function test_getEventName()

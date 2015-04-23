@@ -290,5 +290,6 @@
           //Assert
           $this->assertEquals([$test_committee2], $result);
       }
+
     }
 ?>

@@ -605,6 +605,71 @@
             $this->assertEquals([$test_event, $test_event2], $result);
         }
 
+        function test_addCommittee()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $phone = '999-888-7777';
+            $username = 'Mags123';
+            $password = '1234';
+            $admin_stat = 0;
+            $id = 1;
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
+
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $description = 'The art committee is responsible for making pretty things for events.';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $description, $id);
+            $test_committee->save();
+
+            //Act
+            $test_volunteer->addCommittee($test_committee);
+            $result = $test_volunteer->getCommittees();
+
+            //Assert
+            $this->assertEquals([$test_committee], $result);
+        }
+
+        function test_getCommittees()
+        {
+            //Arrange
+            $first_name = 'Maggie';
+            $last_name = 'Doe';
+            $email = 'maggie@me.com';
+            $phone = '999-888-7777';
+            $username = 'Mags123';
+            $password = '1234';
+            $admin_stat = 0;
+            $id = 1;
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer->save();
+
+            $committee_name = 'Art';
+            $department = 'Event Management';
+            $description = 'The art committee is responsible for making pretty things for events.';
+            $id = 1;
+            $test_committee = new Committee($committee_name, $department, $description, $id);
+            $test_committee->save();
+
+            $committee_name2 = 'FLASH';
+            $department2 = 'Events';
+            $description2 = 'The FLASH committee helps out on an on-call, last-minute basis.';
+            $id2 = 2;
+            $test_committee2 = new Committee($committee_name2, $department2, $description2, $id2);
+            $test_committee2->save();
+
+            //Act
+            $test_volunteer->addCommittee($test_committee);
+            $test_volunteer->addCommittee($test_committee2);
+            $result = $test_volunteer->getCommittees();
+
+            //Assert
+            $this->assertEquals([$test_committee, $test_committee2], $result);
+        }
     }
 
 ?>

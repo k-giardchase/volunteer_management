@@ -146,7 +146,7 @@
 
         function getCommittees()
         {
-            $query = $GLOBALS['DB']->query("SELECT committees.* FROM events JOIN committees_events ON (events.id = committees_events.event_id) JOIN committees ON (committees_events.event_id = events.id) WHERE events.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM events JOIN committees_events ON (events.id = committees_events.event_id) JOIN committees ON (committees_events.committee_id = committees.id) WHERE events.id = {$this->getId()};");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
             $committees = [];
             foreach($returned_committees as $committee) {
@@ -158,11 +158,6 @@
                 array_push($committees, $new_committee);
             }
             return $committees;
-        }
-
-        function addVolunteer($new_volunteer)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$this->getId()}, {$new_volunteer->getId()});");
         }
     }
 

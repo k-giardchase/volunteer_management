@@ -159,6 +159,11 @@
             }
             return $committees;
         }
+
+        function addVolunteer($new_volunteer)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$this->getId()}, {$new_volunteer->getId()});");
+        }
     }
 
 ?>

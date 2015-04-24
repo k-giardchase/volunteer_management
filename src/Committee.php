@@ -122,7 +122,7 @@
 
         function getEvents()
         {
-            $query = $GLOBALS['DB']->query("SELECT events.* FROM committees JOIN committees_events ON (committees.id = committees_events.committee_id) JOIN events ON (committees_events.event_id = events.id) WHERE committees.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT events.* FROM committees JOIN committees_events ON (committees.id = committees_events.committee_id) JOIN events ON (committees_events.event_id = events.id) WHERE committees.id = {$this->getId()} ORDER BY event_date;");
             $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
             $events = [];
             foreach($returned_events as $event) {

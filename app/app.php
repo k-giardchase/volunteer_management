@@ -18,7 +18,7 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.twig');
+        return $app['twig']->render('index.twig', array('events' => Event::getAll()));
     });
 
     return $app;

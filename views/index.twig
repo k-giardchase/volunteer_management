@@ -37,5 +37,32 @@
            <p>Get involved. Make a difference.</p>
        </div>
    </header>
+   <section>
+       <div class="col-md-3">
+           <h1>test</h1>
+       </div>
+       <div class="col-md-6 text-center">
+           <h1>Upcoming events</h1>
+           {% if events is not empty %}
+               {% for event in events %}
+               <dl class='dl-horizontal text-justify'>
+                   <dt>Name</dt>
+                   <dd>{{ event.getEventName }}</dd>
+                   <dt>Date</dt>
+                   <dd>{{ event.getEventDate }}</dd>
+                   <dt>Location</dt>
+                   <dd>{{ event.getLocation }}</dd>
+                   <dt>Information</dt>
+                   <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+               </dl>
+               {% endfor %}
+           {% else %}
+                <h3>No upcoming events to display</h3>
+           {% endif %}
+       </div>
+       <div class="col-md-3">
+           <h1>test</h1>
+       </div>
+   </section>
 </body>
 </html>

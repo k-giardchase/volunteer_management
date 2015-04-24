@@ -225,6 +225,20 @@
           }
           return $result;
         }
+
+        static function authenticateLogin($inputted_username, $inputted_password)
+        {
+          $result = null;
+          $supervisors = Supervisor::getAll();
+          foreach($supervisors as $supervisor) {
+            $username = $supervisor->getUsername();
+            $password = $supervisor->getPassword();
+            if($username === $inputted_username && $password === $inputted_password) {
+              $result = $supervisor;
+            }
+          }
+          return $result;
+        }
     }
 
 ?>

@@ -213,26 +213,17 @@
             return $committees;
         }
 
-        function test_checkUsernameExists()
+        static function checkUsernameExists($inputted_username)
         {
-          //Arrange
-          $first_name = 'Micah';
-          $last_name = 'Smith';
-          $position_title = 'Director of Development';
-          $email = 'Micah@nonprofit.org';
-          $username = 'Micah2';
-          $password = 'helloworld';
-          $phone = '800-600-5000';
-          $admin_stat = 0;
-          $id = 1;
-          $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
-          $test_supervisor->save();
-
-          //Act
-          $result = Supervisor::checkUsernameExists('Micah2');
-
-          //Assert
-          $this->assertEquals(1, $result);
+          $result = 0;
+          $supervisors = Supervisor::getAll();
+          foreach($supervisors as $supervisor) {
+            $username = $supervisor->getUsername();
+            if($username === $inputted_username) {
+              $result = 1;
+            }
+          }
+          return $result;
         }
     }
 

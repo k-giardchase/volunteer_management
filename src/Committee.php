@@ -143,7 +143,7 @@
 
         function getSupervisors()
         {
-            $query = $GLOBALS['DB']->query("SELECT supervisors.* FROM committees JOIN committees_supervisors ON (committees.id = committees_supervisors.committee_id) JOIN supervisors ON (committees_supervisors.supervisor_id = supervisors.id) WHERE committees.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT supervisors.* FROM committees JOIN committees_supervisors ON (committees.id = committees_supervisors.committee_id) JOIN supervisors ON (committees_supervisors.supervisor_id = supervisors.id) WHERE committees.id = {$this->getId()} ORDER BY last_name;");
             $returned_supervisors = $query->fetchAll(PDO::FETCH_ASSOC);
             $supervisors = [];
             foreach($returned_supervisors as $supervisor) {

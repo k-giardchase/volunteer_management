@@ -419,7 +419,7 @@
           $result = $test_committee->getSupervisors();
 
           //Assert
-          $this->assertEquals([$test_supervisor, $test_supervisor2], $result);
+          $this->assertEquals([$test_supervisor2, $test_supervisor], $result);
       }
 
       function test_addVolunteer()

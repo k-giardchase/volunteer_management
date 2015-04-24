@@ -7,3 +7,18 @@ HEADER
 .jumbotron {
     height: 350px;
 }
+
+/*
+***************************
+SECTION
+***************************
+*/
+.dl-horizontal dt
+{
+    text-align: left;
+}
+
+.dl-horizontal dd
+{
+    text-align: left;
+}

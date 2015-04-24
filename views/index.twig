@@ -38,14 +38,25 @@
        </div>
    </header>
    <section>
+      <div class='row'>
        <div class="col-md-3">
-           <h1>test</h1>
+           <h1>Join a committee</h1>
+           {% if committees is not empty %}
+                {% for committee in committees %}
+                    <li>{{ committee.getCommitteeName }}</li>
+                {% endfor %}
+            {% else %}
+                <h3>No committees to display</h3>
+           {% endif %}
        </div>
-       <div class="col-md-6 text-center">
-           <h1>Upcoming events</h1>
+       <div class="col-md-6">
+           <h1>Home page</h1>
+       </div>
+       <div class="col-md-3">
+           <h1>Upcoming opportunities</h1>
            {% if events is not empty %}
                {% for event in events %}
-               <dl class='dl-horizontal text-justify'>
+               <dl class='dl-horizontal'>
                    <dt>Name</dt>
                    <dd>{{ event.getEventName }}</dd>
                    <dt>Date</dt>
@@ -57,12 +68,10 @@
                </dl>
                {% endfor %}
            {% else %}
-                <h3>No upcoming events to display</h3>
+                <h3>No opportunites to display</h3>
            {% endif %}
        </div>
-       <div class="col-md-3">
-           <h1>test</h1>
-       </div>
+   </div>
    </section>
 </body>
 </html>

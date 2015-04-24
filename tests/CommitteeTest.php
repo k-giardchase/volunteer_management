@@ -421,5 +421,34 @@
           //Assert
           $this->assertEquals([$test_supervisor, $test_supervisor2], $result);
       }
+
+      function test_addVolunteer()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $first_name = 'Maggie';
+          $last_name = 'Doe';
+          $email = 'maggie@me.com';
+          $phone = '999-888-7777';
+          $username = 'Mags123';
+          $password = '1234';
+          $admin_stat = 0;
+          $id = 1;
+          $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+          $test_volunteer->save();
+
+          //Act
+          $test_committee->addVolunteer($test_volunteer);
+          $result = $test_committee->getVolunteers();
+
+          //Assert
+          $this->assertEquals([$test_volunteer], $result);
+      }
     }
 ?>

@@ -141,6 +141,27 @@
             $GLOBALS['DB']->exec("INSERT INTO committees_supervisors (committee_id, supervisor_id) VALUES ({$this->getId()}, {$new_supervisor->getId()});");
         }
 
+        function getSupervisors()
+        {
+            $query = $GLOBALS['DB']->query("SELECT supervisors.* FROM committees JOIN committees_supervisors ON (committees.id = committees_supervisors.committee_id) JOIN supervisors ON (committees_supervisors.supervisor_id = supervisors.id) WHERE committees.id = {$this->getId()};");
+            $returned_supervisors = $query->fetchAll(PDO::FETCH_ASSOC);
+            $supervisors = [];
+            foreach($returned_supervisors as $supervisor) {
+                $first_name = $supervisor['first_name'];
+                $last_name = $supervisor['last_name'];
+                $position_title = $supervisor['position_title'];
+                $email = $supervisor['email'];
+                $username = $supervisor['username'];
+                $password = $supervisor['password'];
+                $phone = $supervisor['phone'];
+                $admin_stat = $supervisor['admin_stat'];
+                $id = $supervisor['id'];
+                $new_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+                array_push($supervisors, $new_supervisor);
+            }
+            return $supervisors;
+        }
+
     }
 
 ?>

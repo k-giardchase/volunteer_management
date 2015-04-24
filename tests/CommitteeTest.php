@@ -369,6 +369,7 @@
           $admin_stat = 0;
           $id = 1;
           $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+          $test_supervisor->save();
 
           //Act
           $test_committee->addSupervisor($test_supervisor);

@@ -193,6 +193,21 @@
             }
             return $result;
         }
+
+        static function authenticateLogin($inputted_username, $inputted_password)
+        {
+            $result = 0;
+            $volunteers = Volunteer::getAll();
+            foreach($volunteers as $volunteer) {
+              $username = $volunteer->getUsername();
+              $password = $volunteer->getPassword();
+              if($username === $inputted_username && $password === $inputted_password) {
+                $result = $volunteer;
+              }
+            }
+            return $result;
+        }
+
         function addEvent($new_event)
         {
             $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$new_event->getId()}, {$this->getId()});");

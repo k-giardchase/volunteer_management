@@ -710,7 +710,7 @@
           $result = Volunteer::authenticateLogin('Mags123', '1234');
 
           //Assert
-          $this->assertEquals(1, $result);
+          $this->assertEquals($test_volunteer, $result);
         }
     }
 

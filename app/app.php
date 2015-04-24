@@ -21,6 +21,10 @@
         return $app['twig']->render('index.twig', array('events' => Event::getAll(), 'committees' => Committee::getAll()));
     });
 
+    $app->get('/supervisor-login', function() use ($app) {
+        return $app['twig']->render('supervisor-login.twig');
+    });
+
     return $app;
 
 ?>

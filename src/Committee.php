@@ -167,6 +167,26 @@
             $GLOBALS['DB']->exec("INSERT INTO committees_volunteers (committee_id, volunteer_id) VALUES ({$this->getId()}, {$new_volunteer->getId()});");
         }
 
+        function getVolunteers()
+        {
+            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM committees JOIN committees_volunteers ON (committees.id = committees_volunteers.committee_id) JOIN volunteers ON (committees_volunteers.volunteer_id = volunteers.id) WHERE committees.id = {$this->getId()};");
+            $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
+            $volunteers = [];
+            foreach($returned_volunteers as $volunteer) {
+                $first_name = $volunteer['first_name'];
+                $last_name = $volunteer['last_name'];
+                $email = $volunteer['email'];
+                $phone = $volunteer['phone'];
+                $username = $volunteer['username'];
+                $password = $volunteer['password'];
+                $admin_stat = $volunteer['admin_stat'];
+                $id = $volunteer['id'];
+                $new_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
+                array_push($volunteers, $new_volunteer);
+            }
+            return $volunteers;
+        }
+
     }
 
 ?>

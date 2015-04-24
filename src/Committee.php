@@ -136,6 +136,11 @@
             return $events;
         }
 
+        function addSupervisor($new_supervisor)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_supervisors (committee_id, supervisor_id) VALUES ({$this->getId()}, {$new_supervisor->getId()});");
+        }
+
     }
 
 ?>

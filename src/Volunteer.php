@@ -141,7 +141,7 @@
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->query("SELECT * FROM volunteers;");
+            $query = $GLOBALS['DB']->query("SELECT * FROM volunteers ORDER BY last_name;");
             $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $volunteers = [];
@@ -188,7 +188,7 @@
 
         function getEvents()
         {
-            $query = $GLOBALS['DB']->query("SELECT events.* FROM volunteers JOIN events_volunteers ON (volunteers.id = events_volunteers.volunteer_id) JOIN events ON (events_volunteers.event_id = events.id) WHERE volunteers.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT events.* FROM volunteers JOIN events_volunteers ON (volunteers.id = events_volunteers.volunteer_id) JOIN events ON (events_volunteers.event_id = events.id) WHERE volunteers.id = {$this->getId()} ORDER BY event_date;");
             $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $events = [];
@@ -210,7 +210,7 @@
 
         function getCommittees()
         {
-            $query = $GLOBALS['DB']->query("SELECT committees.* FROM volunteers JOIN committees_volunteers ON (volunteers.id = committees_volunteers.volunteer_id) JOIN committees ON (committees_volunteers.committee_id = committees.id) WHERE volunteers.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM volunteers JOIN committees_volunteers ON (volunteers.id = committees_volunteers.volunteer_id) JOIN committees ON (committees_volunteers.committee_id = committees.id) WHERE volunteers.id = {$this->getId()} ORDER BY committee_name;");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $committees = [];

@@ -348,5 +348,34 @@
           //Assert
           $this->assertEquals([$test_event, $test_event2], $result);
       }
+
+      function test_addSupervisor()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $first_name = 'Micah';
+          $last_name = 'Smith';
+          $position_title = 'Director of Development';
+          $email = 'Micah@nonprofit.org';
+          $username = 'Micah2';
+          $password = 'helloworld';
+          $phone = '800-600-5000';
+          $admin_stat = 0;
+          $id = 1;
+          $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+
+          //Act
+          $test_committee->addSupervisor($test_supervisor);
+          $result = $test_committee->getSupervisors();
+
+          //Assert
+          $this->assertEquals([$test_supervisor], $result);
+      }
     }
 ?>

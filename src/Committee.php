@@ -162,6 +162,11 @@
             return $supervisors;
         }
 
+        function addVolunteer($new_volunteer)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO committees_volunteers (committee_id, volunteer_id) VALUES ({$this->getId()}, {$new_volunteer->getId()});");
+        }
+
     }
 
 ?>

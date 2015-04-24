@@ -81,7 +81,7 @@
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->query("SELECT * FROM events;");
+            $query = $GLOBALS['DB']->query("SELECT * FROM events ORDER BY event_date;");
             $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
             $events = [];
 
@@ -121,7 +121,7 @@
 
         function getVolunteers()
         {
-            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM events JOIN events_volunteers ON (events.id = events_volunteers.event_id) JOIN volunteers ON (events_volunteers.volunteer_id = volunteers.id) WHERE events.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM events JOIN events_volunteers ON (events.id = events_volunteers.event_id) JOIN volunteers ON (events_volunteers.volunteer_id = volunteers.id) WHERE events.id = {$this->getId()} ORDER BY last_name;");
             $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
             $volunteers = [];
             foreach($returned_volunteers as $volunteer) {
@@ -146,7 +146,7 @@
 
         function getCommittees()
         {
-            $query = $GLOBALS['DB']->query("SELECT committees.* FROM events JOIN committees_events ON (events.id = committees_events.event_id) JOIN committees ON (committees_events.committee_id = committees.id) WHERE events.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM events JOIN committees_events ON (events.id = committees_events.event_id) JOIN committees ON (committees_events.committee_id = committees.id) WHERE events.id = {$this->getId()} ORDER BY committee_name;");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
             $committees = [];
             foreach($returned_committees as $committee) {

@@ -81,7 +81,7 @@
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->query("SELECT * FROM committees;");
+            $query = $GLOBALS['DB']->query("SELECT * FROM committees ORDER BY committee_name;");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $committees = [];

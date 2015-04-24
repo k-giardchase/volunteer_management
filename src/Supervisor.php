@@ -12,7 +12,7 @@
         private $admin_stat;
         private $id;
 
-        function __construct($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id = null)
+        function __construct($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat = 1, $id = null)
         {
             $this->first_name = $first_name;
             $this->last_name = $last_name;

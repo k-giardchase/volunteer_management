@@ -25,6 +25,10 @@
         return $app['twig']->render('supervisor-login.twig');
     });
 
+    $app->get('/volunteer-login', function() use ($app) {
+        return $app['twig']->render('volunteer-login.twig');
+    });
+
     return $app;
 
 ?>

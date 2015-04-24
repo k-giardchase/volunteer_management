@@ -29,6 +29,12 @@
         return $app['twig']->render('volunteer-login.twig');
     });
 
+    $app->get('/create-volunteer', function() use ($app) {
+        return $app['twig']->render('create-volunteer.twig');
+    });
+
+    
+
     return $app;
 
 ?>

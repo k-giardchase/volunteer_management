@@ -156,7 +156,7 @@
 
         static function getAll()
         {
-            $query = $GLOBALS['DB']->query("SELECT * FROM supervisors;");
+            $query = $GLOBALS['DB']->query("SELECT * FROM supervisors ORDER BY last_name;");
             $returned_supervisors = $query->fetchAll(PDO::FETCH_ASSOC);
             $supervisors = [];
             foreach($returned_supervisors as $supervisor) {
@@ -199,7 +199,7 @@
         }
         function getCommittees()
         {
-            $query = $GLOBALS['DB']->query("SELECT committees.* FROM supervisors JOIN committees_supervisors ON (supervisors.id = committees_supervisors.supervisor_id) JOIN committees ON (committees_supervisors.committee_id = committees.id) WHERE supervisors.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT committees.* FROM supervisors JOIN committees_supervisors ON (supervisors.id = committees_supervisors.supervisor_id) JOIN committees ON (committees_supervisors.committee_id = committees.id) WHERE supervisors.id = {$this->getId()} ORDER BY committee_name;");
             $returned_committees = $query->fetchAll(PDO::FETCH_ASSOC);
             $committees = [];
             foreach($returned_committees as $committee) {

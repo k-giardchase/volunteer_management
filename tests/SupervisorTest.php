@@ -462,7 +462,7 @@
             $result = Supervisor::getAll();
 
             //Assert
-            $this->assertEquals([$test_supervisor, $test_supervisor2], $result);
+            $this->assertEquals([$test_supervisor2, $test_supervisor], $result);
         }
 
         function test_deleteAll()

@@ -30,10 +30,30 @@
     });
 
     $app->get('/create-volunteer', function() use ($app) {
-        return $app['twig']->render('create-volunteer.twig');
+        $available = 1;
+        return $app['twig']->render('create-volunteer.twig', array('available' => $available));
     });
 
-    
+    $app->post('/create-volunteer', function() use ($app) {
+        $available = 1;
+        $username_exists = Volunteer::checkUsernameExists($_POST['username']);
+
+        if($username_exists === 0) {
+            $first_name = $_POST['first_name'];
+            $last_name = $_POST['last_name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $admin_stat = 0;
+            $new_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat);
+            $new_volunteer->save();
+        } else {
+            $available = 0;
+            return $app['twig']->render('create-volunteer.twig', array('available' => $available));
+        }
+        return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer));
+    });
 
     return $app;
 

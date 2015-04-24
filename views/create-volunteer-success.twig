@@ -31,48 +31,36 @@
        </div>
      </div>
    </nav>
-   <header>
-       <div class='jumbotron text-center'>
-           <br>
-           <h1>Welcome to Volunteer Center</h1>
-           <p>Get involved. Make a difference.</p>
-       </div>
-   </header>
    <section>
-      <div class='row'>
-       <div class="col-md-3">
-           <h1>Join a committee</h1>
-           {% if committees is not empty %}
-                {% for committee in committees %}
-                    <li>{{ committee.getCommitteeName }}</li>
-                {% endfor %}
-            {% else %}
-                <h3>No committees to display</h3>
-           {% endif %}
+       <div class="container">
+           <br>
+           <br>
+           <br>
+           <br>
+           <div class="row">
+               <div class="col-md-6 col-md-offset-3">
+                   <h1>Thanks, {{ volunteer.getFirstName }}</h1>
+                   <h2>Here's the information we have for you:</h2>
+                   <dl class='dl-horizontal'>
+                       <dt>First Name</dt>
+                       <dd>{{ volunteer.getFirstName }}</dd>
+                       <dt>Last Name</dt>
+                       <dd>{{ volunteer.getLastName }}</dd>
+                       <dt>Email</dt>
+                       <dd>{{ volunteer.getEmail }}</dd>
+                       <dt>Phone</dt>
+                       <dd>{{ volunteer.getPhone }}</dd>
+                       <dt>Username</dt>
+                       <dd>{{ volunteer.getUsername }}</dd>
+                   </dl>
+                   <a href='/'>
+                       <button type="submit" class="btn btn-info">Okay, got it</button>
+                   </a>
+                   <a href="volunteer-edit">
+                       <button type="submit" class="btn btn-info">Edit</button>
+                   </a>
+               </div>
        </div>
-       <div class="col-md-6">
-
-       </div>
-       <div class="col-md-3">
-           <h1>Upcoming opportunities</h1>
-           {% if events is not empty %}
-               {% for event in events %}
-               <dl class='dl-horizontal'>
-                   <dt>Name</dt>
-                   <dd>{{ event.getEventName }}</dd>
-                   <dt>Date</dt>
-                   <dd>{{ event.getEventDate }}</dd>
-                   <dt>Location</dt>
-                   <dd>{{ event.getLocation }}</dd>
-                   <dt>Information</dt>
-                   <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-               </dl>
-               {% endfor %}
-           {% else %}
-                <h3>No opportunites to display</h3>
-           {% endif %}
-       </div>
-   </div>
    </section>
-</body>
-</html>
+ </body>
+ </html>

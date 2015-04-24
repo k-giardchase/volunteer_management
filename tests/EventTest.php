@@ -303,21 +303,23 @@
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
+            $phone = '111-222-3333';
             $username = 'Mags123';
             $password = '1234';
-            $admin_stat = 0;
+            $admin_stat = 1;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
             $email = 'johnny@me.com';
+            $phone = '222-444-6666';
             $username = 'John123';
             $password = '123456';
-            $admin_stat = 1;
+            $admin_stat = 0;
             $id = 2;
-            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer2->save();
 
             //Act
@@ -341,21 +343,23 @@
             $first_name = 'Maggie';
             $last_name = 'Doe';
             $email = 'maggie@me.com';
+            $phone = '111-222-3333';
             $username = 'Mags123';
             $password = '1234';
             $admin_stat = 1;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $first_name = 'Johnny';
             $last_name = 'Doe';
             $email = 'johnny@me.com';
+            $phone = '222-444-6666';
             $username = 'John123';
             $password = '123456';
             $admin_stat = 0;
             $id = 2;
-            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer2 = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer2->save();
 
             //Act

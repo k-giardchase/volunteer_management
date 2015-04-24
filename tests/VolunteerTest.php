@@ -543,7 +543,7 @@
             $password = '1234';
             $admin_stat = 0;
             $id1 = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id1);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id1);
             $test_volunteer->save();
 
             $event_name = 'Silent Auction';
@@ -579,7 +579,7 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $event_name = 'Silent Auction';
@@ -616,7 +616,7 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $committee_name = 'Art';
@@ -645,7 +645,7 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             $committee_name = 'Art';
@@ -682,11 +682,11 @@
             $password = '1234';
             $admin_stat = 0;
             $id = 1;
-            $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+            $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
             $test_volunteer->save();
 
             //Act
-            $result = Volunteer::checkIfExists('Mags123');
+            $result = Volunteer::checkUsernameExists($username);
 
             //Assert
             $this->assertEquals(1, $result);

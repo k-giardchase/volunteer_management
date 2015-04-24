@@ -440,7 +440,7 @@
           $password = '1234';
           $admin_stat = 0;
           $id = 1;
-          $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+          $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
           $test_volunteer->save();
 
           //Act
@@ -469,7 +469,7 @@
           $password = '1234';
           $admin_stat = 0;
           $id = 1;
-          $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+          $test_volunteer = new Volunteer($first_name, $last_name, $email, $phone, $username, $password, $admin_stat, $id);
           $test_volunteer->save();
 
           $first_name2 = 'Jane';

@@ -181,6 +181,18 @@
             return $found_volunteer;
         }
 
+        static function checkUsernameExists($inputted_username)
+        {
+            $result = 0;
+            $volunteers = Volunteer::getAll();
+            foreach($volunteers as $volunteer) {
+                $username = $volunteer->getUsername();
+                if($username === $inputted_username) {
+                    $result = 1;
+                }
+            }
+            return $result;
+        }
         function addEvent($new_event)
         {
             $GLOBALS['DB']->exec("INSERT INTO events_volunteers (event_id, volunteer_id) VALUES ({$new_event->getId()}, {$this->getId()});");

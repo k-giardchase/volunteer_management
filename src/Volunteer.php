@@ -199,11 +199,11 @@
             $result = 0;
             $volunteers = Volunteer::getAll();
             foreach($volunteers as $volunteer) {
-              $username = $volunteer->getUsername();
-              $password = $volunteer->getPassword();
-              if($username === $inputted_username && $password === $inputted_password) {
-                $result = $volunteer;
-              }
+                $username = $volunteer->getUsername();
+                $password = $volunteer->getPassword();
+                if($username === $inputted_username && $password === $inputted_password) {
+                    $result = $volunteer;
+                }
             }
             return $result;
         }

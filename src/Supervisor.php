@@ -193,6 +193,33 @@
             return $found_supervisor;
         }
 
+        static function checkUsernameExists($inputted_username)
+        {
+            $result = 0;
+            $supervisors = Supervisor::getAll();
+            foreach($supervisors as $supervisor) {
+                $username = $supervisor->getUsername();
+                if($username === $inputted_username) {
+                    $result = 1;
+                }
+            }
+            return $result;
+        }
+
+        static function authenticateLogin($inputted_username, $inputted_password)
+        {
+            $result = null;
+            $supervisors = Supervisor::getAll();
+            foreach($supervisors as $supervisor) {
+                $username = $supervisor->getUsername();
+                $password = $supervisor->getPassword();
+                if($username === $inputted_username && $password === $inputted_password) {
+                    $result = $supervisor;
+                }
+            }
+            return $result;
+        }
+
         function addCommittee($new_committee)
         {
             $GLOBALS['DB']->exec("INSERT INTO committees_supervisors (committee_id, supervisor_id) VALUES ({$new_committee->getId()}, {$this->getId()});");
@@ -211,33 +238,6 @@
                 array_push($committees, $new_committee);
             }
             return $committees;
-        }
-
-        static function checkUsernameExists($inputted_username)
-        {
-          $result = 0;
-          $supervisors = Supervisor::getAll();
-          foreach($supervisors as $supervisor) {
-            $username = $supervisor->getUsername();
-            if($username === $inputted_username) {
-              $result = 1;
-            }
-          }
-          return $result;
-        }
-
-        static function authenticateLogin($inputted_username, $inputted_password)
-        {
-          $result = null;
-          $supervisors = Supervisor::getAll();
-          foreach($supervisors as $supervisor) {
-            $username = $supervisor->getUsername();
-            $password = $supervisor->getPassword();
-            if($username === $inputted_username && $password === $inputted_password) {
-              $result = $supervisor;
-            }
-          }
-          return $result;
         }
     }
 

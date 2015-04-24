@@ -473,7 +473,7 @@
           $test_volunteer->save();
 
           $first_name2 = 'Jane';
-          $last_name2 = 'Doe';
+          $last_name2 = 'Zoe';
           $email2 = 'jane@me.com';
           $phone2 = '111-333-2222';
           $username2 = 'jane123';

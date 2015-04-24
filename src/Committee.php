@@ -169,7 +169,7 @@
 
         function getVolunteers()
         {
-            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM committees JOIN committees_volunteers ON (committees.id = committees_volunteers.committee_id) JOIN volunteers ON (committees_volunteers.volunteer_id = volunteers.id) WHERE committees.id = {$this->getId()};");
+            $query = $GLOBALS['DB']->query("SELECT volunteers.* FROM committees JOIN committees_volunteers ON (committees.id = committees_volunteers.committee_id) JOIN volunteers ON (committees_volunteers.volunteer_id = volunteers.id) WHERE committees.id = {$this->getId()} ORDER BY last_name;");
             $returned_volunteers = $query->fetchAll(PDO::FETCH_ASSOC);
             $volunteers = [];
             foreach($returned_volunteers as $volunteer) {

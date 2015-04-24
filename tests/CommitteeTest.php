@@ -450,5 +450,46 @@
           //Assert
           $this->assertEquals([$test_volunteer], $result);
       }
+
+      function test_getVolunteers()
+      {
+          //Arrange
+          $committee_name = 'Art';
+          $department = 'Event Management';
+          $description = 'The art committee is responsible for making pretty things for events.';
+          $id = 1;
+          $test_committee = new Committee($committee_name, $department, $description, $id);
+          $test_committee->save();
+
+          $first_name = 'Maggie';
+          $last_name = 'Doe';
+          $email = 'maggie@me.com';
+          $phone = '999-888-7777';
+          $username = 'Mags123';
+          $password = '1234';
+          $admin_stat = 0;
+          $id = 1;
+          $test_volunteer = new Volunteer($first_name, $last_name, $email, $username, $password, $admin_stat, $id);
+          $test_volunteer->save();
+
+          $first_name2 = 'Jane';
+          $last_name2 = 'Doe';
+          $email2 = 'jane@me.com';
+          $phone2 = '111-333-2222';
+          $username2 = 'jane123';
+          $password2 = '9876';
+          $admin_stat2 = 1;
+          $id2 = 2;
+          $test_volunteer2 = new Volunteer($first_name2, $last_name2, $email2, $phone2, $username2, $password2, $admin_stat2, $id2);
+          $test_volunteer2->save();
+
+          //Act
+          $test_committee->addVolunteer($test_volunteer);
+          $test_committee->addVolunteer($test_volunteer2);
+          $result = $test_committee->getVolunteers();
+
+          //Assert
+          $this->assertEquals([$test_volunteer, $test_volunteer2], $result);
+      }
     }
 ?>

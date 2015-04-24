@@ -120,7 +120,21 @@
             $GLOBALS['DB']->exec("INSERT INTO committees_events (committee_id, event_id) VALUES ({$this->getId()}, {$new_event->getId()});");
         }
 
-        
+        function getEvents()
+        {
+            $query = $GLOBALS['DB']->query("SELECT events.* FROM committees JOIN committees_events ON (committees.id = committees_events.committee_id) JOIN events ON (committees_events.event_id = events.id) WHERE committees.id = {$this->getId()};");
+            $returned_events = $query->fetchAll(PDO::FETCH_ASSOC);
+            $events = [];
+            foreach($returned_events as $event) {
+                $event_name = $event['event_name'];
+                $event_date = $event['event_date'];
+                $location = $event['location'];
+                $id = $event['id'];
+                $new_event = new Event($event_name, $event_date, $location, $id);
+                array_push($events, $new_event);
+            }
+            return $events;
+        }
 
     }
 

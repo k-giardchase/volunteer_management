@@ -690,6 +690,28 @@
           $this->assertEquals(1, $result);
         }
 
+        function test_authenticateLogin()
+        {
+          //Arrange
+          $first_name = 'Micah';
+          $last_name = 'Smith';
+          $position_title = 'Director of Development';
+          $email = 'Micah@nonprofit.org';
+          $username = 'Micah2';
+          $password = 'helloworld';
+          $phone = '800-600-5000';
+          $admin_stat = 0;
+          $id = 1;
+          $test_supervisor = new Supervisor($first_name, $last_name, $position_title, $email, $username, $password, $phone, $admin_stat, $id);
+          $test_supervisor->save();
+
+          //Act
+          $result = Supervisor::authenticateLogin('Micah2', 'helloworld');
+
+          //Assert
+          $this->assertEquals($test_supervisor, $result);
+        }
+
     }
 
 ?>

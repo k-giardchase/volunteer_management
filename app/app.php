@@ -152,10 +152,7 @@
             $available = 0;
             return $app['twig']->render('create-volunteer.twig', array('available' => $available));
         }
-        return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer,
-                                                                            'volunteer_id' => $_SESSION['volunteer_id'],
-                                                                            'supervisor_id' => $_SESSION['supervisor_id'],
-                                                                            'admin_stat' => $_SESSION['admin_stat']));
+        return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer));
     });
 
     $app->get('/supervisor-home', function() use($app) {

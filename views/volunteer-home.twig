@@ -17,13 +17,13 @@
            <span class='icon-bar'></span>
            <span class='icon-bar'></span>
          </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
+         <a class='navbar-brand' href='/volunteer-home'>Volunteer Center</a>
        </div>
        <div class="collapse navbar-collapse" id='volunteerNavbar'>
          <ul class='nav navbar-nav'>
-           <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
-           <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
-           <li><a href='/create-volunteer'>Create an account</a></li>
+           <li><a href='/committees'>Committees</a></li>
+           <li><a href='/events'>Events</a></li>
+           <li><a href='/edit-volunteer'>Your account</a></li>
          </ul>
          <ul class='nav navbar-nav navbar-right'>
            <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
@@ -46,7 +46,8 @@
                      <li>{{ committee.getCommitteeName }}</li>
                  {% endfor %}
              {% else %}
-                 <h3>No committees to display.</h3>
+             <h3>Whoops! Looks like you haven't signed up to join any committees.</h3>
+             <li><a href='/committees'>Join a committee</a></li>
             {% endif %}
         </div>
         <div class="col-md-4">

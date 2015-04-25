@@ -123,9 +123,6 @@
                                                         'volunteer_admin_stat' => $_SESSION['volunteer_admin_stat']));
     });
 
-    $app->post('/volunteer-login', function() use ($app) {
-        return $app['twig']->render('index.twig');
-    });
     /*
     **********************************
     READ - CREATE ACCOUNTS
@@ -174,6 +171,25 @@
         $committees = $supervisor->getCommittees();
 
         return $app['twig']->render('supervisor-home.twig', array('supervisor' => $supervisor));
+    });
+
+    $app->get('volunteer-home', function() use ($app) {
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        $committees = $volunteer->getCommittees();
+        $events = $volunteer->getEvents();
+        return $app['twig']->render('volunteer-home.twig', array('volunteer' => $volunteer,
+                                                                'events' => $events,
+                                                                'committees' => $committees));
+    });
+
+    $app->get('/logout', function() use ($app) {
+        return $app['twig']->render('logout.twig');
+    });
+
+    $app->post('/logout', function() use ($app) {
+        $_SESSION['volunteer_id'] = null;
+        $_SESSION['supervisor_id'] = null;
+        return $app['twig']->render('index.twig', array('committees' => Committee::getAll(), 'events' => Event::getAll()));
     });
 
     return $app;

@@ -38,6 +38,7 @@
            <p>Get involved. Make a difference.</p>
        </div>
    </header>
+   {% if supervisor_id == false and volunteer_id == false %}
    <section>
       <div class='row'>
        <div class="col-md-3">
@@ -73,6 +74,20 @@
            {% endif %}
        </div>
    </div>
-   </section>
+  </section>
+  <section>
+      <<div class="container">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          {% elseif supervisor_id == true or volunteer_id == true %}
+                <h1>test</h1>
+          {% endif %}
+
+      </div>
+  </section>
+
 </body>
 </html>

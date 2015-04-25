@@ -30,6 +30,12 @@
          $_SESSION['admin_stat'] = null;
      };
 
+     /*
+     **********************************
+      READ - HOME PAGE
+     **********************************
+     */
+
     $app->get("/", function() use ($app) {
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
@@ -49,22 +55,78 @@
                                                         'volunteer' => $volunteer,
                                                         'supervisor' => $supervisor,
                                                         'supervisor_admin_stat' => $supervisor_admin_stat,
-                                                        'volunteer_admin_stat' => $volunteer_admin_stat));
+                                                        'volunteer_admin_stat' => $volunteer_admin_stat,
+                                                        'supervisor_id' => $_SESSION['supervisor_id'],
+                                                        'volunteer_id' => $_SESSION['volunteer_id']));
     });
 
-    $app->get('/supervisor-login', function() use ($app) {
+    /*
+    **********************************
+    READ - LOGINS
+    **********************************
+    */
 
-        return $app['twig']->render('supervisor-login.twig');
+    $app->get('/supervisor-login', function() use ($app) {
+        $login_success = 1;
+        return $app['twig']->render('supervisor-login.twig', array('login_success' => $login_success));
     });
 
     $app->get('/volunteer-login', function() use ($app) {
         return $app['twig']->render('volunteer-login.twig');
     });
 
+    /*
+    **********************************
+    CREATE - LOGINS
+    **********************************
+    */
+    $app->post('/supervisor-login', function() use ($app) {
+        $login_success = 1;
+        $inputted_username = $_POST['username'];
+        $inputted_password = $_POST['password'];
+        $supervisor= Supervisor::authenticateLogin($inputted_username, $inputted_password);
+        if($supervisor) {
+            $supervisor_id = $supervisor->getSupervisorId();
+            $_SESSION['supervisor_id'] = $supervisor_id;
+            $supervisor_admin_stat = $supervisor->getAdminStat();
+            $_SESSION['supervisor_admin_stat'] = $supervisor_admin_stat;
+            $committees = $supervisor->getCommittees();
+
+        } else {
+            $login_success = 0;
+            return $app['twig']->render('supervisor-login.twig', array('login_success' => $login_success,
+                                                            'supervisor_id' => $_SESSION['supervisor_id'],
+                                                            'volunteer_id' => $_SESSION['volunteer_id'],
+                                                            'committees' => Committee::getAll(),
+                                                            'supervisor_admin_stat' => $_SESSION['supervisor_admin_stat'],
+                                                            'volunteer_admin_stat' => $_SESSION['volunteer_admin_stat']));
+        }
+        return $app['twig']->render('index.twig', array('committees' => $committies,
+                                                        'supervisor_id' => $_SESSION['supervisor_id'],
+                                                        'volunteer_id' => $_SESSION['volunteer_id'],
+                                                        'supervisor_admin_stat' => $_SESSION['supervisor_admin_stat'],
+                                                        'volunteer_admin_stat' => $_SESSION['volunteer_admin_stat']));
+    });
+
+    $app->post('/volunteer-login', function() use ($app) {
+        return $app['twig']->render('index.twig');
+    });
+    /*
+    **********************************
+    READ - CREATE ACCOUNTS
+    **********************************
+    */
+
     $app->get('/create-volunteer', function() use ($app) {
         $available = 1;
         return $app['twig']->render('create-volunteer.twig', array('available' => $available));
     });
+
+    /*
+    **********************************
+    CREATE - CREATE ACCOUNTS
+    **********************************
+    */
 
     $app->post('/create-volunteer', function() use ($app) {
         $available = 1;

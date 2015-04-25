@@ -22,15 +22,22 @@
        </div>
        <div class="collapse navbar-collapse" id='volunteerNavbar'>
          <ul class='nav navbar-nav'>
-            {% if not supervisor and not volunteer %}
-             <li><a href='/create-volunteer'>Create an account</a></li>
-           <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
-           <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
-            {% else %}
-            <li><a href='/committees'>Committees</a></li>
-            <li><a href='/events'>Events</a></li>
-            <li><a href='/logout'>Logout</a></li>
-            {% endif %}
+             {% if not supervisor and not volunteer %}
+                  <li><a href='/create-volunteer'>Create an account</a></li>
+                <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                <li><a href='/committees'>Committees</a></li>
+                <li><a href='/events'>Events</a></li>
+             {% elseif supervisor and not volunteer %}
+                 <li><a href='/committees'>Committees</a></li>
+                 <li><a href='/events'>Events</a></li>
+                 <li><a href='/admin'>Admin</a></li>
+                 <li><a href='/logout'>Logout</a></li>
+             {% else %}
+                 <li><a href='/committees'>Committees</a></li>
+                 <li><a href='/events'>Events</a></li>
+                 <li><a href='/logout'>Logout</a></li>
+             {% endif %}
 
          </ul>
          <ul class='nav navbar-nav navbar-right'>
@@ -44,67 +51,69 @@
        <br>
        <br>
        <br>
-       <div class="col-md-4">
-               <h1>All events</h1>
-               {% if events is not empty %}
-                   {% for event in events %}
-                   <dl class='dl-horizontal'>
-                       <dt>Name</dt>
-                       <dd>{{ event.getEventName }}</dd>
-                       <dt>Date</dt>
-                       <dd>{{ event.getEventDate }}</dd>
-                       <dt>Location</dt>
-                       <dd>{{ event.getLocation }}</dd>
-                       <dt>Information</dt>
-                       <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                   </dl>
-                   {% endfor %}
-               {% else %}
-                        <h1>No events to display.</h1>
-               {% endif %}
-       </div>
-       <div class="col-md-8">
-           {% if volunteer %}
-               {% if volunteer_events is not empty %}
-                    <h1>Your events:</h1>
-                   {% for event in volunteer_events %}
-                   <dl class='dl-horizontal'>
-                       <dt>Name</dt>
-                       <dd>{{ event.getEventName }}</dd>
-                       <dt>Date</dt>
-                       <dd>{{ event.getEventDate }}</dd>
-                       <dt>Location</dt>
-                       <dd>{{ event.getLocation }}</dd>
-                       <dt>Information</dt>
-                       <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                   </dl>
-                   {% endfor %}
-               {% else %}
-                   <h3>Whoops!</h3>
-                   <p> It looks like you haven't signed up for any events yet.<a href='/events'>Click here </a> to add an event to your schedule.</p>
-               {% endif %}
-           {% elseif supervisor %}
-                {% if supervisor_events is not empty %}
-                      <h1>Here are the events your committee(s) are putting on:</h1>
-                      {% for event in supervisor_events %}
-                          <dl class='dl-horizontal'>
-                              <dt>Name</dt>
-                              <dd>{{ event.getEventName }}</dd>
-                              <dt>Date</dt>
-                              <dd>{{ event.getEventDate }}</dd>
-                              <dt>Location</dt>
-                              <dd>{{ event.getLocation }}</dd>
-                              <dt>Information</dt>
-                              <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                          </dl>
-                      {% endfor %}
-                  {% else %}
-              <h3>Whoops!</h3>
-              <p> It looks like your committee(s) aren't putting on any events, or you may not have added yourself as a supervisor to a committee. View <a href='/volunteers'>volunteer list</a> to get the ball rolling, or <a href='/committees'>committees</a> to add yourself to a committee.</p>
-              {% endif %}
-            {% else %}
-                <h1>Sign-in to see the events you're signed up for.</h1>
-            {% endif %}
+       <div class="row">
+           <div class="col-md-4">
+                   <h1>All events</h1>
+                   {% if events is not empty %}
+                       {% for event in events %}
+                       <dl class='dl-horizontal'>
+                           <dt>Name</dt>
+                           <dd>{{ event.getEventName }}</dd>
+                           <dt>Date</dt>
+                           <dd>{{ event.getEventDate }}</dd>
+                           <dt>Location</dt>
+                           <dd>{{ event.getLocation }}</dd>
+                           <dt>Information</dt>
+                           <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+                       </dl>
+                       {% endfor %}
+                   {% else %}
+                            <h1>No events to display.</h1>
+                   {% endif %}
+           </div>
+           <div class="col-md-8">
+               {% if volunteer %}
+                   {% if volunteer_events is not empty %}
+                        <h1>Your events:</h1>
+                       {% for event in volunteer_events %}
+                       <dl class='dl-horizontal'>
+                           <dt>Name</dt>
+                           <dd>{{ event.getEventName }}</dd>
+                           <dt>Date</dt>
+                           <dd>{{ event.getEventDate }}</dd>
+                           <dt>Location</dt>
+                           <dd>{{ event.getLocation }}</dd>
+                           <dt>Information</dt>
+                           <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+                       </dl>
+                       {% endfor %}
+                   {% else %}
+                       <h3>Whoops!</h3>
+                       <p> It looks like you haven't signed up for any events yet.<a href='/events'>Click here </a> to add an event to your schedule.</p>
+                   {% endif %}
+               {% elseif supervisor %}
+                    {% if supervisor_events is not empty %}
+                          <h1>Here are the events your committee(s) are putting on:</h1>
+                          {% for event in supervisor_events %}
+                              <dl class='dl-horizontal'>
+                                  <dt>Name</dt>
+                                  <dd>{{ event.getEventName }}</dd>
+                                  <dt>Date</dt>
+                                  <dd>{{ event.getEventDate }}</dd>
+                                  <dt>Location</dt>
+                                  <dd>{{ event.getLocation }}</dd>
+                                  <dt>Information</dt>
+                                  <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+                              </dl>
+                          {% endfor %}
+                      {% else %}
+                  <h3>Whoops!</h3>
+                  <p> It looks like your committee(s) aren't putting on any events, or you may not have added yourself as a supervisor to a committee. View <a href='/volunteers'>volunteer list</a> to get the ball rolling, or <a href='/committees'>committees</a> to add yourself to a committee.</p>
+                  {% endif %}
+                {% else %}
+                    <h1>Sign-in to see the events you're signed up for.</h1>
+                {% endif %}
+           </div>
        </div>
    </section>
 </body>

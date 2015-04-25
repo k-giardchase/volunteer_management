@@ -26,6 +26,13 @@
                  <li><a href='/create-volunteer'>Create an account</a></li>
                <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
                <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+               <li><a href='/committees'>Committees</a></li>
+               <li><a href='/events'>Events</a></li>
+            {% elseif supervisor and not volunteer %}
+                <li><a href='/committees'>Committees</a></li>
+                <li><a href='/events'>Events</a></li>
+                <li><a href='/admin'>Admin</a></li>
+                <li><a href='/logout'>Logout</a></li>
             {% else %}
                 <li><a href='/committees'>Committees</a></li>
                 <li><a href='/events'>Events</a></li>
@@ -67,7 +74,7 @@
            {% endif %}
            {% if committees is not empty %}
                 {% for committee in committees %}
-                    <li>{{ committee.getCommitteeName }}</li>
+                    <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
                 {% endfor %}
             {% else %}
                 <h3>No committees to display</h3>

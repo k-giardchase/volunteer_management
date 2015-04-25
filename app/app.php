@@ -169,6 +169,8 @@
     $app->get('/events', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        $events = Event::getAll();
+
         if($volunteer && (empty($supervisor))) {
             $volunteer_events = $volunteer->getEvents();
             $supervisor_events = null;
@@ -184,12 +186,34 @@
             $volunteer_events = null;
             $supervisor_events = null;
         }
-        $events = Event::getAll();
+
         return $app['twig']->render('events.twig', array('events' => $events,
                                                         'supervisor' => $supervisor,
                                                         'volunteer' => $volunteer,
                                                         'volunteer_events' => $volunteer_events,
                                                         'supervisor_events' => $supervisor_events));
+    });
+
+    $app->get('/committees', function() use ($app) {
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        if($volunteer && (empty($supervisor))) {
+            $volunteer_committees = $volunteer->getCommittees();
+            $supervisor_committees = null;
+        } elseif ($supervisor && (empty($volunteer))) {
+            $volunteer_committees = null;
+            $supervisor_committees = $supervisor->getCommittees();
+        } else {
+            $volunteer_committees = null;
+            $supervisor_committees = null;
+            $committees = Committee::getAll();
+        }
+
+        return $app['twig']->render('committees.twig', array('committees' => $committees,
+                                                        'supervisor' => $supervisor,
+                                                        'volunteer' => $volunteer,
+                                                        'volunteer_committees' => $volunteer_committees,
+                                                        'supervisor_committees' => $supervisor_committees));
     });
 
     return $app;

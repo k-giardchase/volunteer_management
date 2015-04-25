@@ -34,45 +34,22 @@
    <header>
        <div class='jumbotron text-center'>
            <br>
-           <h1>Welcome to Volunteer Center</h1>
-           <p>Get involved. Make a difference.</p>
+           <h1>Hi, {{ supervisor.getName }}.</h1>
        </div>
    </header>
    <section>
-      <div class='row'>
-       <div class="col-md-3">
-           <h1>Join a committee</h1>
-           {% if committees is not empty %}
-                {% for committee in committees %}
-                    <li>{{ committee.getCommitteeName }}</li>
-                {% endfor %}
-            {% else %}
-                <h3>No committees to display</h3>
-           {% endif %}
-       </div>
-       <div class="col-md-6">
-
-       </div>
-       <div class="col-md-3">
-           <h1>Upcoming opportunities</h1>
-           {% if events is not empty %}
-               {% for event in events %}
-               <dl class='dl-horizontal'>
-                   <dt>Name</dt>
-                   <dd>{{ event.getEventName }}</dd>
-                   <dt>Date</dt>
-                   <dd>{{ event.getEventDate }}</dd>
-                   <dt>Location</dt>
-                   <dd>{{ event.getLocation }}</dd>
-                   <dt>Information</dt>
-                   <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-               </dl>
-               {% endfor %}
-           {% else %}
-                <h3>No opportunites to display</h3>
-           {% endif %}
-       </div>
-   </div>
-  </section>
+       <div class='row'>
+        <div class="col-md-8">
+            <h1>Your Committees:</h1>
+            {% if committees is not empty %}
+                 {% for committee in committees %}
+                     <li>{{ committee.getCommitteeName }}</li>
+                 {% endfor %}
+             {% else %}
+                 <h3>No committees to display.</h3>
+            {% endif %}
+        </div>
+    </div>
+   </section>
 </body>
 </html>

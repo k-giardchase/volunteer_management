@@ -51,13 +51,7 @@
             $supervisor_admin_stat = null;
         }
         return $app['twig']->render('index.twig', array('events' => Event::getAll(),
-                                                        'committees' => Committee::getAll(),
-                                                        'volunteer' => $volunteer,
-                                                        'supervisor' => $supervisor,
-                                                        'supervisor_admin_stat' => $supervisor_admin_stat,
-                                                        'volunteer_admin_stat' => $volunteer_admin_stat,
-                                                        'supervisor_id' => $_SESSION['supervisor_id'],
-                                                        'volunteer_id' => $_SESSION['volunteer_id']));
+                                                        'committees' => Committee::getAll()));
     });
 
     /*
@@ -152,6 +146,13 @@
                                                                             'volunteer_id' => $_SESSION['volunteer_id'],
                                                                             'supervisor_id' => $_SESSION['supervisor_id'],
                                                                             'admin_stat' => $_SESSION['admin_stat']));
+    });
+
+    $app->get('/supervisor-home', function() use($app) {
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $committees = $supervisor->getCommittees();
+
+        return $app['twig']->render('supervisor-home.twig', array('supervisor' => $supervisor));
     });
 
     return $app;

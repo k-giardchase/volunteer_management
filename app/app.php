@@ -166,9 +166,17 @@
 
     $app->get('/events', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        if($volunteer) {
+            $volunteer_events = $volunteer->getEvents();
+        } else {
+            $volunteer_events = null;
+        }
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $events = Event::getAll();
-        
+        return $app['twig']->render('events.twig', array('events' => $events,
+                                                        'supervisor' => $supervisor,
+                                                        'volunteer' => $volunteer,
+                                                        'volunteer_events' => $volunteer_events));
     });
 
     return $app;

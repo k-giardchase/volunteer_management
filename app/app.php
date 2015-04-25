@@ -74,6 +74,27 @@
     CREATE - LOGINS
     **********************************
     */
+    $app->post('/volunteer-login', function() use ($app) {
+        $login_success = 1;
+        $inputted_username = $_POST['username'];
+        $inputted_password = $_POST['password'];
+        $volunteer = Volunteer::authenticateLogin($inputted_username, $inputted_password);
+        if($volunteer) {
+            $volunteer_id = $volunteer->getId();
+            $SESSION['volunteer_id'] = $volunteer_id;
+            $events = $volunteer->getEvents();
+            $committees = $volunteer->getCommittees();
+
+        } else {
+            $login_success = 0;
+            return $app['twig']->render('volunteer-login.twig', array('login_success' => $login_success));
+        }
+        return $app['twig']->render('volunteer-home.twig', array('volunteer' => $volunteer,
+                                                                'events' => $events,
+                                                                'committees' => $committees));
+    });
+
+
     $app->post('/supervisor-login', function() use ($app) {
         $login_success = 1;
         $inputted_username = $_POST['username'];

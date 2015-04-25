@@ -80,9 +80,6 @@
         $inputted_password = $_POST['password'];
         $volunteer = Volunteer::authenticateLogin($inputted_username, $inputted_password);
 
-        var_dump($volunteer);
-        var_dump($inputted_username);
-        var_dump($inputted_password);
         if(!empty($volunteer)) {
             $volunteer_id = $volunteer->getId();
             $SESSION['volunteer_id'] = $volunteer_id;
@@ -98,33 +95,24 @@
                                                                 'committees' => $committees));
     });
 
-
     $app->post('/supervisor-login', function() use ($app) {
         $login_success = 1;
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $supervisor= Supervisor::authenticateLogin($inputted_username, $inputted_password);
-        if($supervisor) {
-            $supervisor_id = $supervisor->getSupervisorId();
+        if(!empty($supervisor)) {
+            $supervisor_id = $supervisor->getId();
             $_SESSION['supervisor_id'] = $supervisor_id;
-            $supervisor_admin_stat = $supervisor->getAdminStat();
-            $_SESSION['supervisor_admin_stat'] = $supervisor_admin_stat;
             $committees = $supervisor->getCommittees();
+            $events = Event::getAll();
 
         } else {
             $login_success = 0;
-            return $app['twig']->render('supervisor-login.twig', array('login_success' => $login_success,
-                                                            'supervisor_id' => $_SESSION['supervisor_id'],
-                                                            'volunteer_id' => $_SESSION['volunteer_id'],
-                                                            'committees' => Committee::getAll(),
-                                                            'supervisor_admin_stat' => $_SESSION['supervisor_admin_stat'],
-                                                            'volunteer_admin_stat' => $_SESSION['volunteer_admin_stat']));
+            return $app['twig']->render('supervisor-login.twig', array('login_success' => $login_success));
         }
-        return $app['twig']->render('index.twig', array('committees' => $committies,
-                                                        'supervisor_id' => $_SESSION['supervisor_id'],
-                                                        'volunteer_id' => $_SESSION['volunteer_id'],
-                                                        'supervisor_admin_stat' => $_SESSION['supervisor_admin_stat'],
-                                                        'volunteer_admin_stat' => $_SESSION['volunteer_admin_stat']));
+        return $app['twig']->render('index.twig', array('committees' => $committees,
+                                                        'supervisor' => $supervisor,
+                                                        'events' => $events));
     });
 
     /*

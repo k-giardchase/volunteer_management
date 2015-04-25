@@ -37,19 +37,19 @@
      */
 
     $app->get("/", function() use ($app) {
-        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
-        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        // $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        // $supervisor = Supervisor::find($_SESSION['supervisor_id']);
 
-        if($volunteer) {
-            $volunteer_admin_stat = $volunteer->getAdminStat();
-        } else {
-            $volunteer_admin_stat = null;
-        }
-        if($supervisor) {
-            $supervisor_admin_stat = $supervisor->getAdminStat();
-        } else {
-            $supervisor_admin_stat = null;
-        }
+        // if($volunteer) {
+        //     $volunteer_admin_stat = $volunteer->getAdminStat();
+        // } else {
+        //     $volunteer_admin_stat = null;
+        // }
+        // if($supervisor) {
+        //     $supervisor_admin_stat = $supervisor->getAdminStat();
+        // } else {
+        //     $supervisor_admin_stat = null;
+        // }
         return $app['twig']->render('index.twig', array('events' => Event::getAll(),
                                                         'committees' => Committee::getAll()));
     });
@@ -79,7 +79,11 @@
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $volunteer = Volunteer::authenticateLogin($inputted_username, $inputted_password);
-        if($volunteer) {
+
+        var_dump($volunteer);
+        var_dump($inputted_username);
+        var_dump($inputted_password);
+        if(!empty($volunteer)) {
             $volunteer_id = $volunteer->getId();
             $SESSION['volunteer_id'] = $volunteer_id;
             $events = $volunteer->getEvents();

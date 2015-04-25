@@ -196,12 +196,12 @@
 
         static function authenticateLogin($inputted_username, $inputted_password)
         {
-            $result = 0;
+            $result = null;
             $volunteers = Volunteer::getAll();
             foreach($volunteers as $volunteer) {
                 $username = $volunteer->getUsername();
                 $password = $volunteer->getPassword();
-                if($username === $inputted_username && $password === $inputted_password) {
+                if(($username === $inputted_username) && ($password === $inputted_password)) {
                     $result = $volunteer;
                 }
             }

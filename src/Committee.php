@@ -108,7 +108,7 @@
 
             foreach($all_committees as $committee) {
                 $committee_id = $committee->getId();
-                if($committee_id === $search_id) {
+                if($committee_id == $search_id) {
                     $found_committee = $committee;
                 }
             }

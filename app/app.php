@@ -154,6 +154,11 @@
         return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer));
     });
 
+    /*
+    **********************************
+    READ - LOGOUT PAGE
+    **********************************
+    */
     $app->get('/logout', function() use ($app) {
         return $app['twig']->render('logout.twig');
     });
@@ -165,6 +170,12 @@
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         return $app['twig']->render('index.twig', array('committees' => Committee::getAll(), 'events' => Event::getAll(), 'volunteer' => $volunteer, 'supervisor' => $supervisor));
     });
+
+    /*
+    **********************************
+    READ - ALL EVENTS
+    **********************************
+    */
 
     $app->get('/events', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
@@ -194,6 +205,11 @@
                                                         'supervisor_events' => $supervisor_events));
     });
 
+    /*
+    **********************************
+    READ - ALL COMMITTEES
+    **********************************
+    */
     $app->get('/committees', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
@@ -214,6 +230,30 @@
                                                         'volunteer' => $volunteer,
                                                         'volunteer_committees' => $volunteer_committees,
                                                         'supervisor_committees' => $supervisor_committees));
+    });
+
+    /*
+    **********************************
+    READ - INDIVIDUAL COMMITTEE
+    **********************************
+    */
+    $app->get('/committee/{id}', function($id) use ($app) {
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+
+        $selected_committee = Committee::find($id);
+
+        $volunteers_associated = $selected_committee->getVolunteers();
+        $supervisors_associated = $selected_committee->getSupervisors();
+        $events_associated = $selected_committee->getEvents();
+        return $app['twig']->render('committee.twig', array('supervisor' => $supervisor,
+                                                            'volunteer' => $volunteer,
+                                                            'selected_committee' => $selected_committee,
+                                                            'volunteers_associated' => $volunteers_associated,
+                                                            'supervisors_associated'=>
+                                                            $supervisors_associated,
+                                                            'events_associated'=>
+                                                            $events_associated));
     });
 
     return $app;

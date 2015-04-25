@@ -36,7 +36,6 @@
     $app->get("/", function() use ($app) {
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
-
         return $app['twig']->render('index.twig', array('events' => Event::getAll(),
                                                         'committees' => Committee::getAll(),
                                                         'supervisor' => $supervisor,
@@ -69,20 +68,21 @@
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $volunteer = Volunteer::authenticateLogin($inputted_username, $inputted_password);
-
         if(!empty($volunteer)) {
             $volunteer_id = $volunteer->getId();
-            $SESSION['volunteer_id'] = $volunteer_id;
+            $_SESSION['volunteer_id'] = $volunteer_id;
             $events = $volunteer->getEvents();
             $committees = $volunteer->getCommittees();
+            $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+            $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+            return $app['twig']->render('index.twig', array('volunteer' => $volunteer,
+                                                            'events' => $events,
+                                                            'committees' => $committees,
+                                                            'supervisor' => $supervisor));
         } else {
             $login_success = 0;
             return $app['twig']->render('volunteer-login.twig', array('login_success' => $login_success));
         }
-        return $app['twig']->render('index.twig', array('volunteer' => $volunteer,
-                                                        'events' => $events,
-                                                        'committees' => $committees,
-                                                        'supervisor' => $supervisor));
     });
 
     $app->get('/supervisor-login', function() use ($app) {

@@ -21,14 +21,15 @@
        </div>
        <div class="collapse navbar-collapse" id='volunteerNavbar'>
          <ul class='nav navbar-nav'>
+
             {% if not supervisor and not volunteer %}
-             <li><a href='/create-volunteer'>Create an account</a></li>
-           <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
-           <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                 <li><a href='/create-volunteer'>Create an account</a></li>
+               <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+               <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
             {% else %}
-            <li><a href='/committees'>Committees</a></li>
-            <li><a href='/events'>Events</a></li>
-            <li><a href='/logout'>Logout</a></li>
+                <li><a href='/committees'>Committees</a></li>
+                <li><a href='/events'>Events</a></li>
+                <li><a href='/logout'>Logout</a></li>
             {% endif %}
 
          </ul>
@@ -37,7 +38,7 @@
          </ul>
        </div>
      </div>
-   </nav>
+ </nav>
    <header>
        <div class='jumbotron text-center'>
            <br>
@@ -51,7 +52,7 @@
 
            {% elseif supervisor %}
                 <h1>Hi, {{ supervisor.getFirstName }}.</h1>
-           {% else %}
+           {% elseif volunteer %}
                 <h1>Hi, {{ volunteer.getFirstName }}.</h1>
            {% endif %}
        </div>

@@ -107,7 +107,7 @@
             $events = Event::getAll();
             foreach($events as $event) {
                 $event_id = $event->getId();
-                if($event_id === $search_id) {
+                if($event_id == $search_id) {
                     $found_event = $event;
                 }
             }

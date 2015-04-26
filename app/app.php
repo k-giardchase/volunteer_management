@@ -250,6 +250,13 @@
                                                                         'supervisor' => $supervisor));
     });
 
+    $app->get('/event/{id}', function($id) use ($app) {
+        $event = Event::find($id);
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        return $app['twig']->render('event.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
+    });
+
     /*
     **********************************
     READ - ALL COMMITTEES
@@ -301,7 +308,6 @@
 
     $app->get('/volunteer/{id}', function($id) use ($app) {
         $selected_volunteer = Volunteer::find($id);
-        var_dump($selected_volunteer);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         return $app['twig']->render('volunteer.twig', array('selected_volunteer' => $selected_volunteer, 'supervisor' => $supervisor, 'volunteer' => $volunteer));

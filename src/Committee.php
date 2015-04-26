@@ -77,6 +77,9 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM committees WHERE id={$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM committees_events WHERE committee_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM committees_supervisors WHERE committee_id = {$this->getId()};");
+
         }
 
         static function getAll()

@@ -48,15 +48,13 @@
                          <dd>{{ event.getEventDate }}</dd>
                          <dt>Location</dt>
                          <dd>{{ event.getLocation }}</dd>
-                         {% if volunteer %}
-                             <form action="/add-event" method="post">
-                                 <button type="submit" class='btn btn-info btn-block'>Add yourself to this event</button>
-                             </form>
-                         {% else %}
-                             <dt>Edit</dt>
-                             <dd><a href='/edit/event/{{ event.getId }}'>Edit this event</a></dd>
-                          {% endif %}
-                     </dl>
+                         <form class="" action="/delete/event/{{event.getId}}" method="post">
+                            <input name="_method" type="hidden" value="delete">
+                            <br>
+                            <div class="text-center">
+                                <button type="submit" class='btn btn-info'>Delete</button>
+                            </div>
+                         </form>
                  </div>
                  <div class="col-md-8">
                          <h1 class='text-center'>Edit</h1>

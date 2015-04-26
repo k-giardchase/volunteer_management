@@ -152,6 +152,7 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM supervisors WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM committees_supervisors WHERE supervisor_id = {$this->getId()};");
         }
 
         static function getAll()

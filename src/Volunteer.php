@@ -137,6 +137,8 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM volunteers WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM committees_volunteers WHERE volunteer_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM events_volunteers WHERE volunteer_id = {$this->getId()};");
         }
 
         static function getAll()

@@ -9,7 +9,7 @@
     <title>Volunteer Center</title>
 </head>
 <body>
-    <nav class='navbar navbar-default navbar-fixed-top'>
+    {#<nav class='navbar navbar-default navbar-fixed-top'>
      <div class='container-fluid'>
        <div class='navbar-header'>
          <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
@@ -45,14 +45,15 @@
          </ul>
        </div>
      </div>
- </nav>
+ </nav> #}
  <section>
      <br>
      <br>
      <br>
      <br>
      <div class="row">
-         <div class="col-md-6 col-md-offset-3">
+         <div class="col-md-8 col-md-offset-2">
+             <h1 class='text-center'>{{ selected_committee.getCommitteeName }} Committee</h1>
                  <dl class='dl-horizontal'>
                      <dt>Name</dt>
                      <dd>{{ selected_committee.getCommitteeName }}</dd>
@@ -71,10 +72,46 @@
                     </dd>
                  </dl>
                  {% if supervisor %}
-                     <a class='text-center' href="/edit/committee/{id}"><button type="submit" class="btn btn-info">Edit this committee</button></a>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                             <a href="/edit/committee/{id}"><button type="submit" class="btn btn-info">Edit this committee</button></a>
+                        </div>
+                    </div>
                  {% endif %}
          </div>
      </div>
+     {% if supervisor %}
+     <div class="row">
+         <h1 class='text-center'>Volunteers signed up for this committee</h1>
+         <div class="col-md-8 col-md-offset-2">
+             <table class='table table-hover'>
+                 <thead>
+                     <tr>
+                         <th>Firstname</th>
+                         <th>Lastname</th>
+                         <th>Email</th>
+                         <th>Phone</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                         {% for volunteer in volunteers_associated %}
+                         <span>
+                             <a href="/volunteer">
+                            <td>{{ volunteer.getFirstName }}</td>
+                            <td>{{ volunteer.getLastName }}</td>
+                            <td>{{ volunteer.getEmail }}</td>
+                            <td>{{ volunteer.getPhone }}</td>
+                        </a>
+
+                         </span>
+                         {% endfor %}
+                     </tr>
+                 </tbody>
+             </table>
+         </div>
+     </div>
+     {% endif %}
  </section>
  </body>
  </html>

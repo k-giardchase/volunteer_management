@@ -67,17 +67,33 @@
    <section>
       <div class='row'>
        <div class="col-md-3">
-           {% if not supervisor and not volunteer %}
-               <h1>Committees</h1>
-           {% else %}
-                <h1>Your committees</h1>
-           {% endif %}
-           {% if committees is not empty %}
+         {% if not supervisor and not volunteer %}
+           <h1>Committees</h1>
+                {% if committees is not empty %}
                 {% for committee in committees %}
                     <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
                 {% endfor %}
             {% else %}
                 <h3>No committees to display</h3>
+                {% endif %}
+           {% elseif supervisor and not volunteer %}
+               <h1>Your committees</h1>
+                {% if supervisor_committees is not empty %}
+                    {% for committee in supervisor_committees %}
+                        <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <h3>No committees to display</h3>
+                {% endif %}
+            {% else %}
+                <h1>Your committees</h1>
+                 {% if volunteer_committees is not empty %}
+                     {% for committee in volunteer_committees %}
+                         <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
+                     {% endfor %}
+                 {% else %}
+                     <h3>No committees to display</h3>
+                 {% endif %}
            {% endif %}
 
        </div>
@@ -87,9 +103,6 @@
        <div class="col-md-3">
            {% if not supervisor and not volunteer %}
                 <h1>Upcoming events</h1>
-           {% else %}
-                <h1>Your events</h1>
-            {% endif %}
                {% if events is not empty %}
                    {% for event in events %}
                    <dl class='dl-horizontal'>
@@ -103,16 +116,49 @@
                        <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
                    </dl>
                    {% endfor %}
-               {% else %}
-                   {% if not supervisor and not volunteer %}
-                        <h1>No events to display.</h1>
-                   {% else %}
+                {% endif %}
+            {% elseif supervisor and not volunteer %}
+                <h1>Upcoming events</h1>
+                   {% if supervisor_events is not empty %}
+                       {% for event in supervisor_events %}
+                       <dl class='dl-horizontal'>
+                           <dt>Name</dt>
+                           <dd>{{ event.getEventName }}</dd>
+                           <dt>Date</dt>
+                           <dd>{{ event.getEventDate }}</dd>
+                           <dt>Location</dt>
+                           <dd>{{ event.getLocation }}</dd>
+                           <dt>Information</dt>
+                           <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+                       </dl>
+                       {% endfor %}
+                    {% else %}
                         <h3>Whoops!</h3>
                         <p>
-                            It looks like you haven't signed up for any events yet.
-                            <a href='/events'>Click here</a> to add an event to your schedule.
+                            It looks like your committees are not signed up for any events yet.
                         </p>
                    {% endif %}
+                {% else %}
+                    <h1>Upcoming events</h1>
+                       {% if volunteer_events is not empty %}
+                           {% for event in volunteer_events %}
+                           <dl class='dl-horizontal'>
+                               <dt>Name</dt>
+                               <dd>{{ event.getEventName }}</dd>
+                               <dt>Date</dt>
+                               <dd>{{ event.getEventDate }}</dd>
+                               <dt>Location</dt>
+                               <dd>{{ event.getLocation }}</dd>
+                               <dt>Information</dt>
+                               <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
+                           </dl>
+                           {% endfor %}
+                        {% else %}
+                            <h3>Whoops!</h3>
+                            <p>
+                                It looks like you're not signed up for any events yet.
+                            </p>
+                       {% endif %}
                {% endif %}
        </div>
    </div>

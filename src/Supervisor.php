@@ -213,7 +213,7 @@
             foreach($supervisors as $supervisor) {
                 $username = $supervisor->getUsername();
                 $password = $supervisor->getPassword();
-                if($username === $inputted_username && $password === $inputted_password) {
+                if(($username === $inputted_username) && ($password === $inputted_password)) {
                     $result = $supervisor;
                 }
             }

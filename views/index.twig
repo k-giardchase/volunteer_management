@@ -64,37 +64,37 @@
            {% endif %}
        </div>
    </header>
-   <section>
+    <section>
       <div class='row'>
        <div class="col-md-3">
-         {% if not supervisor and not volunteer %}
-           <h1>Committees</h1>
-                {% if committees is not empty %}
+        {% if not supervisor and not volunteer %}
+            <h1>Committees</h1>
+            {% if committees is not empty %}
                 {% for committee in committees %}
-                    <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
+                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
                 {% endfor %}
             {% else %}
                 <h3>No committees to display</h3>
-                {% endif %}
-           {% elseif supervisor and not volunteer %}
-               <h1>Your committees</h1>
-                {% if supervisor_committees is not empty %}
-                    {% for committee in supervisor_committees %}
-                        <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
-                    {% endfor %}
-                {% else %}
-                    <h3>No committees to display</h3>
-                {% endif %}
+            {% endif %}
+        {% elseif supervisor and not volunteer %}
+            <h1>Your committees</h1>
+            {% if supervisor_committees is not empty %}
+                {% for committee in supervisor_committees %}
+                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
+                {% endfor %}
             {% else %}
-                <h1>Your committees</h1>
-                 {% if volunteer_committees is not empty %}
-                     {% for committee in volunteer_committees %}
-                         <li><a href='/committee/{{ committee.getId }}'>{{ committee.getCommitteeName }}</a></li>
-                     {% endfor %}
-                 {% else %}
-                     <h3>No committees to display</h3>
-                 {% endif %}
-           {% endif %}
+                    <h3>No committees to display</h3>
+            {% endif %}
+        {% else %}
+            <h1>Your committees</h1>
+            {% if volunteer_committees is not empty %}
+                {% for committee in volunteer_committees %}
+                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
+                {% endfor %}
+            {% else %}
+                <h3>No committees to display</h3>
+            {% endif %}
+        {% endif %}
 
        </div>
        <div class="col-md-6">
@@ -160,8 +160,8 @@
                             </p>
                        {% endif %}
                {% endif %}
+           </div>
        </div>
-   </div>
-  </section>
+    </section>
 </body>
 </html>

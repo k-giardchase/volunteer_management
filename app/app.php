@@ -288,7 +288,6 @@
         $selected_committee = Committee::find($id);
         $volunteers_associated = $selected_committee->getVolunteers();
         $supervisors_associated = $selected_committee->getSupervisors();
-        var_dump($supervisors_associated);
         $events_associated = $selected_committee->getEvents();
         return $app['twig']->render('committee.twig', array('supervisor' => $supervisor,
                                                             'volunteer' => $volunteer,
@@ -298,6 +297,11 @@
                                                             $supervisors_associated,
                                                             'events_associated'=>
                                                             $events_associated));
+    });
+
+    $app->get('/admin', function() use ($app) {
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        return $app['twig']->render('admin.twig', array('volunteers' => Volunteer::getAll()));
     });
 
     return $app;

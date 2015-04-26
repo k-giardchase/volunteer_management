@@ -9,7 +9,7 @@
     <title>Volunteer Center</title>
 </head>
 <body>
-    {#<nav class='navbar navbar-default navbar-fixed-top'>
+    <nav class='navbar navbar-default navbar-fixed-top'>
      <div class='container-fluid'>
        <div class='navbar-header'>
          <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
@@ -45,7 +45,7 @@
          </ul>
        </div>
      </div>
- </nav> #}
+ </nav>
  <section>
      <br>
      <br>
@@ -87,8 +87,8 @@
              <table class='table table-hover'>
                  <thead>
                      <tr>
-                         <th>Firstname</th>
                          <th>Lastname</th>
+                         <th>Firstname</th>
                          <th>Email</th>
                          <th>Phone</th>
                      </tr>
@@ -98,8 +98,8 @@
                          {% for volunteer in volunteers_associated %}
                          <span>
                              <a href="/volunteer">
-                            <td>{{ volunteer.getFirstName }}</td>
                             <td>{{ volunteer.getLastName }}</td>
+                            <td>{{ volunteer.getFirstName }}</td>
                             <td>{{ volunteer.getEmail }}</td>
                             <td>{{ volunteer.getPhone }}</td>
                         </a>

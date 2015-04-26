@@ -22,22 +22,22 @@ It uses <a href='https://getcomposer.org/'>Composer</a> to install:
 <li><a href='https://phpunit.de/'>PHPUnit</a></li>
 
 ##Use and Editing
-To view the app,
-1. Open your command shell, and clone the repository into your home folder using the command `git clone https://github.com/k-giardchase/volunteer_management.git`
-2. Import the database into PostgreSQL.
-    1. Create a new database `CREATE DATABASE volunteer_management;`
-    2. Connect to the database `\c volunteer_management;`
-    3. In your command shell, and in the top level of your home directory, import the database `\i volunteer_management.sql`
-    4. If you would like to edit the app and make use of the test database, `CREATE DATABASE volunteer_management_test WITH TEMPLATE volunteer_management`
-    4. NOTE: if the database fails to import, please see the following database section to manually create the database.
-3. In the top level of the project folder, run `composer install`
+To view the app,<br>
+1. Open your command shell, and clone the repository into your home folder using the command `git clone https://github.com/k-giardchase/volunteer_management.git`<br>
+2. Import the database into PostgreSQL.<br>
+    1. Create a new database `CREATE DATABASE volunteer_management;`<br>
+    2. Connect to the database `\c volunteer_management;`<br>
+    3. In your command shell, and in the top level of your home directory, import the database `\i volunteer_management.sql`<br>
+    4. If you would like to edit the app and make use of the test database, `CREATE DATABASE volunteer_management_test WITH TEMPLATE volunteer_management`<br>
+    4. NOTE: if the database fails to import, please see the following database section to manually create the database.<br>
+3. In the top level of the project folder, run `composer install`<br>
 4. Start a php server by changing directories into the web folder `cd volunteer_management/web`
-and start your server `php -S localhost:8000`
+and start your server `php -S localhost:8000`<br>
 5. Open your browser and navigate to your root path: `localhost:8000`
 
 
 ##DATABASE
-If the database fails to import (see above), you may manually create it using the following commands:
+If the database fails to import (see above), you may manually create it using the following commands:<br>
 ```sql
 CREATE DATABASE volunteer_management;
  \c volunteer_management
@@ -53,12 +53,12 @@ CREATE DATABASE volunteer_management_test WITH TEMPLATE volunteer_management;
 ```
 
 ##Known bugs
-This app is currently a work in progress. To date, the following need to be updated:
-1. Views to create, delete, and update a supervisor.
-2. The ability to update the committees an event is associated with.
-3. The ability to add a supervisor to a committee.
-4. The date must be entered in a way that affects user experience, e.g. 2014-09-01 12:00:00.
-5. Though supervisors and volunteers have an admin_stat property, the app does not make use of it as of yet.
+This app is currently a work in progress. To date, the following need to be updated:<br>
+1. Views to create, delete, and update a supervisor.<br>
+2. The ability to update the committees an event is associated with.<br>
+3. The ability to add a supervisor to a committee.<br>
+4. The date must be entered in a way that affects user experience, e.g. 2014-09-01 12:00:00.<br>
+5. Though supervisors and volunteers have an admin_stat property, the app does not make use of it as of yet.<br>
 6. Styling/CSS.
 
 

@@ -228,6 +228,28 @@
                                                         'committees' => $committees));
     });
 
+    $app->post('/create-event', function() use ($app) {
+        $event_name = $_POST['event_name'];
+        $event_date = $_POST['event_date'];
+        $location = $_POST['location'];
+        $new_event = new Event($event_name, $event_date, $location);
+        $new_event->save();
+        //Grab all checked committees
+        $checked = [];
+        $committees = $_POST['committees'];
+        foreach($committees as $committee_id) {
+            $new_committee = Committee::find($committee_id);
+            array_push($checked, $new_committee);
+        }
+        //For each checked committee, add the event to them.
+        foreach($checked as $committee) {
+            $new_event->addCommittee($committee);
+        }
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        return $app['twig']->render('create-event-success.twig', array('event' => $new_event,
+                                                                        'supervisor' => $supervisor));
+    });
+
     /*
     **********************************
     READ - ALL COMMITTEES

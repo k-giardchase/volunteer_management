@@ -21,10 +21,17 @@
        </div>
        <div class="collapse navbar-collapse" id='volunteerNavbar'>
          <ul class='nav navbar-nav'>
+            {% if supervisor and not volunteer %}
                 <li><a href='/committees'>Committees</a></li>
                 <li><a href='/events'>Events</a></li>
                 <li><a href='/admin'>Admin</a></li>
                 <li><a href='/logout'>Logout</a></li>
+            {% else %}
+                <li><a href='/committees'>Committees</a></li>
+                <li><a href='/events'>Events</a></li>
+                <li><a href='/volunteer/{{ volunteer.getId }}'>Your account</a></li>
+                <li><a href='/logout'>Logout</a></li>
+            {% endif %}
          </ul>
          <ul class='nav navbar-nav navbar-right'>
            <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
@@ -32,49 +39,38 @@
        </div>
      </div>
  </nav>
-    <div class="container">
+     <div class="container">
          <section>
              <br>
              <br>
              <br>
              <br>
              <div class="row">
-                 <div class="col-md-8 col-md-offset-2 text-center">
-                     <h1>Admin Dashboard</h1>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-md-8 col-md-offset-2 text-center">
-                     <a href='/volunteers'><button type="submit" class='btn btn-info' name="button">Add a supervisor</button></a>
-                 </div>
-             </div>
-             <div class="row">
-                 <h1 class='text-center'>Volunteers</h1>
-                 <div class="col-md-8 col-md-offset-2">
-                     <table class='table table-hover'>
-                         <thead>
-                             <tr>
-                                 <th>Lastname</th>
-                                 <th>Firstname</th>
-                                 <th>Email</th>
-                                 <th>Phone</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             {% for volunteer in volunteers %}
-                                 <tr>
-                                        <td>{{ volunteer.getLastName }}</td>
-                                        <td><a href='volunteer/{{ volunteer.getId }}'>{{ volunteer.getFirstName }}</a></td>
-                                        <td>{{ volunteer.getEmail }}</td>
-                                        <td>{{ volunteer.getPhone }}</td>
-                                 </tr>
-                             {% endfor %}
-                         </tbody>
-                     </table>
-                 </div>
+                 {% if volunteer %}
+                    <h1 class='text-center'>Your account information:</h1>
+                 {% else %}
+                    <h1 class='text-center'>{{selected_volunteer.getFirstName }}'s information</h1>
+                 {% endif %}
+                 <div class='col-md-4 col-md-offset-4'>
+                 <dl class='dl-horizontal'>
+                     <dt>Firstname</dt>
+                     <dd>{{ selected_volunteer.getFirstName }}</dd>
+                     <dt>Lastname</dt>
+                     <dd>{{ selected_volunteer.getLastName }}</dd>
+                     <dt>Email</dt>
+                     <dd>{{ selected_volunteer.getEmail }}</dd>
+                     <dt>Phone</dt>
+                     <dd>{{ selected_volunteer.getPhone}}</dd>
+                     <dt>Username</dt>
+                     <dd>{{ selected_volunteer.getUsername }}</dd>
+                     <dt>Password</dt>
+                     <dd>{{ selected_volunteer.getPassword }}</dd>
+                     <dt>Edit</dt>
+                     <dd><a href='/edit/volunteer/{{ selected_volunteer.getId }}'>Click to edit</a></dd>
+                 </dl>
              </div>
             </div>
          </section>
-    </div>
+     </div>
 </body>
 </html>

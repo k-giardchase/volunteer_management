@@ -299,8 +299,12 @@
                                                             $events_associated));
     });
 
-    $app->get('/event{id}', function(id) use ($app) {
-
+    $app->get('/volunteer/{id}', function($id) use ($app) {
+        $selected_volunteer = Volunteer::find($id);
+        var_dump($selected_volunteer);
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        return $app['twig']->render('volunteer.twig', array('selected_volunteer' => $selected_volunteer, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
     });
 
     $app->get('/admin', function() use ($app) {

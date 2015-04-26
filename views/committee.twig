@@ -94,19 +94,14 @@
                      </tr>
                  </thead>
                  <tbody>
-                     <tr>
-                         {% for volunteer in volunteers_associated %}
-                         <span>
-                             <a href="/volunteer">
+                     {% for volunteer in volunteers_associated %}
+                         <tr>
                             <td>{{ volunteer.getLastName }}</td>
                             <td>{{ volunteer.getFirstName }}</td>
                             <td>{{ volunteer.getEmail }}</td>
                             <td>{{ volunteer.getPhone }}</td>
-                        </a>
-
-                         </span>
-                         {% endfor %}
-                     </tr>
+                         </tr>
+                     {% endfor %}
                  </tbody>
              </table>
          </div>

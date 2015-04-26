@@ -174,7 +174,7 @@
 
             foreach($volunteers as $volunteer) {
                 $volunteer_id = $volunteer->getId();
-                if($volunteer_id === $search_id) {
+                if($volunteer_id == $search_id) {
                     $found_volunteer = $volunteer;
                 }
             }

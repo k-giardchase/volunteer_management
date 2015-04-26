@@ -10,71 +10,80 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
-    <div class="container">
-         <section>
-             <br>
-             <br>
-             <br>
-             <br>
-             <div class="row">
-                 <div class="col-md-8 col-md-offset-2 text-center">
-                     <h1>Admin Dashboard</h1>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-md-8 col-md-offset-2 text-center">
-                     <a href='/volunteers'><button type="submit" class='btn btn-info' name="button">Add a supervisor</button></a>
-                 </div>
-             </div>
-             <div class="row">
-                 <h1 class='text-center'>Volunteers</h1>
-                 <div class="col-md-8 col-md-offset-2">
-                     <table class='table table-hover'>
-                         <thead>
-                             <tr>
-                                 <th>Lastname</th>
-                                 <th>Firstname</th>
-                                 <th>Email</th>
-                                 <th>Phone</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             {% for volunteer in volunteers %}
-                                 <tr>
-                                        <td>{{ volunteer.getLastName }}</td>
-                                        <td><a href='volunteer/{{ volunteer.getId }}'>{{ volunteer.getFirstName }}</a></td>
-                                        <td>{{ volunteer.getEmail }}</td>
-                                        <td>{{ volunteer.getPhone }}</td>
-                                 </tr>
-                             {% endfor %}
-                         </tbody>
-                     </table>
-                 </div>
-             </div>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
             </div>
-         </section>
-    </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <section>
+     <br>
+     <br>
+     <br>
+     <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h1>Admin Dashboard</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <a href='/volunteers'>
+                    <button type="submit" class='btn btn-info' name="button">Add a supervisor</button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class='text-center'>Volunteers</h1>
+            <div class="col-md-8 col-md-offset-2">
+                <table class='table table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Lastname</th>
+                            <th>Firstname</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for volunteer in volunteers %}
+                            <tr>
+                                <td>{{ volunteer.getLastName }}</td>
+                                <td>
+                                    <a href='volunteer/{{ volunteer.getId }}'>
+                                        {{ volunteer.getFirstName }}
+                                    </a>
+                                </td>
+                                <td>{{ volunteer.getEmail }}</td>
+                                <td>{{ volunteer.getPhone }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

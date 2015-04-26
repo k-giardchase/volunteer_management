@@ -1,4 +1,5 @@
-<html lang='en'>
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset='utf-8'>
     <link rel ='stylesheet' href ='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
@@ -10,158 +11,167 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-
-            {% if not supervisor and not volunteer %}
-                 <li><a href='/create-volunteer'>Create an account</a></li>
-               <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
-               <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
-               <li><a href='/committees'>Committees</a></li>
-               <li><a href='/events'>Events</a></li>
-            {% elseif supervisor and not volunteer %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% else %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% endif %}
-
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
-   <header>
-       <div class='jumbotron text-center'>
-           <br>
-           {# display generic message if not logged in #}
-
-           {% if not supervisor and not volunteer %}
-               <h1>Welcome to Volunteer Center</h1>
-               <p>Get involved. Make a difference.</p>
-
-           {# if logged in, display unique greeting #}
-
-           {% elseif supervisor %}
-                <h1>Hi, {{ supervisor.getFirstName }}.</h1>
-           {% elseif volunteer %}
-                <h1>Hi, {{ volunteer.getFirstName }}.</h1>
-           {% endif %}
-       </div>
-   </header>
-    <section>
-      <div class='row'>
-       <div class="col-md-3">
-        {% if not supervisor and not volunteer %}
-            <h1>Committees</h1>
-            {% if committees is not empty %}
-                {% for committee in committees %}
-                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
-                {% endfor %}
-            {% else %}
-                <h3>No committees to display</h3>
-            {% endif %}
-        {% elseif supervisor and not volunteer %}
-            <h1>Your committees</h1>
-            {% if supervisor_committees is not empty %}
-                {% for committee in supervisor_committees %}
-                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
-                {% endfor %}
-            {% else %}
-                    <h3>No committees to display</h3>
-            {% endif %}
-        {% else %}
-            <h1>Your committees</h1>
-            {% if volunteer_committees is not empty %}
-                {% for committee in volunteer_committees %}
-                    <a href='/committee/{{ committee.getId }}'><button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button></a><br>
-                {% endfor %}
-            {% else %}
-                <h3>No committees to display</h3>
-            {% endif %}
-        {% endif %}
-
-       </div>
-       <div class="col-md-6">
-
-       </div>
-       <div class="col-md-3">
-           {% if not supervisor and not volunteer %}
-                <h1>Upcoming events</h1>
-               {% if events is not empty %}
-                   {% for event in events %}
-                   <dl class='dl-horizontal'>
-                       <dt>Name</dt>
-                       <dd>{{ event.getEventName }}</dd>
-                       <dt>Date</dt>
-                       <dd>{{ event.getEventDate }}</dd>
-                       <dt>Location</dt>
-                       <dd>{{ event.getLocation }}</dd>
-                       <dt>Information</dt>
-                       <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                   </dl>
-                   {% endfor %}
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                {% if not supervisor and not volunteer %}
+                    <li><a href='/create-volunteer'>Create an account</a></li>
+                    <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                    <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                {% elseif supervisor and not volunteer %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/logout'>Logout</a></li>
                 {% endif %}
-            {% elseif supervisor == true and volunteer == false%}
-                <h1>All upcoming events</h1>
-                   {% if events is not empty %}
-                       {% for event in events %}
-                       <dl class='dl-horizontal'>
-                           <dt>Name</dt>
-                           <dd>{{ event.getEventName }}</dd>
-                           <dt>Date</dt>
-                           <dd>{{ event.getEventDate }}</dd>
-                           <dt>Location</dt>
-                           <dd>{{ event.getLocation }}</dd>
-                           <dt>Information</dt>
-                           <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                       </dl>
-                       {% endfor %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <div class='jumbotron text-center'>
+        <br>
+        {# display generic message if not logged in #}
+            {% if not supervisor and not volunteer %}
+                <h1>Welcome to Volunteer Center</h1>
+                <p>Get involved. Make a difference.</p>
+        {# if logged in, display unique greeting #}
+            {% elseif supervisor %}
+                <h1>Hi, {{ supervisor.getFirstName }}.</h1>
+            {% elseif volunteer %}
+                <h1>Hi, {{ volunteer.getFirstName }}.</h1>
+            {% endif %}
+       </div>
+    </header>
+    <section>
+        <div class='row'>
+            <div class="col-md-3">
+            {% if not supervisor and not volunteer %}
+                <h1>Committees</h1>
+                {% if committees is not empty %}
+                    {% for committee in committees %}
+                        <a href='/committee/{{ committee.getId }}'>
+                            <button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button>
+                        </a>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <h3>No committees to display</h3>
+                {% endif %}
+            {% elseif supervisor and not volunteer %}
+                <h1>Your committees</h1>
+                {% if supervisor_committees is not empty %}
+                    {% for committee in supervisor_committees %}
+                        <a href='/committee/{{ committee.getId }}'>
+                            <button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button>
+                        </a>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <h3>No committees to display</h3>
+                {% endif %}
+            {% else %}
+                <h1>Your committees</h1>
+                {% if volunteer_committees is not empty %}
+                    {% for committee in volunteer_committees %}
+                        <a href='/committee/{{ committee.getId }}'>
+                            <button type="submit" class='btn btn-info btn-block'>{{ committee.getCommitteeName }}</button>
+                        </a>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <h3>No committees to display</h3>
+                {% endif %}
+            {% endif %}
+            </div>
+            <div class="col-md-6">
+                {# Empty div to add blog feed later on #}
+            </div>
+            <div class="col-md-3">
+                {% if not supervisor and not volunteer %}
+                    <h1>Upcoming events</h1>
+                    {% if events is not empty %}
+                        {% for event in events %}
+                        <dl class='dl-horizontal'>
+                            <dt>Name</dt>
+                                <dd>{{ event.getEventName }}</dd>
+                            <dt>Date</dt>
+                                <dd>{{ event.getEventDate }}</dd>
+                            <dt>Location</dt>
+                                <dd>{{ event.getLocation }}</dd>
+                            <dt>Information</dt>
+                                <dd>
+                                    <a href='/event/{{ event.getId }}'>Click for more info</a>
+                                </dd>
+                        </dl>
+                        {% endfor %}
+                    {% endif %}
+                {% elseif supervisor == true and volunteer == false %}
+                    <h1>All upcoming events</h1>
+                    {% if events is not empty %}
+                        {% for event in events %}
+                        <dl class='dl-horizontal'>
+                            <dt>Name</dt>
+                                <dd>{{ event.getEventName }}</dd>
+                            <dt>Date</dt>
+                                <dd>{{ event.getEventDate }}</dd>
+                            <dt>Location</dt>
+                                <dd>{{ event.getLocation }}</dd>
+                            <dt>Information</dt>
+                                <dd>
+                                    <a href='/event/{{ event.getId }}'>Click for more info</a>
+                                </dd>
+                        </dl>
+                        {% endfor %}
                     {% else %}
                         <h3>Whoops!</h3>
-                        <p>
-                            It looks like your committees are not signed up for any events yet.
-                        </p>
-                   {% endif %}
+                        <p>It looks like your committees are not signed up for any events yet.</p>
+                    {% endif %}
                 {% else %}
                     <h1>Upcoming events</h1>
-                       {% if volunteer_events is not empty %}
-                           {% for event in volunteer_events %}
-                           <dl class='dl-horizontal'>
-                               <dt>Name</dt>
-                               <dd>{{ event.getEventName }}</dd>
-                               <dt>Date</dt>
-                               <dd>{{ event.getEventDate }}</dd>
-                               <dt>Location</dt>
-                               <dd>{{ event.getLocation }}</dd>
-                               <dt>Information</dt>
-                               <dd><a href='/event/{{ event.getId }}'>Click for more info</a></dd>
-                           </dl>
-                           {% endfor %}
+                        {% if volunteer_events is not empty %}
+                            {% for event in volunteer_events %}
+                            <dl class='dl-horizontal'>
+                                <dt>Name</dt>
+                                    <dd>{{ event.getEventName }}</dd>
+                                <dt>Date</dt>
+                                    <dd>{{ event.getEventDate }}</dd>
+                                <dt>Location</dt>
+                                    <dd>{{ event.getLocation }}</dd>
+                                <dt>Information</dt>
+                                    <dd>
+                                        <a href='/event/{{ event.getId }}'>Click for more info</a>
+                                    </dd>
+                            </dl>
+                            {% endfor %}
                         {% else %}
                             <h3>Whoops!</h3>
-                            <p>
-                                It looks like you're not signed up for any events yet.
-                            </p>
-                       {% endif %}
-               {% endif %}
-           </div>
-       </div>
+                            <p>It looks like you're not signed up for any events yet.</p>
+                        {% endif %}
+                {% endif %}
+            </div>
+        </div>
     </section>
 </body>
 </html>

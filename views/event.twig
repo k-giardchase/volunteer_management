@@ -11,62 +11,68 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-             {% if supervisor and not volunteer %}
-                 <li><a href='/committees'>Committees</a></li>
-                 <li><a href='/events'>Events</a></li>
-                 <li><a href='/admin'>Admin</a></li>
-                 <li><a href='/logout'>Logout</a></li>
-             {% else %}
-                 <li><a href='/committees'>Committees</a></li>
-                 <li><a href='/events'>Events</a></li>
-                 <li><a href='/logout'>Logout</a></li>
-             {% endif %}
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
-   </nav>
-   <div class="container">
-       <section>
-           <br>
-           <br>
-           <br>
-           <br>
-           <div class="row">
-               <div class="col-md-4 col-md-offset-4">
-                   <h1 class='text-center'>{{ event.getEventName }}</h1>
-                   <dl class='dl-horizontal'>
-                       <dt>Name</dt>
-                       <dd>{{ event.getEventName }}</dd>
-                       <dt>Date</dt>
-                       <dd>{{ event.getEventDate }}</dd>
-                       <dt>Location</dt>
-                       <dd>{{ event.getLocation }}</dd>
-                       {% if volunteer %}
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                {% if supervisor and not volunteer %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% endif %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h1 class='text-center'>{{ event.getEventName }}</h1>
+                <dl class='dl-horizontal'>
+                    <dt>Name</dt>
+                        <dd>{{ event.getEventName }}</dd>
+                    <dt>Date</dt>
+                        <dd>{{ event.getEventDate }}</dd>
+                    <dt>Location</dt>
+                        <dd>{{ event.getLocation }}</dd>
+                    {% if volunteer %}
                            <form action="/add-event" method="post">
                                <button type="submit" class='btn btn-info btn-block'>Add yourself to this event</button>
                            </form>
-                       {% else %}
-                           <dt>Edit</dt>
-                           <dd><a href='/edit/event/{{ event.getId }}'>Edit this event</a></dd>
-                        {% endif %}
-                   </dl>
-               </div>
-           </div>
-       </section>
-   </div>
+                    {% else %}
+                    <dt>Edit</dt>
+                        <dd>
+                            <a href='/edit/event/{{ event.getId }}'>Edit this event</a>
+                        </dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </section>
+    </div>
 </body>
 </html>

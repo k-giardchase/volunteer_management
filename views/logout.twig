@@ -1,10 +1,74 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <form action="/logout" method="post">
-            <button type="submit" class='btn btn-info'>Log out</button>
-        </form>
-    </body>
+<head>
+    <meta charset='utf-8'>
+    <link rel ='stylesheet' href ='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <link rel ='stylesheet' href ='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='/../css/styles.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <title>Volunteer Center</title>
+</head>
+<body>
+    <nav class='navbar navbar-default navbar-fixed-top'>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                {% if not supervisor and not volunteer %}
+                    <li><a href='/create-volunteer'>Create an account</a></li>
+                    <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                    <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                {% elseif supervisor and not volunteer %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% endif %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row text-center">
+            <section>
+                <h1 class='text-center'>Are you sure you want to log out?</h1>
+                <div class="col-md-6 text-center">
+                    <form action="/logout" method="post">
+                        <button type="submit" class='btn btn-info'>Log out</button>
+                    </form>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a href="/">
+                        <button type="submit" class='btn btn-info'>Home</button>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
 </html>

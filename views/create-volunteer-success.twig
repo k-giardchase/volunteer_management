@@ -10,57 +10,61 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/volunteer-home'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-                 <li><a href='/committees'>Committees</a></li>
-                 <li><a href='/events'>Events</a></li>
-                 <li><a href='/logout'>Logout</a></li>
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
-   </nav>
-   <section>
-       <div class="container">
-           <br>
-           <br>
-           <br>
-           <br>
-           <div class="row">
-               <div class="col-md-6 col-md-offset-3">
-                   <h1>Thanks, {{ volunteer.getFirstName }}.</h1>
-                   <h2>Here's the information we have for you:</h2>
-                   <dl class='dl-horizontal'>
-                       <dt>First Name</dt>
-                       <dd>{{ volunteer.getFirstName }}</dd>
-                       <dt>Last Name</dt>
-                       <dd>{{ volunteer.getLastName }}</dd>
-                       <dt>Email</dt>
-                       <dd>{{ volunteer.getEmail }}</dd>
-                       <dt>Phone</dt>
-                       <dd>{{ volunteer.getPhone }}</dd>
-                       <dt>Username</dt>
-                       <dd>{{ volunteer.getUsername }}</dd>
-                   </dl>
-                   <a href='/'>
-                       <button type="submit" class="btn btn-info">Okay, got it</button>
-                   </a>
-                   <a href="/edit/volunteer/{{ volunteer.getId }}">
-                       <button type="submit" class="btn btn-info">Edit</button>
-                   </a>
-               </div>
-       </div>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/volunteer-home'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Thanks, {{ volunteer.getFirstName }}.</h1>
+                <h2>Here's the information we have for you:</h2>
+                <dl class='dl-horizontal'>
+                    <dt>First Name</dt>
+                        <dd>{{ volunteer.getFirstName }}</dd>
+                    <dt>Last Name</dt>
+                        <dd>{{ volunteer.getLastName }}</dd>
+                    <dt>Email</dt>
+                        <dd>{{ volunteer.getEmail }}</dd>
+                    <dt>Phone</dt>
+                        <dd>{{ volunteer.getPhone }}</dd>
+                    <dt>Username</dt>
+                        <dd>{{ volunteer.getUsername }}</dd>
+                </dl>
+                <a href='/'>
+                    <button type="submit" class="btn btn-info">Okay, got it</button>
+                </a>
+                <a href="/edit/volunteer/{{ volunteer.getId }}">
+                    <button type="submit" class="btn btn-info">Edit</button>
+                </a>
+            </div>
+        </div>
    </section>
- </body>
- </html>
+</body>
+</html>

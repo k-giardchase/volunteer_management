@@ -10,54 +10,59 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
- <section>
-     <div class="container">
-         <br>
-         <br>
-         <br>
-         <br>
-         <div class="row">
-             <div class="col-md-6 col-md-offset-3">
-                 <h1>Thanks, {{ supervisor.getFirstName }}.</h1>
-                 <h2>Here's the information for the event you created:</h2>
-                 <dl class='dl-horizontal'>
-                     <dt>Event Name</dt>
-                     <dd>{{ event.getEventName }}</dd>
-                     <dt>Event Date</dt>
-                     <dd>{{ event.getEventDate }}</dd>
-                     <dt>Location</dt>
-                     <dd>{{ event.getLocation }}</dd>
-                 </dl>
-                 <a href='/'>
-                     <button type="submit" class="btn btn-info">Okay, got it</button>
-                 </a>
-                 <a href="/edit/event/{{event.getId}}">
-                     <button type="submit" class="btn btn-info">Edit</button>
-                 </a>
-             </div>
-     </div>
- </section>
- </body>
- </html>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                   <span class='icon-bar'></span>
+                   <span class='icon-bar'></span>
+                   <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1>Thanks, {{ supervisor.getFirstName }}.</h1>
+                    <h2>Here's the information for the event you created:</h2>
+                    <dl class='dl-horizontal'>
+                        <dt>Event Name</dt>
+                            <dd>{{ event.getEventName }}</dd>
+                        <dt>Event Date</dt>
+                            <dd>{{ event.getEventDate }}</dd>
+                        <dt>Location</dt>
+                            <dd>{{ event.getLocation }}</dd>
+                     </dl>
+                    <a href='/'>
+                        <button type="submit" class="btn btn-info">Okay, got it</button>
+                    </a>
+                    <a href="/edit/event/{{event.getId}}">
+                        <button type="submit" class="btn btn-info">Edit</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

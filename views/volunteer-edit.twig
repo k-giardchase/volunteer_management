@@ -1,4 +1,5 @@
-<html lang='en'>
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset='utf-8'>
     <link rel ='stylesheet' href ='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
@@ -10,109 +11,125 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
-     <div class="container">
-         <section>
-             <br>
-             <br>
-             <br>
-             <br>
-             <div class="row">
-                 <div class="col-md-4">
-                     <h1 class='text-center'>{{ selected_volunteer.getFirstName }}</h1>
-                     <dl class='dl-horizontal'>
-                             <dt>Firstname</dt>
-                             <dd>{{ selected_volunteer.getFirstName }}</dd>
-                             <dt>Lastname</dt>
-                             <dd>{{ selected_volunteer.getLastName }}</dd>
-                             <dt>Email</dt>
-                             <dd>{{ selected_volunteer.getEmail }}</dd>
-                             <dt>Phone</dt>
-                             <dd>{{ selected_volunteer.getPhone}}</dd>
-                             <dt>Username</dt>
-                             <dd>{{ selected_volunteer.getUsername }}</dd>
-                             <dt>Password</dt>
-                             <dd>{{ selected_volunteer.getPassword }}</dd>
-                        {% if supervisor %}
-                         <form action="/delete/volunteer/{{selected_volunteer.getId}}" method="post">
-                            <input name="_method" type="hidden" value="delete">
-                            <br>
-                            <div class="text-center">
-                                <button type="submit" class='btn btn-info'>Delete</button>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                {% if not supervisor and not volunteer %}
+                    <li><a href='/create-volunteer'>Create an account</a></li>
+                    <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                    <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                {% elseif supervisor and not volunteer %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                {% endif %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+            <h1 class='text-center'>{{ selected_volunteer.getFirstName }}</h1>
+            <dl class='dl-horizontal'>
+                <dt>Firstname</dt>
+                    <dd>{{ selected_volunteer.getFirstName }}</dd>
+                <dt>Lastname</dt>
+                    <dd>{{ selected_volunteer.getLastName }}</dd>
+                <dt>Email</dt>
+                    <dd>{{ selected_volunteer.getEmail }}</dd>
+                <dt>Phone</dt>
+                    <dd>{{ selected_volunteer.getPhone}}</dd>
+                <dt>Username</dt>
+                    <dd>{{ selected_volunteer.getUsername }}</dd>
+                <dt>Password</dt>
+                    <dd>{{ selected_volunteer.getPassword }}</dd>
+                {% if supervisor %}
+                    <form action="/delete/volunteer/{{selected_volunteer.getId}}" method="post">
+                        <input name="_method" type="hidden" value="delete">
+                        <br>
+                        <div class="text-center">
+                            <button type="submit" class='btn btn-info'>Delete</button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <h1 class='text-center'>Edit</h1>
+                <form class="form-horizontal" action='/volunteer/{{ selected_volunteer.getId }}' method='post'>
+                    <input name="_method" value="patch" type='hidden'>
+                    <div class="form-group">
+                        <label for="first_name" class="col-sm-2 control-label">Firstname</label>
+                        <div class="col-sm-10">
+                            <input value='{{ selected_volunteer.getFirstName }}'type="text" class="form-control" name='first_name' id="first_name">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="col-sm-2 control-label">Lastname</label>
+                            <div class="col-sm-10">
+                                <input type="text" value='{{ selected_volunteer.getLastName }}' class="form-control" name='last_name' id="last_name" required>
                             </div>
-                         </form>
-                        {% endif %}
-                 </div>
-                 <div class="col-md-8">
-                         <h1 class='text-center'>Edit</h1>
-                         <form class="form-horizontal" action='/volunteer/{{ selected_volunteer.getId }}' method='post'>
-                             <input name="_method" value="patch" type='hidden'>
-                             <div class="form-group">
-                               <label for="first_name" class="col-sm-2 control-label">Firstname</label>
-                               <div class="col-sm-10">
-                                 <input value='{{ selected_volunteer.getFirstName }}'type="text" class="form-control" name='first_name' id="first_name">
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="last_name" class="col-sm-2 control-label">Lastname</label>
-                               <div class="col-sm-10">
-                                 <input type="text" value='{{ selected_volunteer.getLastName }}' class="form-control" name='last_name' id="last_name" required>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="email" class="col-sm-2 control-label">Email</label>
-                               <div class="col-sm-10">
-                                 <input type="email" class="form-control" name='email'id="email" placeholder="Email" value='{{ selected_volunteer.getEmail }}'required>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="phone" class="col-sm-2 control-label">Phone</label>
-                               <div class="col-sm-10">
-                                 <input type="text" value='{{ selected_volunteer.getPhone }}' class="form-control" name='phone' id="phone" placeholder="Phone" required>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="username" class="col-sm-2 control-label">Username</label>
-                               <div class="col-sm-10">
-                                 <input type="text" value='{{ selected_volunteer.getUsername }}' class="form-control" name='username' id="username" placeholder="Username" required>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="password" class="col-sm-2 control-label">Password</label>
-                               <div class="col-sm-10">
-                                 <input type="text" value='{{ selected_volunteer.getPassword }}' class="form-control" name='password' id="password" placeholder="Password" required>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <div class="col-sm-offset-2 col-sm-10">
-                                 <button type="submit" class="btn btn-default">Submit</button>
-                               </div>
-                             </div>
-                     </form>
-                 </div>
-             </div>
-         </section>
-     </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" name='email'id="email" placeholder="Email" value='{{ selected_volunteer.getEmail }}'required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="text" value='{{ selected_volunteer.getPhone }}' class="form-control" name='phone' id="phone" placeholder="Phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" value='{{ selected_volunteer.getUsername }}' class="form-control" name='username' id="username" placeholder="Username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="text" value='{{ selected_volunteer.getPassword }}' class="form-control" name='password' id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
  </body>
  </html>

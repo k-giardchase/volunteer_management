@@ -10,81 +10,86 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
-     <div class="container">
-         <section>
-             <br>
-             <br>
-             <br>
-             <br>
-             <div class="row">
-                 <div class="col-md-4">
-                     <h1 class='text-center'>{{ event.getEventName }}</h1>
-                     <dl class='dl-horizontal'>
-                         <dt>Name</dt>
-                         <dd>{{ event.getEventName }}</dd>
-                         <dt>Date</dt>
-                         <dd>{{ event.getEventDate }}</dd>
-                         <dt>Location</dt>
-                         <dd>{{ event.getLocation }}</dd>
-                         <form class="" action="/delete/event/{{event.getId}}" method="post">
-                            <input name="_method" type="hidden" value="delete">
-                            <br>
-                            <div class="text-center">
-                                <button type="submit" class='btn btn-info'>Delete</button>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    <li><a href='/committees'>Committees</a></li>
+                    <li><a href='/events'>Events</a></li>
+                    <li><a href='/admin'>Admin</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <section>
+        <br>
+        <br>
+        <br>
+        <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <h1 class='text-center'>{{ event.getEventName }}</h1>
+                    <dl class='dl-horizontal'>
+                        <dt>Name</dt>
+                            <dd>{{ event.getEventName }}</dd>
+                        <dt>Date</dt>
+                            <dd>{{ event.getEventDate }}</dd>
+                        <dt>Location</dt>
+                            <dd>{{ event.getLocation }}</dd>
+                    </dl>
+                    <form class="" action="/delete/event/{{event.getId}}" method="post">
+                        <input name="_method" type="hidden" value="delete">
+                        <br>
+                        <div class="text-center">
+                            <button type="submit" class='btn btn-info'>Delete</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <h1 class='text-center'>Edit</h1>
+                    <form class="form-horizontal" action='/event/{{ event.getId }}' method='post'>
+                        <input name="_method" value="patch" type='hidden'>
+                        <div class="form-group">
+                            <label for="event_name" class="col-sm-2 control-label">Event Name</label>
+                            <div class="col-sm-10">
+                                <input value='{{ event.getEventName }}'type="text" class="form-control" name='event_name' id="event_name" placeholder="Event Name">
                             </div>
-                         </form>
-                 </div>
-                 <div class="col-md-8">
-                         <h1 class='text-center'>Edit</h1>
-                         <form class="form-horizontal" action='/event/{{ event.getId }}' method='post'>
-                             <input name="_method" value="patch" type='hidden'>
-                             <div class="form-group">
-                               <label for="event_name" class="col-sm-2 control-label">Event Name</label>
-                               <div class="col-sm-10">
-                                 <input value='{{ event.getEventName }}'type="text" class="form-control" name='event_name' id="event_name" placeholder="Event Name">
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="event_date" class="col-sm-2 control-label">Event Date</label>
-                               <div class="col-sm-10">
-                                 <input type="text" value='{{ event.getEventDate }}' class="form-control" name='event_date' id="event_date" placeholder="Event Date" required>
-                               </div>
-                             </div>
-                            <div class="form-group">
-                              <label for="location" class="col-sm-2 control-label">Location</label>
-                              <div class="col-sm-10">
+                        </div>
+                        <div class="form-group">
+                            <label for="event_date" class="col-sm-2 control-label">Event Date</label>
+                            <div class="col-sm-10">
+                                <input type="text" value='{{ event.getEventDate }}' class="form-control" name='event_date' id="event_date" placeholder="Event Date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="col-sm-2 control-label">Location</label>
+                            <div class="col-sm-10">
                                 <input type="location" value='{{ event.getLocation }}' class="form-control" name='location'id="location" placeholder="Location" required>
-                              </div>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-info">Edit</button>
-                            </div>
-                     </form>
-                 </div>
-             </div>
-         </section>
-     </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
  </body>
  </html>

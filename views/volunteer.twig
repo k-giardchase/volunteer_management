@@ -10,67 +10,78 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-            {% if supervisor and not volunteer %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% else %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/volunteer/{{ volunteer.getId }}'>Your account</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% endif %}
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
-     <div class="container">
-         <section>
-             <br>
-             <br>
-             <br>
-             <br>
-             <div class="row">
-                 {% if volunteer %}
-                    <h1 class='text-center'>Your account information:</h1>
-                 {% else %}
-                    <h1 class='text-center'>{{selected_volunteer.getFirstName }}'s information</h1>
-                 {% endif %}
-                 <div class='col-md-4 col-md-offset-4'>
-                 <dl class='dl-horizontal'>
-                     <dt>Firstname</dt>
-                     <dd>{{ selected_volunteer.getFirstName }}</dd>
-                     <dt>Lastname</dt>
-                     <dd>{{ selected_volunteer.getLastName }}</dd>
-                     <dt>Email</dt>
-                     <dd>{{ selected_volunteer.getEmail }}</dd>
-                     <dt>Phone</dt>
-                     <dd>{{ selected_volunteer.getPhone}}</dd>
-                     <dt>Username</dt>
-                     <dd>{{ selected_volunteer.getUsername }}</dd>
-                     <dt>Password</dt>
-                     <dd>{{ selected_volunteer.getPassword }}</dd>
-                     <dt>Edit</dt>
-                     <dd><a href='/edit/volunteer/{{ selected_volunteer.getId }}'>Click to edit</a></dd>
-                 </dl>
-             </div>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
             </div>
-         </section>
-     </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    {% if not supervisor and not volunteer %}
+                         <li><a href='/create-volunteer'>Create an account</a></li>
+                       <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                       <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                       <li><a href='/committees'>Committees</a></li>
+                       <li><a href='/events'>Events</a></li>
+                    {% elseif supervisor and not volunteer %}
+                        <li><a href='/committees'>Committees</a></li>
+                        <li><a href='/events'>Events</a></li>
+                        <li><a href='/admin'>Admin</a></li>
+                        <li><a href='/logout'>Logout</a></li>
+                    {% else %}
+                        <li><a href='/committees'>Committees</a></li>
+                        <li><a href='/events'>Events</a></li>
+                        <li><a href='/logout'>Logout</a></li>
+                    {% endif %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+     <div class="container">
+        <section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            {% if volunteer %}
+                <h1 class='text-center'>Your account information:</h1>
+            {% else %}
+                <h1 class='text-center'>{{selected_volunteer.getFirstName }}'s information</h1>
+            {% endif %}
+            <div class='col-md-4 col-md-offset-4'>
+                <dl class='dl-horizontal'>
+                    <dt>Firstname</dt>
+                        <dd>{{ selected_volunteer.getFirstName }}</dd>
+                    <dt>Lastname</dt>
+                        <dd>{{ selected_volunteer.getLastName }}</dd>
+                    <dt>Email</dt>
+                        <dd>{{ selected_volunteer.getEmail }}</dd>
+                    <dt>Phone</dt>
+                        <dd>{{ selected_volunteer.getPhone}}</dd>
+                    <dt>Username</dt>
+                        <dd>{{ selected_volunteer.getUsername }}</dd>
+                    <dt>Password</dt>
+                        <dd>{{ selected_volunteer.getPassword }}</dd>
+                    <dt>Edit</dt>
+                        <dd>
+                            <a href='/edit/volunteer/{{ selected_volunteer.getId }}'>Click to edit</a>
+                        </dd>
+                </dl>
+            </div>
+        </div>
+        </section>
+    </div>
 </body>
 </html>

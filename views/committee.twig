@@ -10,103 +10,106 @@
 </head>
 <body>
     <nav class='navbar navbar-default navbar-fixed-top'>
-     <div class='container-fluid'>
-       <div class='navbar-header'>
-         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-           <span class='icon-bar'></span>
-         </button>
-         <a class='navbar-brand' href='/'>Volunteer Center</a>
-       </div>
-       <div class="collapse navbar-collapse" id='volunteerNavbar'>
-         <ul class='nav navbar-nav'>
-
-            {% if not supervisor and not volunteer %}
-                 <li><a href='/create-volunteer'>Create an account</a></li>
-               <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
-               <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
-               <li><a href='/committees'>Committees</a></li>
-               <li><a href='/events'>Events</a></li>
-            {% elseif supervisor and not volunteer %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/admin'>Admin</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% else %}
-                <li><a href='/committees'>Committees</a></li>
-                <li><a href='/events'>Events</a></li>
-                <li><a href='/logout'>Logout</a></li>
-            {% endif %}
-
-         </ul>
-         <ul class='nav navbar-nav navbar-right'>
-           <li><a href='https://github.com/k-giardchase/volunteer_management.git'><i class="fa fa-github"></i></a></li>
-         </ul>
-       </div>
-     </div>
- </nav>
- <section>
-     <br>
-     <br>
-     <br>
-     <br>
-     <div class="row">
-         <div class="col-md-8 col-md-offset-2">
-             <h1 class='text-center'>{{ selected_committee.getCommitteeName }} Committee</h1>
-                 <dl class='dl-horizontal'>
-                     <dt>Name</dt>
-                     <dd>{{ selected_committee.getCommitteeName }}</dd>
-                     <dt>Department</dt>
-                     <dd>{{ selected_committee.getDepartment }}</dd>
-                     <dt>Description</dt>
-                     <dd>{{ selected_committee.getDescription }}</dd>
-                     <dt>Contact info</dt>
-                     <dd>If you would like to find out more about what this committee does, please contact:
-                         <ul>
-                         {% for supervisor in supervisors_associated %}
-                             <li>{{supervisor.getFirstName }} {{ supervisor.getLastName}} at {{ supervisor.getEmail }} or {{supervisor.getPhone }}.</li>
-                         {% endfor %}
-
-                         </ul>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#volunteerNavbar'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='/'>Volunteer Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id='volunteerNavbar'>
+                <ul class='nav navbar-nav'>
+                    {% if not supervisor and not volunteer %}
+                         <li><a href='/create-volunteer'>Create an account</a></li>
+                       <li><a href='/supervisor-login'>Supervisor Log-in</a></li>
+                       <li><a href='/volunteer-login'>Volunteer Log-in</a></li>
+                       <li><a href='/committees'>Committees</a></li>
+                       <li><a href='/events'>Events</a></li>
+                    {% elseif supervisor and not volunteer %}
+                        <li><a href='/committees'>Committees</a></li>
+                        <li><a href='/events'>Events</a></li>
+                        <li><a href='/admin'>Admin</a></li>
+                        <li><a href='/logout'>Logout</a></li>
+                    {% else %}
+                        <li><a href='/committees'>Committees</a></li>
+                        <li><a href='/events'>Events</a></li>
+                        <li><a href='/logout'>Logout</a></li>
+                    {% endif %}
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li>
+                        <a href='https://github.com/k-giardchase/volunteer_management.git'>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1 class='text-center'>{{ selected_committee.getCommitteeName }} Committee</h1>
+            <dl class='dl-horizontal'>
+                <dt>Name</dt>
+                    <dd>{{ selected_committee.getCommitteeName }}</dd>
+                        <dt>Department</dt>
+                    <dd>{{ selected_committee.getDepartment }}</dd>
+                        <dt>Description</dt>
+                    <dd>{{ selected_committee.getDescription }}</dd>
+                        <dt>Contact info</dt>
+                    <dd>If you would like to find out more about what this committee does, please contact:
+                        <ul>
+                            {% for supervisor in supervisors_associated %}
+                                <li>{{supervisor.getFirstName }} {{ supervisor.getLastName}} at {{ supervisor.getEmail }} or {{supervisor.getPhone }}.</li>
+                            {% endfor %}
+                        </ul>
                     </dd>
-                 </dl>
-                 {% if supervisor %}
+                </dl>
+                {% if supervisor %}
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center">
-                             <a href="/edit/committee/{id}"><button type="submit" class="btn btn-info">Edit this committee</button></a>
+                            <a href="/edit/committee/{id}">
+                                <button type="submit" class="btn btn-info">Edit this committee</button>
+                            </a>
                         </div>
                     </div>
-                 {% endif %}
-         </div>
-     </div>
-     {% if supervisor %}
-     <div class="row">
-         <h1 class='text-center'>Volunteers signed up for this committee</h1>
-         <div class="col-md-8 col-md-offset-2">
-             <table class='table table-hover'>
-                 <thead>
-                     <tr>
-                         <th>Lastname</th>
-                         <th>Firstname</th>
-                         <th>Email</th>
-                         <th>Phone</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     {% for volunteer in volunteers_associated %}
-                         <tr>
+                {% endif %}
+        </div>
+    </div>
+    {% if supervisor %}
+    <div class="row">
+        <h1 class='text-center'>Volunteers signed up for this committee</h1>
+        <div class="col-md-8 col-md-offset-2">
+            <table class='table table-hover'>
+                <thead>
+                    <tr>
+                        <th>Lastname</th>
+                        <th>Firstname</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for volunteer in volunteers_associated %}
+                        <tr>
                             <td>{{ volunteer.getLastName }}</td>
                             <td>{{ volunteer.getFirstName }}</td>
                             <td>{{ volunteer.getEmail }}</td>
                             <td>{{ volunteer.getPhone }}</td>
-                         </tr>
-                     {% endfor %}
-                 </tbody>
-             </table>
-         </div>
-     </div>
-     {% endif %}
- </section>
- </body>
- </html>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    </section>
+</body>
+</html>

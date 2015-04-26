@@ -25,11 +25,11 @@ It uses <a href='https://getcomposer.org/'>Composer</a> to install:
 To view the app,<br>
 1. Open your command shell, and clone the repository into your home folder using the command `git clone https://github.com/k-giardchase/volunteer_management.git`<br>
 2. Import the database into PostgreSQL.<br>
-    1. Create a new database `CREATE DATABASE volunteer_management;`<br>
-    2. Connect to the database `\c volunteer_management;`<br>
-    3. In your command shell, and in the top level of your home directory, import the database `\i volunteer_management.sql`<br>
-    4. If you would like to edit the app and make use of the test database, `CREATE DATABASE volunteer_management_test WITH TEMPLATE volunteer_management`<br>
-    4. NOTE: if the database fails to import, please see the following database section to manually create the database.<br>
+    a. Create a new database `CREATE DATABASE volunteer_management;`<br>
+    b. Connect to the database `\c volunteer_management;`<br>
+    c. In your command shell, and in the top level of your home directory, import the database `\i volunteer_management.sql`<br>
+    d. If you would like to edit the app and make use of the test database, `CREATE DATABASE volunteer_management_test WITH TEMPLATE volunteer_management`<br>
+    e. NOTE: if the database fails to import, please see the following database section to manually create the database.<br>
 3. In the top level of the project folder, run `composer install`<br>
 4. Start a php server by changing directories into the web folder `cd volunteer_management/web`
 and start your server `php -S localhost:8000`<br>

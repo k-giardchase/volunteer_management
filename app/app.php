@@ -42,6 +42,7 @@
         $volunteer_committees = null;
         $supervisor_events = null;
         $supervisor_committees = null;
+
         if(!(empty($supervisor))) {
             $supervisor_committees = $supervisor->getCommittees();
             $volunteer_events = null;
@@ -86,6 +87,7 @@
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $volunteer = Volunteer::authenticateLogin($inputted_username, $inputted_password);
+
         if(!empty($volunteer)) {
             $volunteer_id = $volunteer->getId();
             $_SESSION['volunteer_id'] = $volunteer_id;
@@ -104,6 +106,7 @@
                                                             'supervisor' => $supervisor));
         } else {
             $login_success = 0;
+
             return $app['twig']->render('volunteer-login.twig', array('login_success' => $login_success));
         }
     });
@@ -120,6 +123,7 @@
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $supervisor= Supervisor::authenticateLogin($inputted_username, $inputted_password);
+
         if(!empty($supervisor)) {
             $events = Event::getAll();
             $committees = Committee::getAll();
@@ -128,6 +132,7 @@
             $volunteer = Volunteer::find($_SESSION['volunteer_id']);
             $supervisor = Supervisor::find($_SESSION['supervisor_id']);
             $supervisor_committees = $supervisor->getCommittees();
+
             return $app['twig']->render('index.twig', array('supervisor_committees'=>
                                                             $supervisor_committees,
                                                             'events' => $events,
@@ -138,6 +143,7 @@
 
         } else {
             $login_success = 0;
+
             return $app['twig']->render('supervisor-login.twig', array('login_success' => $login_success));
         }
     });
@@ -151,6 +157,7 @@
     //VOLUNTEER
     $app->get('/create-volunteer', function() use ($app) {
         $available = 1;
+
         return $app['twig']->render('create-volunteer.twig', array('available' => $available));
     });
 
@@ -170,12 +177,13 @@
             $new_volunteer->save();
             $new_volunteer_id = $new_volunteer->getId();
             $_SESSION['volunteer_id'] = $new_volunteer_id;
+
+            return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer));
         } else {
             $available = 0;
+
             return $app['twig']->render('create-volunteer.twig', array('available' => $available));
         }
-
-        return $app['twig']->render('create-volunteer-success.twig', array('volunteer' => $new_volunteer));
     });
 
     /*
@@ -186,6 +194,7 @@
     $app->get('/logout', function() use ($app) {
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('logout.twig', array('volunteer' => $volunteer,
                                                         'supervisor' => $supervisor));
     });
@@ -195,6 +204,7 @@
         $_SESSION['supervisor_id'] = null;
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('index.twig', array('committees' => Committee::getAll(),
                                                         'events' => Event::getAll(),
                                                         'volunteer' => $volunteer,
@@ -212,6 +222,7 @@
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $events = Event::getAll();
         $committees = Committee::getAll();
+
         if($volunteer && (empty($supervisor))) {
             $volunteer_events = $volunteer->getEvents();
         } elseif ($supervisor && (empty($volunteer))) {
@@ -229,11 +240,13 @@
     });
 
     $app->post('/create-event', function() use ($app) {
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $event_name = $_POST['event_name'];
         $event_date = $_POST['event_date'];
         $location = $_POST['location'];
         $new_event = new Event($event_name, $event_date, $location);
         $new_event->save();
+
         //Grab all checked committees
         $checked = [];
         $committees = $_POST['committees'];
@@ -241,11 +254,12 @@
             $new_committee = Committee::find($committee_id);
             array_push($checked, $new_committee);
         }
+
         //For each checked committee, add the event to them.
         foreach($checked as $committee) {
             $new_event->addCommittee($committee);
         }
-        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('create-event-success.twig', array('event' => $new_event,
                                                                         'supervisor' => $supervisor));
     });
@@ -254,7 +268,10 @@
         $event = Event::find($id);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
-        return $app['twig']->render('event.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
+
+        return $app['twig']->render('event.twig', array('event' => $event,
+                                                        'supervisor' => $supervisor,
+                                                        'volunteer' => $volunteer));
     });
 
     $app->get('/edit/event/{id}', function($id) use ($app) {
@@ -263,7 +280,11 @@
         $committees = $event->getCommittees();
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
-        return $app['twig']->render('event-edit.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer, 'committees' => $committees, 'all_committees' => $all_committees));
+
+        return $app['twig']->render('event-edit.twig', array('event' => $event,
+                                                            'supervisor' => $supervisor,
+                                                            'volunteer' => $volunteer,
+                                                            'committees' => $committees, 'all_committees' => $all_committees));
     });
 
     $app->patch('/event/{id}', function($id) use ($app) {
@@ -276,7 +297,9 @@
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
 
-        return $app['twig']->render('event.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
+        return $app['twig']->render('event.twig', array('event' => $event,
+                                                        'supervisor' => $supervisor,
+                                                        'volunteer' => $volunteer));
     });
 
     $app->delete('/delete/event/{id}', function($id) use ($app) {
@@ -319,6 +342,8 @@
     $app->get('/committees', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        $committees = Committee::getAll();
+
         if($volunteer && (empty($supervisor))) {
             $volunteer_committees = $volunteer->getCommittees();
             $supervisor_committees = null;
@@ -329,7 +354,7 @@
             $volunteer_committees = null;
             $supervisor_committees = null;
         }
-        $committees = Committee::getAll();
+
         return $app['twig']->render('committees.twig', array('committees' => $committees,
                                                         'supervisor' => $supervisor,
                                                         'volunteer' => $volunteer,
@@ -345,6 +370,7 @@
         $volunteers_associated = $selected_committee->getVolunteers();
         $supervisors_associated = $selected_committee->getSupervisors();
         $events_associated = $selected_committee->getEvents();
+
         return $app['twig']->render('committee.twig', array('supervisor' => $supervisor,
                                                             'volunteer' => $volunteer,
                                                             'selected_committee' => $selected_committee,
@@ -365,6 +391,7 @@
         $selected_volunteer = Volunteer::find($id);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+
         return $app['twig']->render('volunteer.twig', array('selected_volunteer' =>
                                                             $selected_volunteer,
                                                             'supervisor' => $supervisor,
@@ -375,6 +402,7 @@
         $selected_volunteer = Volunteer::find($id);
         $selected_volunteer->delete();
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('admin.twig', array('volunteers' => Volunteer::getAll()));
     });
 
@@ -382,6 +410,7 @@
         $selected_volunteer = Volunteer::find($id);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('volunteer-edit.twig', array('selected_volunteer' =>
                                                                 $selected_volunteer,
                                                                 'volunteer' => $volunteer,
@@ -400,6 +429,7 @@
         $selected_volunteer->update($new_first_name, $new_last_name, $new_email, $new_phone, $new_username, $new_password, $admin_stat);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+
         return $app['twig']->render('volunteer.twig', array('selected_volunteer' =>
                                                             $selected_volunteer,
                                                             'supervisor' => $supervisor,
@@ -414,6 +444,7 @@
 
     $app->get('/admin', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+
         return $app['twig']->render('admin.twig', array('volunteers' => Volunteer::getAll()));
     });
 

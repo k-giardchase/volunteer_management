@@ -36,29 +36,28 @@
     $app->get("/", function() use ($app) {
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
-
-        if($supervisor) {
+        $volunteer_events = null;
+        $volunteer_committees = null;
+        $supervisor_events = null;
+        $supervisor_committees = null;
+        if(!(empty($supervisor))) {
             $supervisor_committees = $supervisor->getCommittees();
-            $supervisor_events = [];
-            foreach($supervisor_committees as $committee) {
-                $events = $committee->getEvents();
-                array_push($supervisor_events, $events);
-            }
             $volunteer_events = null;
+            $volunteer_committees = null;
         }
 
-        if($volunteer) {
+        if(!(empty($volunteer))) {
             $volunteer_events = $volunteer->getEvents();
             $volunteer_committees = $volunteer->getCommittees();
             $supervisor_events = null;
+            $supervisor_committees = null;
         }
 
         return $app['twig']->render('index.twig', array('events' => Event::getAll(),
                                                         'committees' => Committee::getAll(),
                                                         'supervisor' => $supervisor,
                                                         'volunteer' => $volunteer,
-                                                        'supervisor_events' => $supervisor_events,
-                                                        'volunteer_events' => $volunteer_events,
+                                                        'supervisor_events' =>  $volunteer_events,
                                                         'supervisor_committees'=>
                                                         $supervisor_committees,
                                                         'volunteer_committees' =>
@@ -130,16 +129,10 @@
             $_SESSION['supervisor_id'] = $supervisor_id;
             $volunteer = Volunteer::find($_SESSION['volunteer_id']);
             $supervisor = Supervisor::find($_SESSION['supervisor_id']);
-
             $supervisor_committees = $supervisor->getCommittees();
-            $supervisor_events = [];
-            foreach($supervisor_committees as $committee) {
-                $events = $committee->getEvents();
-                array_push($supervisor_events, $events);
-            }
             return $app['twig']->render('index.twig', array('supervisor_committees'=>
                                                             $supervisor_committees,
-                                                            'supervisor_events' => $supervisor_events,
+                                                            'events' => $events,
                                                             'supervisor' => $supervisor,
                                                             'events' => $events,
                                                             'volunteer' => $volunteer,
@@ -221,25 +214,17 @@
 
         if($volunteer && (empty($supervisor))) {
             $volunteer_events = $volunteer->getEvents();
-            $supervisor_events = null;
         } elseif ($supervisor && (empty($volunteer))) {
             $volunteer_events = null;
             $supervisor_committees = $supervisor->getCommittees();
-            $supervisor_events = [];
-            foreach($supervisor_committees as $committee) {
-                $events = $committee->getEvents();
-                array_push($supervisor_events, $events);
-            }
         } else {
             $volunteer_events = null;
-            $supervisor_events = null;
         }
 
         return $app['twig']->render('events.twig', array('events' => $events,
                                                         'supervisor' => $supervisor,
                                                         'volunteer' => $volunteer,
-                                                        'volunteer_events' => $volunteer_events,
-                                                        'supervisor_events' => $supervisor_events));
+                                                        'volunteer_events' => $volunteer_events));
     });
 
     /*

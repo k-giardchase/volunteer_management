@@ -117,10 +117,10 @@
                    </dl>
                    {% endfor %}
                 {% endif %}
-            {% elseif supervisor and not volunteer %}
-                <h1>Upcoming events</h1>
-                   {% if supervisor_events is not empty %}
-                       {% for event in supervisor_events %}
+            {% elseif supervisor == true and volunteer == false%}
+                <h1>All upcoming events</h1>
+                   {% if events is not empty %}
+                       {% for event in events %}
                        <dl class='dl-horizontal'>
                            <dt>Name</dt>
                            <dd>{{ event.getEventName }}</dd>

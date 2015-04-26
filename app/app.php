@@ -121,7 +121,6 @@
         $inputted_username = $_POST['username'];
         $inputted_password = $_POST['password'];
         $supervisor= Supervisor::authenticateLogin($inputted_username, $inputted_password);
-        var_dump($supervisor);
         if(!empty($supervisor)) {
             $events = Event::getAll();
             $committees = Committee::getAll();
@@ -254,6 +253,28 @@
         $event = Event::find($id);
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        return $app['twig']->render('event.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
+    });
+
+    $app->get('/edit/event/{id}', function($id) use ($app) {
+        $event = Event::find($id);
+        $all_committees = Committee::getAll();
+        $committees = $event->getCommittees();
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+        return $app['twig']->render('event-edit.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer, 'committees' => $committees, 'all_committees' => $all_committees));
+    });
+
+    $app->patch('/event/{id}', function($id) use ($app) {
+        $event = Event::find($id);
+        $new_event_name = $_POST['event_name'];
+        $new_event_date = $_POST['event_date'];
+        $new_location = $_POST['location'];
+        $event->update($new_event_name, $new_event_date, $new_location);
+
+        $supervisor = Supervisor::find($_SESSION['supervisor_id']);
+        $volunteer = Volunteer::find($_SESSION['volunteer_id']);
+
         return $app['twig']->render('event.twig', array('event' => $event, 'supervisor' => $supervisor, 'volunteer' => $volunteer));
     });
 

@@ -211,7 +211,7 @@
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         $volunteer = Volunteer::find($_SESSION['volunteer_id']);
         $events = Event::getAll();
-
+        $committees = Committee::getAll();
         if($volunteer && (empty($supervisor))) {
             $volunteer_events = $volunteer->getEvents();
         } elseif ($supervisor && (empty($volunteer))) {
@@ -224,7 +224,8 @@
         return $app['twig']->render('events.twig', array('events' => $events,
                                                         'supervisor' => $supervisor,
                                                         'volunteer' => $volunteer,
-                                                        'volunteer_events' => $volunteer_events));
+                                                        'volunteer_events' => $volunteer_events,
+                                                        'committees' => $committees));
     });
 
     /*

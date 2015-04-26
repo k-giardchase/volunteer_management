@@ -299,6 +299,10 @@
                                                             $events_associated));
     });
 
+    $app->get('/event{id}', function(id) use ($app) {
+
+    });
+
     $app->get('/admin', function() use ($app) {
         $supervisor = Supervisor::find($_SESSION['supervisor_id']);
         return $app['twig']->render('admin.twig', array('volunteers' => Volunteer::getAll()));
